@@ -1,0 +1,116 @@
+/* Layout General */
+.dashboard-wrapper { display: flex; min-height: 100vh; color: #ccc; }
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1f1f1f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+}
+
+.sidebar-header { padding: 20px; text-align: center; background: #181818; }
+
+.sidebar-menu {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #4a5568 transparent;
+}
+
+.sidebar-menu ul { list-style: none; padding: 0; margin: 0; }
+.sidebar-menu li a {
+    display: block;
+    padding: 15px 20px;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: 1s;
+}
+.sidebar-menu li a:hover { 
+    background: #34495e; 
+    color: white; 
+    border-radius: 10px;}
+
+/* Para navegadores basados en Chrome/Edge/Safari */
+.sidebar-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background-color: #4a5568; /* Un color grisáceo que combine */
+    border-radius: 10px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Contenido */ 
+.main-content {
+    flex: 1;
+    margin-left: 250px; /* Ancho del sidebar */
+    background: #f4f7f6;
+}
+
+.top-nav {
+    background: #1f1f1f;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 12vh;
+    max-height: 100px;
+    overflow: hidden;
+    color: #ccc;
+}
+
+.top-nav img {
+    height: 10vh;
+    margin: auto;
+}
+
+.top-nav .perfil-nav {
+    padding: 10px;
+}
+
+.content-area { padding: 30px; background-color: #2a2d2e; height: 88vh; }
+
+.sidebar-footer {
+    margin-top: auto;
+    background-color: #1a252f;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sidebar-footer:hover {
+    background-color: #d3dde6;
+    transition: 2s;
+    border-radius: 10px;
+}
+
+.sidebar-footer form {
+    display: flex;       
+    width: 100%;        
+    height: 100%;      
+    margin: 0;
+    background-color: #181818;
+}
+
+.logout-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.sidebar-menu ul li .active {
+    color: black;
+    background-color: #ccc;
+    border-radius: 10px;
+}

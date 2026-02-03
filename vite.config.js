@@ -8,4 +8,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+
+    server: {
+        host: 'localhost', // O usa '127.0.0.1'
+        cors: {
+            origin: '*', // Esto permite que sarf.local lea a Vite
+        },
+    },
 });

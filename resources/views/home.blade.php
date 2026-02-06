@@ -1,4 +1,4 @@
 <x-app-layout>
-    <x-slot name="title">Mi Perfil</x-slot>
-    <p>Contenido del perfil...</p>
+    <x-slot name="title">Inicio</x-slot>
+    <p>Pagina de Inicio</p>
 </x-app-layout>

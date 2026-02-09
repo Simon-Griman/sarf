@@ -30,11 +30,11 @@
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-zinc-800 border-r dark:border-zinc-700 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 h-screen flex flex-col">
     
             <div class="flex w-64 items-center justify-between px-4 py-6 flex-shrink-0 border border-gray-100 dark:border-zinc-700 mx-auto mb-2">
-                <h3 class="text-xl font-bold text-center mx-auto w-full items-center">
+                <h2 class="text-[24px] font-bold text-center mx-auto w-full items-center">
                     <a href="{{ route('home') }}" class="block w-full text-center border-0">
-                        SARF
+                        <span class="text-yellow-400 dark:text-yellow-500">S</span><span class="text-blue-500 dark:text-blue-600">AR</span><span class="text-red-500 dark:text-red-600">F</span>
                     </a>
-                </h3>
+                </h2>
                 <button id="close-sidebar" class="lg:hidden text-gray-500">
                     <i class="fas fa-times"></i>
                 </button>
@@ -54,11 +54,11 @@
                 <div x-data="{ open: {{ request()->routeIs('auditoria.*') ? 'true' : 'false' }} }">
                     <button @click="open = !open" 
                             class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group 
-                                text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-800"
+                                text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700"
                             :class="open ? 'bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-zinc-100'  : ''">
                         
                         <div class="flex items-center">
-                            <i class="fas fa-eye w-5 h-5 mr-3"></i> <span class="font-medium dark:hover:bg-zinc-800">Auditoría</span>
+                            <i class="fas fa-eye w-5 h-5 mr-3"></i> <span class="font-medium dark:hover:bg-zinc-700">Auditoría</span>
                         </div>
 
                         <i class="fas fa-chevron-down text-[10px] transition-transform duration-300"
@@ -92,10 +92,14 @@
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
 
-                <div class="flex-1 h-full overflow-hidden flex items-center justify-center px-4">
-                    <img src="{{ asset('storage/images/cintillos/cintillo_ayacucho.jpg') }}" 
-                        alt="Banner" 
-                        class="w-90 h-full object-contain md:object-fill dark:opacity-80 dark:hover:opacity-100 transition-opacity">
+                <div class="flex-1 mr-8 ml-4">
+                    <img src="{{ asset('storage/images/cintillos/cintillo_claro.jpg') }}" 
+                        alt="Cintillo Institucional" 
+                        class="w-full h-auto block dark:hidden rounded-xl transition-all duration-300">
+
+                    <img src="{{ asset('storage/images/cintillos/cintillo_oscuro.jpg') }}" 
+                        alt="Cintillo Institucional" 
+                        class="w-full h-auto hidden dark:block rounded-xl transition-all duration-300">
                 </div>
 
                 <div class="flex items-center space-x-4 ml-auto">

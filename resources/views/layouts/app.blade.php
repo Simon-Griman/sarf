@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Scripts -->
-    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @livewireScripts
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -66,7 +65,7 @@
                     </button>
 
                     <div x-show="open" 
-                        x-collapse.duration.1000ms 
+                        x-collapse.duration.700ms 
                         class="mt-1 ml-4 border-l border-gray-200 dark:border-zinc-700 space-y-1">
                         
                         <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">

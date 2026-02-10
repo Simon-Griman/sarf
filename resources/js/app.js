@@ -1,11 +1,5 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
-
 //DASHBOARD
 const sidebar = document.getElementById('sidebar');
 const openBtn = document.getElementById('open-sidebar');

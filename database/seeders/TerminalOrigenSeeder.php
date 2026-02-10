@@ -16,5 +16,7 @@ class TerminalOrigenSeeder extends Seeder
         TerminalOrigen::create([
             'nombre' => 'Sede',
         ]);
+
+        TerminalOrigen::factory()->count(99)->create();
     }
 }

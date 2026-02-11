@@ -32,6 +32,8 @@
                 <x-text-input type="date" wire:model.live.debounce.300ms="filters.fecha_inicio" class="mt-2"></x-text-input>
             </th>
             @endif
+
+            @if($columns['acciones'])<th></th>@endif
         </tr>
         <tr>
             @if($columns['usuario'])
@@ -63,6 +65,8 @@
                 <x-text-input type="date" wire:model.live.debounce.300ms="filters.fecha_fin" class="mt-2"></x-text-input>
             </th>
             @endif
+
+            @if($columns['acciones'])<th></th>@endif
         </tr>
         <tr>
             @if($columns['usuario'])
@@ -83,6 +87,10 @@
 
             @if($columns['fecha'])
             <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Fecha</th>
+            @endif
+
+            @if($columns['acciones'])
+            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Acciones</th>
             @endif
         </tr>
     </x-slot>
@@ -122,6 +130,13 @@
             @if($columns['fecha'])
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
                 {{ $user->created_at }}
+            </td>
+            @endif
+
+            @if($columns['acciones'])
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+                <a href="" class="text-blue-700 dark:text-blue-500 cursor-pointer hover:underline decoration-2 hover:text-blue-900 dark:hover:text-blue-400 pr-2"><i class="fas fa-pen-to-square"></i> Editar</a>
+                <a href="" class="text-red-700 dark:text-red-500 cursor-pointer hover:underline decoration-2 hover:text-red-900 dark:hover:text-red-400 pl-2"><i class="fas fa-trash"></i> Borrar</a>
             </td>
             @endif
         </tr>

@@ -28,6 +28,7 @@ class Index extends Component
         'terminal' => true,
         'rol' => true,
         'fecha' => true,
+        'acciones' => true,
     ];
 
     public function updatingFilters()

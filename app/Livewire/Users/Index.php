@@ -11,7 +11,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10;
+    public $paginate = 10, $modalOpen = false, $borrarUser, $username;
 
     public $filters = [
         'name' => '',
@@ -34,6 +34,37 @@ class Index extends Component
     public function updatingFilters()
     {
         $this->resetPage();
+    }
+
+    public function modalBorrar($id)
+    {
+        $this->username = User::find($id)->name;
+
+        $this->borrarUser = $id;
+
+        $this->modalOpen = true;
+    }
+
+    public function borrar()
+    {
+        // 1. Buscamos y borramos
+        $usuario = User::find($this->borrarUser);
+        if ($usuario) {
+            $usuario->delete();
+        }
+
+        // 2. Cerramos el modal (esto actualizará el x-show de Alpine automáticamente)
+        $this->modalOpen = false;
+
+        // 3. Opcional: Limpiar las variables para la próxima vez
+        $this->reset(['borrarUser', 'username']);
+
+        // 4. Opcional: Lanzar un mensaje de éxito (toast)
+        $this->dispatch('notify', 
+            message: 'Usuario eliminado correctamente', 
+            icon: 'success',
+            title: '¡Hecho!'
+        );
     }
 
     public function render()

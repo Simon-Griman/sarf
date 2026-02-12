@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
         return view('home');
     })->name('home');
 
-    Route::get('/users/index', UserController::class)->name('users.index');
+    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users');
 });
 
 require __DIR__.'/auth.php';

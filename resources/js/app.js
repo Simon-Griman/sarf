@@ -62,3 +62,28 @@ themeToggleBtn.addEventListener('click', function() {
     
     updateIcons();
 });
+
+//SWEETALERT2
+window.addEventListener('notify', event => {
+
+    const data = event.detail;
+
+    // Detectamos si el sistema está en modo oscuro
+    const isDark = document.documentElement.classList.contains('dark');
+
+    Swal.fire({
+        title: data.title || 'Notificación',
+        text: data.message, 
+        icon: data.icon || 'info',
+        toast: true,
+        //position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+
+        // --- ADAPTACIÓN DE COLORES ---
+        background: isDark ? '#1f2937' : '#ffffff', // bg-gray-800 o blanco
+        color: isDark ? '#ffffff' : '#1f2937',      // texto blanco o gris oscuro
+        iconColor: data.icon === 'success' ? '#10b981' : undefined, // verde tailwind opcional
+    });
+});

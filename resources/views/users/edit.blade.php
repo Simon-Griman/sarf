@@ -2,6 +2,6 @@
 
     <x-slot name="title">Usuarios</x-slot>
 
-    {{--@livewire('users.index')--}}
+    @livewire('users.edit', ['user_id' => $id])
 
 </x-app-layout>

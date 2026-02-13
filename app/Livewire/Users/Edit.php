@@ -10,15 +10,17 @@ class Edit extends Component
 {
     public $user_id;
 
-    public $nombre, $cedula, $correo, $terminal_user;
+    public $nombre, $cedula, $correo, $terminal_user, $rol;
 
-    protected $rules = [
-        'nombre' => 'required',
-        'cedula' => 'required',
-        'correo' => 'required|unique:users,email',
-    ];
-
-    //TODO: instalar los idiomas
+    protected function rules()
+    {
+        return [
+            'nombre' => 'required',
+            'cedula' => 'required|integer|min:1000000|max:40000000|unique:users,cedula,' . $this->user_id,
+            'correo' => 'required|email|unique:users,email,' . $this->user_id,
+            'terminal_user' => 'required',
+        ];
+    }
 
     public function mount()
     {
@@ -30,9 +32,25 @@ class Edit extends Component
         $this->terminal_user = $user->terminal_origen_id;
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function update()
     {
         $this->validate();
+
+        $user = User::find($this->user_id);
+
+        $user->update([
+            'name' => $this->nombre,
+            'email' => $this->correo,
+            'cedula' => $this->cedula,
+            'terminal_origen_id' => $this->terminal_user,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
     }
 
     public function render()

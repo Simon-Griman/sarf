@@ -10,7 +10,6 @@
     <!--TODO: colocar los CDNs en local-->
 
     <!--Estilos-->
-    
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -92,11 +91,11 @@
                 </button>
 
                 <div class="flex-1 mr-8 ml-4">
-                    <img src="{{ asset('storage/images/cintillos/cintillo_claro.jpg') }}" 
+                    <img src="{{ asset('storage/images/cintillos/Cintillo_claro.jpg') }}" 
                         alt="Cintillo Institucional" 
                         class="w-full h-auto block dark:hidden rounded-xl transition-all duration-300">
 
-                    <img src="{{ asset('storage/images/cintillos/cintillo_oscuro.jpg') }}" 
+                    <img src="{{ asset('storage/images/cintillos/Cintillo_oscuro.jpg') }}" 
                         alt="Cintillo Institucional" 
                         class="w-full h-auto hidden dark:block rounded-xl transition-all duration-300">
                 </div>

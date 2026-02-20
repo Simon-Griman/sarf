@@ -23,12 +23,10 @@ class Index extends Component
     ];
 
     public $columns = [
-        'usuario' => true,
         'cedula' => true,
         'terminal' => true,
         'rol' => true,
         'fecha' => false,
-        'acciones' => true,
     ];
 
     public function updatingFilters()
@@ -65,6 +63,11 @@ class Index extends Component
             icon: 'success',
             title: '¡Hecho!'
         );
+    }
+
+    public function crearUsuario()
+    {
+        return redirect()->route('users.create');
     }
 
     public function render()

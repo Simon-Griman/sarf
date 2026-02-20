@@ -2,7 +2,6 @@
 <x-table>
     <x-slot name="thead">
         <tr>
-            @if($columns['usuario'])
             <th class="text-left pl-2">
                 <div x-data="{ open: false }" class="relative mt-2 flex justify-start">
                     <x-primary-button @click="open = !open">
@@ -22,7 +21,6 @@
                     </div>
                 </div>
             </th>
-            @endif
 
             @if($columns['cedula'])<th></th>@endif
             @if($columns['terminal'])<th></th>@endif
@@ -34,12 +32,10 @@
             </th>
             @endif
 
-            @if($columns['acciones'])<th></th>@endif
+            <th></th>
         </tr>
         <tr>
-            @if($columns['usuario'])
             <th class="text-left pl-2"><x-text-input wire:model.live.debounce.300ms="filters.name" class="mt-2"></x-text-input></th>
-            @endif
 
             @if($columns['cedula'])
             <th class="text-left"><x-text-input wire:model.live.debounce.300ms="filters.cedula" class="mt-2"></x-text-input></th>
@@ -67,12 +63,10 @@
             </th>
             @endif
 
-            @if($columns['acciones'])<th></th>@endif
+            <th class="pt-2"><x-success-button wire:click="crearUsuario"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button></th>
         </tr>
         <tr>
-            @if($columns['usuario'])
             <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-gray-100">Usuario</th>
-            @endif
 
             @if($columns['cedula'])
             <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-gray-100">Cedula</th>
@@ -90,15 +84,12 @@
             <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Fecha</th>
             @endif
 
-            @if($columns['acciones'])
             <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Acciones</th>
-            @endif
         </tr>
     </x-slot>
 
     @foreach($users as $user)
         <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200">
-            @if($columns['usuario'])
             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                 <div class="flex items-center gap-x-3">
                     {{--<img class="object-cover w-10 h-10 rounded-full" src="{{ $user->avatar_url }}" alt="">--}}
@@ -108,7 +99,6 @@
                     </div>
                 </div>
             </td>
-            @endif
 
             @if($columns['cedula'])
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
@@ -134,21 +124,17 @@
             </td>
             @endif
 
-            @if($columns['acciones'])
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
                 <a href="{{ route('users.edit', $user->id) }}" class="text-blue-700 dark:text-blue-500 cursor-pointer hover:underline decoration-2 hover:text-blue-900 dark:hover:text-blue-400 pr-2"><i class="fas fa-pen-to-square"></i> Editar</a>
 
                 <button class="text-red-700 dark:text-red-500 cursor-pointer hover:underline decoration-2 hover:text-red-900 dark:hover:text-red-400 pl-2" wire:click="modalBorrar({{ $user->id }})"><i class="fas fa-trash"></i> Borrar</button>
-
-                <!-- TODO: modal desaparece solo -->
             </td>
-            @endif
         </tr>
     @endforeach
 
     <x-slot name="tfoot">
         <tr>
-            <td colspan="{{ (count(array_filter($columns)))-1 }}" class="p-2">{{ $users->links() }}</td>
+            <td colspan="{{ (count(array_filter($columns)))+1 }}" class="p-2">{{ $users->links() }}</td>
             <td class="p-2">
                 @if ($users->count() >= 10)
                     <span>Registros: </span>

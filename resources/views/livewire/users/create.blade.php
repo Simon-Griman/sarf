@@ -1,7 +1,7 @@
 <form wire:submit.prevent="save" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6">
         <div class="border-b border-white/10 pb-12">
-            <h2 class=" text-xl font-semibold text-white">Información del Usuario</h2>
+            <h2 class=" text-xl font-semibold text-white inline-flex">Información del Usuario</h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-3">

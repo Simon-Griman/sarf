@@ -1,7 +1,11 @@
 <form wire:submit.prevent="update" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6">
         <div class="border-b border-white/10 pb-12">
-            <h2 class=" text-xl font-semibold text-white">Información del Usuario</h2>
+            <h2 class=" text-xl font-semibold text-white inline-flex">Información del Usuario</h2>
+
+            <div class="inline-flex gap-x-2 float-right">
+                <x-warning-button wire:click="resetPassword"><i class="fa-solid fa-key pr-2"></i>Resetear Contraseña</x-warning-button>
+            </div>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-3">

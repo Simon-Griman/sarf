@@ -4,6 +4,7 @@ namespace App\Livewire\Users;
 
 use App\Models\TerminalOrigen;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Edit extends Component
@@ -51,6 +52,17 @@ class Edit extends Component
         ]);
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
+    }
+
+    public function resetPassword()
+    {
+        $user = User::find($this->user_id);
+
+        $user->update([
+            'password' => Hash::make($user->cedula),
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'Contraseña reseteada correctamente');
     }
 
     public function render()

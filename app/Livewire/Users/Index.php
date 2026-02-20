@@ -27,7 +27,7 @@ class Index extends Component
         'cedula' => true,
         'terminal' => true,
         'rol' => true,
-        'fecha' => true,
+        'fecha' => false,
         'acciones' => true,
     ];
 

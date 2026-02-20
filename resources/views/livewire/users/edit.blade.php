@@ -1,4 +1,4 @@
-<form wire:submit.prevent="update">
+<form wire:submit.prevent="update" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6">
         <div class="border-b border-white/10 pb-12">
             <h2 class=" text-xl font-semibold text-white">Información del Usuario</h2>

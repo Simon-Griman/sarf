@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
+
+    Route::resource('/roles', RoleController::class);
 });
 
 require __DIR__.'/auth.php';

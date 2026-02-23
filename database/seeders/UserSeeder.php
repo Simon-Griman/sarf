@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'simongrimanv@hotmail.com',
             'cedula' => 26716044,
             'password' => Hash::make('simonG20'),
-        ]);
+        ])->assignRole('super-admin');
 
         User::factory()->count(250)->create();
     }

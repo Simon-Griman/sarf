@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
         return view('home');
     })->name('home');
 
-    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users');
+    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
 });
 
 require __DIR__.'/auth.php';

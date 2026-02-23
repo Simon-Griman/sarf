@@ -42,13 +42,20 @@
                 <a href="{{ route('home') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('home') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-home mr-3"></i> Inicio
                 </a>
+
+                @can('resumen.index')
                 <a href="" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('resumen') ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                         <i class="fas fa-home mr-3"></i> Resumen
                 </a>
+                @endcan
+
+                @can('users.index')
                 <a href="{{ route('users.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('users.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-users mr-3"></i> Usuarios
                 </a>
+                @endcan
 
+                @can('auditoria.index')
                 <div x-data="{ open: {{ request()->routeIs('auditoria.*') ? 'true' : 'false' }} }">
                     <button @click="open = !open" 
                             class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group 
@@ -67,19 +74,26 @@
                         x-collapse.duration.700ms 
                         class="mt-1 ml-4 border-l border-gray-200 dark:border-zinc-700 space-y-1">
                         
+                        @can('auditoria.creados')
                         <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Creados
                         </a>
+                        @endcan
 
+                        @can('auditoria.editados')
                         <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('editados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Editados
                         </a>
+                        @endcan
 
+                        @can('auditoria.eliminados')
                         <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('eliminados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Eliminados
                         </a>
+                        @endcan
                     </div>
                 </div>
+                @endcan
             </nav>
         </aside>
 

@@ -125,9 +125,9 @@
             @endif
 
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
-                <a href="{{ route('users.edit', $user->id) }}" class="text-blue-700 dark:text-blue-500 cursor-pointer hover:underline decoration-2 hover:text-blue-900 dark:hover:text-blue-400 pr-2"><i class="fas fa-pen-to-square"></i> Editar</a>
+                <x-edit-button onclick="window.location.href='{{ route('users.edit', $user->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
 
-                <button class="text-red-700 dark:text-red-500 cursor-pointer hover:underline decoration-2 hover:text-red-900 dark:hover:text-red-400 pl-2" wire:click="modalBorrar({{ $user->id }})"><i class="fas fa-trash"></i> Borrar</button>
+                <x-delete-button wire:click="modalBorrar({{ $user->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
             </td>
         </tr>
     @endforeach

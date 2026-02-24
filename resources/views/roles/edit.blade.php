@@ -1,40 +1,33 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Role') }}
-        </h2>
-    </x-slot>
+    <x-slot name="title">Roles</x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('roles.update', $role) }}" method="POST">
-                        @csrf
-                        @method('PUT')
+    <x-h2>Editar Rol</x-h2>
 
-                        <div class="form-group">
-                            <label>Nombre del Rol:</label>
-                            <input type="text" name="name" value="{{ $role->name }}" class="form-control">
-                        </div>
+    <x-card>
+        <form action="{{ route('roles.update', $role) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-                        <h3 class="mt-3">Asignar Permisos</h3>
-                        <div class="row">
-                            @foreach($permissions as $permission)
-                                <div class="col-md-3">
-                                    <label>
-                                        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}"
-                                            {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
-                                        {{ $permission->name }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mt-4">Actualizar Rol</button>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label class="block pb-2">Nombre del Rol:</label>
+                <x-text-input type="text" name="name" value="{{ $role->name }}" class="w-full md:w-3/4"></x-text-input>
             </div>
-        </div>
-    </div>
+
+            <h3 class="mt-3 mb-2">Asignar Permisos</h3>
+            <div class="row overflow-y-auto px-2 pb-2" style="max-height: 300px;">
+                @foreach($permissions as $permission)
+                    <div class="col-md-3">
+                        <label>
+                            <x-checkbox name="permissions[]" value="{{ $permission->name }}"
+                                :checked="$role->hasPermissionTo($permission->name)"></x-checkbox>
+                            {{ $permission->name }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+
+            <x-primary-button class="mt-4 mr-4">Actualizar Rol</x-primary-button>
+            <x-secondary-button onclick="window.location.href='{{ route('roles.index') }}'">Cancelar</x-secondary-button>
+        </form>
+    </x-card>            
 </x-app-layout>

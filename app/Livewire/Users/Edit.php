@@ -6,12 +6,15 @@ use App\Models\TerminalOrigen;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 
 class Edit extends Component
 {
     public $user_id;
 
     public $nombre, $cedula, $correo, $terminal_user, $rol;
+
+    public $selectedRoles = [];
 
     protected function rules()
     {
@@ -31,6 +34,8 @@ class Edit extends Component
         $this->cedula = $user->cedula;
         $this->correo = $user->email;
         $this->terminal_user = $user->terminal_origen_id;
+
+        $this->selectedRoles = $user->roles->pluck('name')->toArray();
     }
 
     public function updated($propertyName)
@@ -50,6 +55,8 @@ class Edit extends Component
             'cedula' => $this->cedula,
             'terminal_origen_id' => $this->terminal_user,
         ]);
+
+        $user->syncRoles($this->selectedRoles);
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
     }
@@ -71,6 +78,8 @@ class Edit extends Component
 
         $terminales = TerminalOrigen::orderBy('nombre')->get();
 
-        return view('livewire.users.edit', compact('user', 'terminales'));
+        $roles = Role::all();
+
+        return view('livewire.users.edit', compact('user', 'terminales', 'roles'));
     }
 }

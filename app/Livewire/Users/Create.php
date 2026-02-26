@@ -6,11 +6,14 @@ use App\Models\TerminalOrigen;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 
 class Create extends Component
 {
 
     public $nombre, $cedula, $correo, $terminal_user, $rol;
+
+    public $selectedRoles = [];
 
     protected $rules = [
         'nombre' => 'required',
@@ -28,13 +31,15 @@ class Create extends Component
     {
         $this->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $this->nombre,
             'email' => $this->correo,
             'cedula' => $this->cedula,
             'terminal_origen_id' => $this->terminal_user,
             'password' => Hash::make($this->cedula),
         ]);
+
+        $user->syncRoles($this->selectedRoles);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
     }
@@ -43,6 +48,8 @@ class Create extends Component
     {
         $terminales = TerminalOrigen::orderBy('nombre')->get();
 
-        return view('livewire.users.create', compact('terminales'));
+        $roles = Role::all();
+
+        return view('livewire.users.create', compact('terminales', 'roles'));
     }
 }

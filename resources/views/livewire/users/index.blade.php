@@ -43,7 +43,7 @@
 
             @if($columns['terminal'])
             <th class="text-left">
-                <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2" wire:model.live.debounce.300ms="filters.nombre">
+                <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 custom-scrollbar" wire:model.live.debounce.300ms="filters.nombre">
                     <option value="">Todo</option>
 
                     @foreach ($terminal as $item)
@@ -114,7 +114,11 @@
 
             @if($columns['rol'])
             <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
-                Admin
+                @foreach($user->getRoleNames() as $rolNombre)
+                    <x-badge name="{{ $rolNombre }}">
+                        {{ $rolNombre }}
+                    </x-badge>
+                @endforeach
             </td>
             @endif
 

@@ -124,7 +124,7 @@
 
             @if($columns['fecha'])
             <td class="px-4 py-4 text-sm whitespace-nowrap">
-                {{ $user->created_at }}
+                {{ $user->created_at->format('d/m/Y') }}
             </td>
             @endif
 

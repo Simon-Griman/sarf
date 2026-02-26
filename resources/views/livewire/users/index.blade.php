@@ -65,31 +65,31 @@
 
             <th class="pt-2"><x-success-button wire:click="crearUsuario"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button></th>
         </tr>
-        <tr>
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-gray-100">Usuario</th>
+        <tr class="text-gray-900 dark:text-gray-100">
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Usuario</th>
 
             @if($columns['cedula'])
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-gray-100">Cedula</th>
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Cedula</th>
             @endif
 
             @if($columns['terminal'])
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Terminal</th>
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Terminal</th>
             @endif
 
             @if($columns['rol'])
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Rol</th>
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Rol</th>
             @endif
 
             @if($columns['fecha'])
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Fecha</th>
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Fecha</th>
             @endif
 
-            <th class="px-4 py-3.5 text-sm font-medium text-left text-gray-500 dark:text-white">Acciones</th>
+            <th class="px-4 py-3.5 text-sm font-medium text-left">Acciones</th>
         </tr>
     </x-slot>
 
     @foreach($users as $user)
-        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200">
+        <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200 text-gray-700 dark:text-gray-200">
             <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                 <div class="flex items-center gap-x-3">
                     {{--<img class="object-cover w-10 h-10 rounded-full" src="{{ $user->avatar_url }}" alt="">--}}
@@ -101,19 +101,19 @@
             </td>
 
             @if($columns['cedula'])
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+            <td class="px-4 py-4 text-sm whitespace-nowrap">
                 {{ $user->cedula }}
             </td>
             @endif
 
             @if($columns['terminal'])
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+            <td class="px-4 py-4 text-sm whitespace-nowrap">
                 {{ $user->terminalOrigen->nombre ?? 'Sin terminal' }}
             </td>
             @endif
 
             @if($columns['rol'])
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+            <td class="px-4 py-4 text-sm whitespace-nowrap">
                 @foreach($user->getRoleNames() as $rolNombre)
                     <x-badge name="{{ $rolNombre }}">
                         {{ $rolNombre }}
@@ -123,12 +123,12 @@
             @endif
 
             @if($columns['fecha'])
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+            <td class="px-4 py-4 text-sm whitespace-nowrap">
                 {{ $user->created_at }}
             </td>
             @endif
 
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-200 whitespace-nowrap">
+            <td class="px-4 py-4 text-sm whitespace-nowrap">
                 <x-edit-button onclick="window.location.href='{{ route('users.edit', $user->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
 
                 <x-delete-button wire:click="modalBorrar({{ $user->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>

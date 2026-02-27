@@ -8,16 +8,8 @@
 
     <title>{{ $title ?? '' }} | {{ config('app.name') }}</title>
 
-    <!--TODO: colocar los CDNs en local-->
-
     <!--Estilos-->
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!--Iconos-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    @livewireStyles
 
     <!-- Scripts -->
     @livewireScripts
@@ -76,19 +68,19 @@
                         class="mt-1 ml-4 border-l border-gray-200 dark:border-zinc-700 space-y-1">
                         
                         @can('auditoria.creados')
-                        <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                        <a href="#" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Creados
                         </a>
                         @endcan
 
                         @can('auditoria.editados')
-                        <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('editados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                        <a href="#" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('editados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Editados
                         </a>
                         @endcan
 
                         @can('auditoria.eliminados')
-                        <a href="#" class="block p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('eliminados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                        <a href="#" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('eliminados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Eliminados
                         </a>
                         @endcan
@@ -181,8 +173,5 @@
 
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden lg:hidden"></div>
     </div>
-
-    <!--TODO: instalar en local-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

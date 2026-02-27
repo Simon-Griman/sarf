@@ -1,4 +1,7 @@
 import './bootstrap';
+import Swal from 'sweetalert2';
+import '@fortawesome/fontawesome-free/js/all.js';
+window.Swal = Swal;
 
 //DASHBOARD
 const sidebar = document.getElementById('sidebar');

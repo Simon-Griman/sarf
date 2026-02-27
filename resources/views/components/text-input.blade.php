@@ -9,7 +9,7 @@
     $hasError = $name && $errors->has($name);
     
     // Clases base (puedes ajustarlas a tu diseño)
-    $baseClasses = "w-full md:w-3/4 bg-zinc-100 dark:bg-zinc-900 rounded-md shadow-sm border transition duration-150 ease-in-out";
+    $baseClasses = "w-full bg-zinc-100 dark:bg-zinc-900 rounded-md shadow-sm border transition duration-150 ease-in-out";
     
     // Clases dinámicas según si hay error o no
     $statusClasses = $hasError 

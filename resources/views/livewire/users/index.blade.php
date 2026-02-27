@@ -35,15 +35,15 @@
             <th></th>
         </tr>
         <tr>
-            <th class="text-left pl-2"><x-text-input wire:model.live.debounce.300ms="filters.name" class="mt-2"></x-text-input></th>
+            <th class="text-left px-2"><x-text-input wire:model.live.debounce.300ms="filters.name" class="mt-2"></x-text-input></th>
 
             @if($columns['cedula'])
-            <th class="text-left"><x-text-input wire:model.live.debounce.300ms="filters.cedula" class="mt-2"></x-text-input></th>
+            <th class="text-left pr-2"><x-text-input wire:model.live.debounce.300ms="filters.cedula" class="mt-2"></x-text-input></th>
             @endif
 
             @if($columns['terminal'])
-            <th class="text-left">
-                <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 custom-scrollbar" wire:model.live.debounce.300ms="filters.nombre">
+            <th class="text-left pr-2">
+                <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 w-full custom-scrollbar" wire:model.live.debounce.300ms="filters.nombre">
                     <option value="">Todo</option>
 
                     @foreach ($terminal as $item)
@@ -54,7 +54,7 @@
             @endif
 
             @if($columns['rol'])
-            <th class="text-left"><x-text-input wire:model.live.debounce.300ms="filters.rol" class="mt-2"></x-text-input></th>
+            <th class="text-left pr-2"><x-text-input wire:model.live.debounce.300ms="filters.rol" class="mt-2"></x-text-input></th>
             @endif
 
             @if($columns['fecha'])

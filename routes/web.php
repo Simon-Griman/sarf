@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CintilloController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
 
     Route::resource('/roles', RoleController::class);
+
+    Route::get('/cintillos', CintilloController::class)->name('cintillos');
 });
 
 require __DIR__.'/auth.php';

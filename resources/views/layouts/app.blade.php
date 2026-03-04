@@ -103,20 +103,32 @@
         </aside>
 
         <main class="flex-1 flex flex-col overflow-y-auto">
-            <header class="bg-white shadow-sm p-4 flex justify-between items-center dark:bg-zinc-800 transition-colors duration-300">
+            <header class="bg-white shadow-sm px-2 flex justify-between items-center dark:bg-zinc-800 transition-colors duration-300 h-[85px]">
 
                 <button id="open-sidebar" class="lg:hidden text-gray-600 dark:text-gray-300">
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
 
-                <div class="flex-1 mr-8 ml-4">
+                <div class="flex-1 mx-4 h-full flex items-center justify-center overflow-hidden">
+                    @if (isset($cintilloClaro) && $cintilloClaro)
+                    <img src="{{ asset('storage/' . $cintilloClaro) }}" 
+                        alt="Cintillo Institucional" 
+                        class="max-h-full w-auto object-contain block dark:hidden rounded-xl transition-all duration-300">
+                    @else
                     <img src="{{ asset('storage/images/cintillos/Cintillo_claro.jpg') }}" 
                         alt="Cintillo Institucional" 
-                        class="w-full h-auto block dark:hidden rounded-xl transition-all duration-300">
+                        class="max-h-full w-auto object-contain block dark:hidden rounded-xl transition-all duration-300">
+                    @endif
 
+                    @if (isset($cintilloOscuro) && $cintilloOscuro)
+                    <img src="{{ asset('storage/' . $cintilloOscuro) }}" 
+                        alt="Cintillo Institucional" 
+                        class="max-h-full w-auto object-contain hidden dark:block rounded-xl transition-all duration-300">
+                    @else
                     <img src="{{ asset('storage/images/cintillos/Cintillo_oscuro.jpg') }}" 
                         alt="Cintillo Institucional" 
-                        class="w-full h-auto hidden dark:block rounded-xl transition-all duration-300">
+                        class="max-h-full w-auto object-contain hidden dark:block rounded-xl transition-all duration-300">
+                    @endif
                 </div>
 
                 <div class="flex items-center space-x-4 ml-auto">

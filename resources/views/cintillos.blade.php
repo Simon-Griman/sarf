@@ -2,6 +2,6 @@
 
     <x-slot name="title">Cintillos</x-slot>
 
-    @livewire('cintillos')
+    @livewire('cintillos')    
 
 </x-app-layout>

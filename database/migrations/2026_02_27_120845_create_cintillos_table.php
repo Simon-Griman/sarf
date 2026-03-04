@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->enum('activo', [0, 1])->default(0);
+            $table->enum('modo', ['claro', 'oscuro'])->nullable();
             $table->timestamps();
         });
     }

@@ -9,5 +9,6 @@ class Cintillo extends Model
     protected $fillable = [
         'nombre',
         'activo',
+        'modo',
     ];
 }

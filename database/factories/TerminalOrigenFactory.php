@@ -17,7 +17,7 @@ class TerminalOrigenFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => substr(fake()->city(), 0, 45),
+            'nombre' => substr(fake()->unique()->city(), 0, 45),
         ];
     }
 }

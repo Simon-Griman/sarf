@@ -25,7 +25,7 @@
                         <x-edit-button wire:click="modalActivar({{ $item->id }})"><i class="fas fa-check-circle"></i> Activar</x-edit-button>
                         @endcan
 
-                        @can('cintillos.delete')
+                        @can('cintillos.destroy')
                         <x-delete-button wire:click="confirBorrar({{ $item->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
                         @endcan
                     </td>

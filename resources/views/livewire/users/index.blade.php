@@ -54,7 +54,7 @@
             @endif
 
             @if($columns['rol'])
-            <th class="text-left pr-2"><x-text-input wire:model.live.debounce.300ms="filters.rol" class="mt-2"></x-text-input></th>
+            <th class="text-left pr-2"><x-text-input wire:model.live.debounce.300ms="filters.role" class="mt-2"></x-text-input></th>
             @endif
 
             @if($columns['fecha'])

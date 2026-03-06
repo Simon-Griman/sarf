@@ -18,6 +18,7 @@ class Index extends Component
         'email' => '',
         'cedula' => '',
         'nombre' => '',
+        'role' => '',
         'fecha_inicio' => '',
         'fecha_fin' => '',
     ];
@@ -72,15 +73,28 @@ class Index extends Component
 
     public function render()
     {
-        $users = User::select('users.*', 'nombre')
+        $users = User::select('users.*', 'nombre', 'roles.name as role_name')
             ->join('terminal_origens', 'terminal_origens.id', '=', 'users.terminal_origen_id')
+            ->leftjoin('model_has_roles', function($join) {
+                $join->on('model_has_roles.model_id', '=', 'users.id')
+                    ->where('model_has_roles.model_type', '=', User::class);
+            })
+            ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
         ;
 
         foreach ($this->filters as $column => $value)
         {
-            if (!empty($value) && !in_array($column, ['fecha', 'fecha_inicio', 'fecha_fin']))
+            if (!empty($value) && !in_array($column, ['fecha_inicio', 'fecha_fin']))
             {
-                $users->where($column, 'like', '%' . $value . '%');
+                if ($column === 'role') {
+                    $users->where('roles.name', 'like', '%' . $value . '%');
+                } elseif ($column === 'nombre') {
+                    $users->where('terminal_origens.nombre', 'like', '%' . $value . '%');
+                } elseif ($column === 'name' || $column === 'email' || $column === 'cedula') {
+                    $users->where('users.' . $column, 'like', '%' . $value . '%');
+                } else {
+                    $users->where($column, 'like', '%' . $value . '%');
+                }
             }
         }
 

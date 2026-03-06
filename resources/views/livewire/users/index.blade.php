@@ -63,7 +63,11 @@
             </th>
             @endif
 
-            <th class="pt-2"><x-success-button wire:click="crearUsuario"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button></th>
+            <th class="pt-2">
+                @can('users.create')
+                <x-success-button wire:click="crearUsuario"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
+                @endcan
+            </th>
         </tr>
         <tr class="text-gray-900 dark:text-gray-100">
             <th class="px-4 py-3.5 text-sm font-medium text-left">Usuario</th>
@@ -129,9 +133,13 @@
             @endif
 
             <td class="px-4 py-4 text-sm whitespace-nowrap">
+                @can('users.edit')
                 <x-edit-button onclick="window.location.href='{{ route('users.edit', $user->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
+                @endcan
 
+                @can('users.destroy')
                 <x-delete-button wire:click="modalBorrar({{ $user->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
+                @endcan
             </td>
         </tr>
     @endforeach

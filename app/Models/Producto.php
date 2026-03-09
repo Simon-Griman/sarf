@@ -2,22 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TerminalOrigen extends Model
+class Producto extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'nombre',
     ];
-
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class);
-    }
 
     public function resumenes(): HasMany
     {

@@ -46,9 +46,46 @@ class Index extends Component
 
     public function borrar()
     {
+        if (!$this->borrarUser) {
+            $this->dispatch('notify', 
+                message: 'No se ha seleccionado ningún usuario para eliminar', 
+                icon: 'error',
+                title: '¡Error!'
+            );
+            return;
+        }
+
         // 1. Buscamos y borramos
         $usuario = User::find($this->borrarUser);
+        
         if ($usuario) {
+
+            if (auth()->id() === $usuario->id) {
+                $this->dispatch('notify', 
+                    message: 'No puedes eliminar tu propio usuario', 
+                    icon: 'error',
+                    title: '¡Error!'
+                );
+
+                $this->modalOpen = false;
+                $this->reset(['borrarUser', 'username']);
+
+                return;
+            }
+
+            if ($usuario->role_level >= auth()->user()->role_level) {
+                $this->dispatch('notify', 
+                    message: 'No puedes eliminar un usuario con el mismo o mayor rol que tú', 
+                    icon: 'error',
+                    title: '¡Error!'
+                );
+
+                $this->modalOpen = false;
+                $this->reset(['borrarUser', 'username']);
+                
+                return;
+            }
+
             $usuario->delete();
         }
 

@@ -40,24 +40,25 @@ return new class extends Migration
 
             //datos buque
             //carga
-            $table->integer('OBQ');
-            $table->integer('OBQ_agua');
-            $table->integer('TCV_carga');
-            $table->integer('GSV_carga');
-            $table->integer('NSV_carga');
-            $table->integer('TRV');
-            $table->integer('TRV_ajustado');
+            $table->integer('OBQ')->nullable();
+            $table->integer('OBQ_agua')->nullable();
+            $table->integer('TCV_carga')->nullable();
+            $table->integer('GSV_carga')->nullable();
+            $table->integer('NSV_carga')->nullable();
+            $table->integer('TRV')->nullable();
+            $table->integer('TRV_ajustado')->nullable();
             //descarga
-            $table->integer('ROB');
-            $table->integer('ROB_agua');
-            $table->integer('TCV_descarga');
-            $table->integer('GSV_descarga');
-            $table->integer('NSV_descarga');
-            $table->integer('TDV');
-            $table->integer('TDV_ajustado');
+            $table->integer('ROB')->nullable();
+            $table->integer('ROB_agua')->nullable();
+            $table->integer('TCV_descarga')->nullable();
+            $table->integer('GSV_descarga')->nullable();
+            $table->integer('NSV_descarga')->nullable();
+            $table->integer('TDV')->nullable();
+            $table->integer('TDV_ajustado')->nullable();
 
-            $table->integer('VEF');
+            $table->decimal('VEF', 6, 4)->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

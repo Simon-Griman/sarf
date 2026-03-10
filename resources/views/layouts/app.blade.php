@@ -37,7 +37,7 @@
                 </a>
 
                 @can('resumen.index')
-                <a href="" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('resumen') ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('resumen.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('resumen') ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                         <i class="fas fa-home mr-3"></i> Resumen
                 </a>
                 @endcan

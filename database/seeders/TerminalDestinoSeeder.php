@@ -2,21 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\TerminalOrigen;
+use App\Models\TerminalDestino;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class TerminalOrigenSeeder extends Seeder
+class TerminalDestinoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        TerminalOrigen::create([
-            'nombre' => 'Sede',
-        ]);
-
-        TerminalOrigen::factory()->count(50)->create();
+        TerminalDestino::factory()->count(50)->create();
     }
 }

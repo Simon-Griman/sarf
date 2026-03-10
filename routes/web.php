@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CintilloController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResumenController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function() {
         return view('home');
     })->name('home');
+
+    Route::resource('/resumen', ResumenController::class)->except('show', 'store', 'destroy')->names('resumen')->middleware('permission:resumen.index|resumen.create|resumen.edit|resumen.destroy');
 
     Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
 

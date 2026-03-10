@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(TerminalOrigenSeeder::class);
+        $this->call(TerminalDestinoSeeder::class);
+        $this->call(OperacionSeeder::class);
+        $this->call(ProductoSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ResumenSeeder::class);
     }
 }

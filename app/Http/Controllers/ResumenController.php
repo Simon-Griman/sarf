@@ -17,9 +17,11 @@ class ResumenController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $operacion = $request->query('operacion'); // Obtener el valor de 'operacion' desde la URL
+
+        return view('resumen.create', compact('operacion')); // Pasar 'operacion' a la vista
     }
 
     /**

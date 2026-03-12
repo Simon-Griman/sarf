@@ -14,7 +14,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $borrarResumen, $nro_embarque;
+    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $borrarResumen, $nro_embarque, $operacion;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -87,9 +87,14 @@ class Index extends Component
         );
     }
 
-    public function crearResumen()
+    public function modalResumen()
     {
-        return redirect()->route('resumen.create');
+        $this->modalOpen2 = true;
+    }
+
+    public function crearResumen($operacion)
+    {
+        return redirect()->route('resumen.create', compact('operacion'));
     }
 
     public function render()

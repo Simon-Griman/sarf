@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resumen;
 use Illuminate\Http\Request;
 
 class ResumenController extends Controller
@@ -43,9 +44,9 @@ class ResumenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        return view('resumen.edit', compact('id'));
     }
 
     /**

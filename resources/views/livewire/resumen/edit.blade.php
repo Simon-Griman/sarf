@@ -1,7 +1,7 @@
-<form wire:submit.prevent="save" onsubmit="document.activeElement.blur()">
+<form wire:submit.prevent="update" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6" style="height: 79vh">
         <div class="border-b border-gray-400 dark:border-white/10 pb-12">
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Crear Resumen de {{ $tipo_operacion }}</h2>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Editar Resumen de {{ $tipo_operacion }}</h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -152,7 +152,7 @@
                 <div class="sm:col-span-2">
                     <label for="tabla_VCF" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Tabla VCF<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="tabla_VCF" type="number" name="tabla_VCF" autocomplete="family-name" wire:model.blur="tabla_VCF" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="tabla_VCF" type="text" name="tabla_VCF" autocomplete="family-name" wire:model.blur="tabla_VCF" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -175,7 +175,7 @@
                     <h2 class="">Datos Buque</h2>
                 </div>
 
-                @if ($tipo_operacion === 'carga' || $tipo_operacion === 'importacion')
+                @if ($tipo_operacion === 'Carga' || $tipo_operacion === 'Importación')
 
                 <div class="sm:col-span-2">
                     <label for="OBQ" class="block text-sm/6 font-medium text-gray-800 dark:text-white">OBQ<span class="text-red-500">*</span></label>
@@ -226,7 +226,7 @@
                     </div>
                 </div>
 
-                @elseif ($tipo_operacion === 'descarga' || $tipo_operacion === 'exportacion')
+                @elseif ($tipo_operacion === 'Descarga' || $tipo_operacion === 'Exportación')
 
                 <div class="sm:col-span-2">
                     <label for="ROB" class="block text-sm/6 font-medium text-gray-800 dark:text-white">ROB<span class="text-red-500">*</span></label>

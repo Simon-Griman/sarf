@@ -9,9 +9,6 @@ use App\Models\TerminalDestino;
 use App\Models\TerminalOrigen;
 use Livewire\Component;
 
-
-use function Symfony\Component\Translation\t;
-
 class Edit extends Component
 {
     public $resumen_id;

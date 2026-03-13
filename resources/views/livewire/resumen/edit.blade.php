@@ -103,49 +103,49 @@
                 <div class="sm:col-span-2">
                     <label for="TOV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TOV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TOV" type="number" name="TOV" autocomplete="family-name" wire:model.blur="TOV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TOV" type="number" step="0.01" name="TOV" autocomplete="family-name" wire:model.blur="TOV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="GOV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">GOV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="GOV" type="number" name="GOV" autocomplete="family-name" wire:model.blur="GOV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="GOV" type="number" step="0.01" name="GOV" autocomplete="family-name" wire:model.blur="GOV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="GSV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">GSV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="GSV" type="number" name="GSV" autocomplete="family-name" wire:model.blur="GSV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="GSV" type="number" step="0.01" name="GSV" autocomplete="family-name" wire:model.blur="GSV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="NSV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">NSV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="NSV" type="number" name="NSV" autocomplete="family-name" wire:model.blur="NSV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="NSV" type="number" step="0.01" name="NSV" autocomplete="family-name" wire:model.blur="NSV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TCV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TCV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TCV" type="number" name="TCV" autocomplete="family-name" wire:model.blur="TCV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TCV" type="number" step="0.01" name="TCV" autocomplete="family-name" wire:model.blur="TCV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="sediment_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Sediment Water<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="sediment_water" type="number" name="sediment_water" autocomplete="family-name" wire:model.blur="sediment_water" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="sediment_water" type="number" step="0.01" name="sediment_water" autocomplete="family-name" wire:model.blur="sediment_water" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="free_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Free Water<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="free_water" type="number" name="free_water" autocomplete="family-name" wire:model.blur="free_water" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="free_water" type="number" step="0.01" name="free_water" autocomplete="family-name" wire:model.blur="free_water" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -159,14 +159,14 @@
                 <div class="sm:col-span-2">
                     <label for="temp" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Temp<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="temp" type="number" name="temp" autocomplete="family-name" wire:model.blur="temp" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="temp" type="number" step="0.01" name="temp" autocomplete="family-name" wire:model.blur="temp" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="API" class="block text-sm/6 font-medium text-gray-800 dark:text-white">API<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="API" type="number" name="API" autocomplete="family-name" wire:model.blur="API" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="API" type="number" step="0.01" name="API" autocomplete="family-name" wire:model.blur="API" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -180,49 +180,49 @@
                 <div class="sm:col-span-2">
                     <label for="OBQ" class="block text-sm/6 font-medium text-gray-800 dark:text-white">OBQ<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="OBQ" type="number" name="OBQ" autocomplete="family-name" wire:model.blur="OBQ" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="OBQ" type="number" step="0.01" name="OBQ" autocomplete="family-name" wire:model.blur="OBQ" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="OBQ_agua" class="block text-sm/6 font-medium text-gray-800 dark:text-white">OBQ Agua<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="OBQ_agua" type="number" name="OBQ_agua" autocomplete="family-name" wire:model.blur="OBQ_agua" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="OBQ_agua" type="number" step="0.01" name="OBQ_agua" autocomplete="family-name" wire:model.blur="OBQ_agua" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TCV_carga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TCV: Despues de la carga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TCV_carga" type="number" name="TCV_carga" autocomplete="family-name" wire:model.blur="TCV_carga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TCV_carga" type="number" step="0.01" name="TCV_carga" autocomplete="family-name" wire:model.blur="TCV_carga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="GSV_carga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">GSV: Despues de la carga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="GSV_carga" type="number" name="GSV_carga" autocomplete="family-name" wire:model.blur="GSV_carga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="GSV_carga" type="number" step="0.01" name="GSV_carga" autocomplete="family-name" wire:model.blur="GSV_carga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="NSV_carga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">NSV: Despues de la carga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="NSV_carga" type="number" name="NSV_carga" autocomplete="family-name" wire:model.blur="NSV_carga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="NSV_carga" type="number" step="0.01" name="NSV_carga" autocomplete="family-name" wire:model.blur="NSV_carga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TRV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TRV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TRV" type="number" name="TRV" autocomplete="family-name" wire:model.blur="TRV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TRV" type="number" step="0.01" name="TRV" autocomplete="family-name" wire:model.blur="TRV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TRV_ajustado" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TRV Ajustado<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TRV_ajustado" type="number" name="TRV_ajustado" autocomplete="family-name" wire:model.blur="TRV_ajustado" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TRV_ajustado" type="number" step="0.01" name="TRV_ajustado" autocomplete="family-name" wire:model.blur="TRV_ajustado" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -231,49 +231,49 @@
                 <div class="sm:col-span-2">
                     <label for="ROB" class="block text-sm/6 font-medium text-gray-800 dark:text-white">ROB<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="ROB" type="number" name="ROB" autocomplete="family-name" wire:model.blur="ROB" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="ROB" type="number" step="0.01" name="ROB" autocomplete="family-name" wire:model.blur="ROB" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="ROB_agua" class="block text-sm/6 font-medium text-gray-800 dark:text-white">ROB Agua<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="ROB_agua" type="number" name="ROB_agua" autocomplete="family-name" wire:model.blur="ROB_agua" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="ROB_agua" type="number" step="0.01" name="ROB_agua" autocomplete="family-name" wire:model.blur="ROB_agua" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TCV_descarga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TCV: Antes de la descarga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TCV_descarga" type="number" name="TCV_descarga" autocomplete="family-name" wire:model.blur="TCV_descarga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TCV_descarga" type="number" step="0.01" name="TCV_descarga" autocomplete="family-name" wire:model.blur="TCV_descarga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="GSV_descarga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">GSV: Antes de la descarga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="GSV_descarga" type="number" name="GSV_descarga" autocomplete="family-name" wire:model.blur="GSV_descarga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="GSV_descarga" type="number" step="0.01" name="GSV_descarga" autocomplete="family-name" wire:model.blur="GSV_descarga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="NSV_descarga" class="block text-sm/6 font-medium text-gray-800 dark:text-white">NSV: Antes de la descarga<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="NSV_descarga" type="number" name="NSV_descarga" autocomplete="family-name" wire:model.blur="NSV_descarga" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="NSV_descarga" type="number" step="0.01" name="NSV_descarga" autocomplete="family-name" wire:model.blur="NSV_descarga" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TDV" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TDV<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TDV" type="number" name="TDV" autocomplete="family-name" wire:model.blur="TDV" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TDV" type="number" step="0.01" name="TDV" autocomplete="family-name" wire:model.blur="TDV" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="TDV_ajustado" class="block text-sm/6 font-medium text-gray-800 dark:text-white">TDV Ajustado<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="TDV_ajustado" type="number" name="TDV_ajustado" autocomplete="family-name" wire:model.blur="TDV_ajustado" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="TDV_ajustado" type="number" step="0.01" name="TDV_ajustado" autocomplete="family-name" wire:model.blur="TDV_ajustado" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -282,7 +282,7 @@
                 <div class="sm:col-span-2">
                     <label for="VEF" class="block text-sm/6 font-medium text-gray-800 dark:text-white">VEF<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="VEF" type="number" name="VEF" autocomplete="family-name" wire:model.blur="VEF" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="VEF" type="number" step="0.0001" name="VEF" autocomplete="family-name" wire:model.blur="VEF" @blur="$wire.$refresh()" />
                     </div>
                 </div>
             </div>

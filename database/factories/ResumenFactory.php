@@ -18,10 +18,20 @@ class ResumenFactory extends Factory
     {
         $terminalOrigen = \App\Models\TerminalOrigen::pluck('id');
         $terminalDestino = \App\Models\TerminalDestino::pluck('id');
-        $operacion = \App\Models\Operacion::pluck('id');
+        $operacion = \App\Models\Operacion::select('id', 'nombre')->get();
         $producto = \App\Models\Producto::pluck('id');
 
-        $carga = fake()->boolean();
+        $operacion_id = fake()->randomElement($operacion);
+
+        if ($operacion_id->nombre == 'Carga' || $operacion_id->nombre == 'Importación')
+        {
+            $carga = true;
+        }
+
+        elseif ($operacion_id->nombre == 'Descarga' || $operacion_id->nombre == 'Exportación')
+        {
+            $carga = false;
+        }
 
         return [
             'terminal_origen_id' => fake()->randomElement($terminalOrigen),
@@ -29,7 +39,7 @@ class ResumenFactory extends Factory
             'buque' => fake()->name(),
             'nro_embarque' => fake()->numberBetween(100000000000, 999999999999),
             'nro_viaje' => fake()->unique()->numberBetween(10000, 99999),
-            'operacion_id' => fake()->randomElement($operacion),
+            'operacion_id' => $operacion_id->id,
             'producto_id' => fake()->randomElement($producto),
             'volumen' => fake()->numberBetween(100000, 999999),
             'cantidad_determinada' => fake()->randomElement(['Tanque de Tierra', 'Cifras Buque']),

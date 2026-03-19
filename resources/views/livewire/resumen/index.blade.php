@@ -214,6 +214,9 @@
                 @endif
 
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
+
+                    <a href="{{ route('resumen-pdf', ['id' => $resumen->id]) }}" target="_blank" class="mr-4 text-amber-600" title="Reporte"><i class="far fa-file-pdf"></i></a>
+
                     @can('users.edit')
                     <x-edit-button onclick="window.location.href='{{ route('resumen.edit', $resumen->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
                     @endcan

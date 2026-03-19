@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CintilloController;
+use App\Http\Controllers\PdfResumenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumenController;
 use App\Http\Controllers\RoleController;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::resource('/resumen', ResumenController::class)->except('show', 'store', 'destroy')->names('resumen')->middleware('permission:resumen.index|resumen.create|resumen.edit|resumen.destroy');
+
+    Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->name('resumen-pdf');
 
     Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
 

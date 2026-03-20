@@ -57,49 +57,99 @@
         </thead>
         <tbody class="center">
             <tr>
+                @php
+                    $AyW = ($resumen->sediment_water * 100) / $resumen->TOV;
+                    $densidad = cons1 / ($resumen->API + cons2);
+                    $api_seco = round((cons1 * (1 - ($AyW / 100)) / ($densidad - ($AyW / 100)) - cons2), 1);
+                    $ftm = round((((cons3 / ($api_seco + cons2)) - cons4) * cons5), 5);
+                    $tm = $ftm * $resumen->TOV;
+                    $ftl = round((((cons3 / ($api_seco + cons2)) - cons4) * cons6), 5);
+                    $tl = $ftl * $resumen->TOV;   
+                @endphp
+
                 <td>TOV</td>
                 <td>{{ $resumen->TOV }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ round(($resumen->TOV / cons7), 3) }}</td>
+                <td>{{ $resumen->TOV * 42 }}</td>
+                <td>{{ $tl }}</td>
+                <td>{{ $tm }}</td>
+                <td>{{ $tm * 1000 }}</td>
             </tr>
             <tr>
+                @php
+                    $AyW = ($resumen->sediment_water * 100) / $resumen->GOV;
+                    $densidad = cons1 / ($resumen->API + cons2);
+                    $api_seco = round((cons1 * (1 - ($AyW / 100)) / ($densidad - ($AyW / 100)) - cons2), 1);
+                    $ftm = round((((cons3 / ($api_seco + cons2)) - cons4) * cons5), 5);
+                    $tm = $ftm * $resumen->GOV;
+                    $ftl = round((((cons3 / ($api_seco + cons2)) - cons4) * cons6), 5);
+                    $tl = $ftl * $resumen->GOV;   
+                @endphp
+                
                 <td>GOV</td>
                 <td>{{ $resumen->GOV }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ round(($resumen->GOV / cons7), 3) }}</td>
+                <td>{{ $resumen->GOV * 42 }}</td>
+                <td>{{ $tl }}</td>
+                <td>{{ $tm }}</td>
+                <td>{{ $tm * 1000 }}</td>
             </tr>
             <tr>
+                @php
+                    $AyW = ($resumen->sediment_water * 100) / $resumen->GSV;
+                    $densidad = cons1 / ($resumen->API + cons2);
+                    $api_seco = round((cons1 * (1 - ($AyW / 100)) / ($densidad - ($AyW / 100)) - cons2), 1);
+                    $ftm = round((((cons3 / ($api_seco + cons2)) - cons4) * cons5), 5);
+                    $tm = $ftm * $resumen->GSV;
+                    $ftl = round((((cons3 / ($api_seco + cons2)) - cons4) * cons6), 5);
+                    $tl = $ftl * $resumen->GSV;   
+                @endphp
+
                 <td>GSV</td>
                 <td>{{ $resumen->GSV }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ round(($resumen->GSV / cons7), 3) }}</td>
+                <td>{{ $resumen->GSV * 42 }}</td>
+                <td>{{ $tl }}</td>
+                <td>{{ $tm }}</td>
+                <td>{{ $tm * 1000 }}</td>
             </tr>
             <tr>
+                @php
+                    $AyW = ($resumen->sediment_water * 100) / $resumen->NSV;
+                    $densidad = cons1 / ($resumen->API + cons2);
+                    $api_seco = round((cons1 * (1 - ($AyW / 100)) / ($densidad - ($AyW / 100)) - cons2), 1);
+                    $ftm = round((((cons3 / ($api_seco + cons2)) - cons4) * cons5), 5);
+                    $tm = $ftm * $resumen->NSV;
+                    $ftl = round((((cons3 / ($api_seco + cons2)) - cons4) * cons6), 5);
+                    $tl = $ftl * $resumen->NSV;   
+                @endphp
+
                 <td>NSV</td>
                 <td>{{ $resumen->NSV }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ round(($resumen->NSV / cons7), 3) }}</td>
+                <td>{{ $resumen->NSV * 42 }}</td>
+                <td>{{ $tl}}</td>
+                <td>{{ $tm }}</td>
+                <td>{{ $tm * 1000 }}</td>
             </tr>
             <tr>
+                @php
+                    $AyW = ($resumen->sediment_water * 100) / $resumen->TCV;
+                    $densidad = cons1 / ($resumen->API + cons2);
+                    $api_seco = round((cons1 * (1 - ($AyW / 100)) / ($densidad - ($AyW / 100)) - cons2), 1);
+                    $ftm = round((((cons3 / ($api_seco + cons2)) - cons4) * cons5), 5);
+                    $tm = $ftm * $resumen->TCV;
+                    $ftl = round((((cons3 / ($api_seco + cons2)) - cons4) * cons6), 5);
+                    $tl = $ftl * $resumen->TCV;   
+                @endphp
+
                 <td>TCV</td>
                 <td>{{ $resumen->TCV }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ round(($resumen->TCV / cons7), 3) }}</td>
+                <td>{{ $resumen->TCV * 42 }}</td>
+                <td>{{ $ftl * $resumen->TCV }}</td>
+                <td>{{ $tm = $ftm * $resumen->TCV }}</td>
+                <td>{{ $tm * 1000 }}</td>
             </tr>
             <tr>
                 <td>SEDIMIENT & WATER</td>
@@ -158,27 +208,27 @@
             <tr>
                 <td>OBQ: (CANTIDAD A BORDO)</td>
                 <td>{{ $resumen->OBQ }}</td>
-                <td></td>
+                <td>{{ round($resumen->OBQ / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>OBQ: CANTIDAD A BORDO (AGUA)</td>
                 <td>{{ $resumen->OBQ_agua }}</td>
-                <td></td>
+                <td>{{ round($resumen->OBQ_agua / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>TCV: DESPUES DE LA CARGA</td>
                 <td>{{ $resumen->TCV_carga }}</td>
-                <td></td>
+                <td>{{ round($resumen->TCV_carga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>GSV: DESPUES DE LA CARGA</td>
                 <td>{{ $resumen->GSV_carga }}</td>
-                <td></td>
+                <td>{{ round($resumen->GSV_carga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>NSV: DESPUES DE LA CARGA</td>
                 <td>{{ $resumen->NSV_carga }}</td>
-                <td></td>
+                <td>{{ round($resumen->NSV_carga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>VEF</td>
@@ -200,27 +250,27 @@
             <tr>
                 <td>ROB: (REMANENTE A BORDO)</td>
                 <td>{{ $resumen->ROB }}</td>
-                <td></td>
+                <td>{{ round($resumen->ROB / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>ROB: REMANENTE A BORDO (AGUA)</td>
                 <td>{{ $resumen->ROB_agua }}</td>
-                <td></td>
+                <td>{{ round($resumen->ROB_agua / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>TCV: ANTES DE LA DESCARGA</td>
                 <td>{{ $resumen->TCV_descarga }}</td>
-                <td></td>
+                <td>{{ round($resumen->TCV_descarga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>GSV: ANTES DE LA DESCARGA</td>
                 <td>{{ $resumen->GSV_descarga }}</td>
-                <td></td>
+                <td>{{ round($resumen->GSV_descarga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>NSV: ANTES DE LA DESCARGA</td>
                 <td>{{ $resumen->NSV_descarga }}</td>
-                <td></td>
+                <td>{{ round($resumen->NSV_descarga / cons7, 3) }}</td>
             </tr>
             <tr>
                 <td>VEF</td>
@@ -257,7 +307,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr class="center">
                 <td>{{ $resumen->TCV }}</td>
 
                 @if($resumen->operacion->nombre == 'Carga' || $resumen->operacion->nombre == 'Importación')

@@ -14,10 +14,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'super-admin']);
-        $rolAdmin = Role::create(['name' => 'admin']);
-        $rolUser = Role::create(['name' => 'user']);
-        $rolCintillo = Role::create(['name' => 'cintillo']);
+        Role::create(['name' => 'super-admin', 'peso' => 10]);
+        $rolAdmin = Role::create(['name' => 'admin', 'peso' => 5]);
+        $rolUser = Role::create(['name' => 'user', 'peso' => 3]);
+        $rolCintillo = Role::create(['name' => 'cintillo', 'peso' => 2]);
+        $rolResumen = Role::create(['name' => 'resumen', 'peso' => 1]);
 
         Permission::create(['name' => 'users.index'])->assignRole([$rolAdmin, $rolUser]);
         Permission::create(['name' => 'users.create'])->assignRole([$rolAdmin, $rolUser]);
@@ -33,5 +34,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'cintillos.create'])->assignRole([$rolAdmin, $rolCintillo]);
         Permission::create(['name' => 'cintillos.activar'])->assignRole([$rolAdmin, $rolCintillo]);
         Permission::create(['name' => 'cintillos.destroy'])->assignRole([$rolAdmin, $rolCintillo]);
+
+        Permission::create(['name' => 'resumen.index'])->assignRole([$rolAdmin, $rolResumen]);
+        Permission::create(['name' => 'resumen.create'])->assignRole([$rolAdmin, $rolResumen]);
+        Permission::create(['name' => 'resumen.edit'])->assignRole([$rolAdmin, $rolResumen]);
+        Permission::create(['name' => 'resumen.destroy'])->assignRole([$rolAdmin, $rolResumen]);
     }
 }

@@ -113,7 +113,7 @@
                 @endif
 
                 <th class="pt-2">
-                    @can('users.create')
+                    @can('resumen.create')
                     <x-success-button wire:click="modalResumen"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
                     @endcan
                 </th>
@@ -217,11 +217,11 @@
 
                     <a href="{{ route('resumen-pdf', ['id' => $resumen->id]) }}" target="_blank" class="mr-4 text-amber-600" title="Reporte"><i class="far fa-file-pdf"></i></a>
 
-                    @can('users.edit')
+                    @can('resumen.edit')
                     <x-edit-button onclick="window.location.href='{{ route('resumen.edit', $resumen->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
                     @endcan
 
-                    @can('users.destroy')
+                    @can('resumen.destroy')
                     <x-delete-button wire:click="modalBorrar({{ $resumen->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
                     @endcan
                 </td>

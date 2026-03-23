@@ -25,15 +25,15 @@ Route::middleware('auth')->group(function () {
         return view('home');
     })->name('home');
 
-    Route::resource('/resumen', ResumenController::class)->except('show', 'store', 'destroy')->names('resumen')->middleware('permission:resumen.index|resumen.create|resumen.edit|resumen.destroy');
+    Route::resource('/resumen', ResumenController::class)->only('index', 'create', 'edit')->names('resumen');
 
     Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->name('resumen-pdf');
 
-    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users')->middleware('permission:users.index|users.create|users.edit|users.destroy');
+    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users');
 
-    Route::resource('/roles', RoleController::class);
+    Route::resource('/roles', RoleController::class)->except('show');
 
-    Route::get('/cintillos', CintilloController::class)->name('cintillos');
+    Route::get('/cintillos', CintilloController::class)->name('cintillos')->middleware('permission:cintillos.index');
 });
 
 require __DIR__.'/auth.php';

@@ -2,6 +2,7 @@
 
     <x-slot name="title">Resumen</x-slot>
 
+    <!--TODO: cambiar los session por componentes-->
     @if(session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', () => {

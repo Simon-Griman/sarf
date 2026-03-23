@@ -73,7 +73,7 @@ class Index extends Component
                 return;
             }
 
-            if ($usuario->role_level >= auth()->user()->role_level) {
+            if ($usuario->roles->max('peso') >= auth()->user()->roles->max('peso')) {
                 $this->dispatch('notify', 
                     message: 'No puedes eliminar un usuario con el mismo o mayor rol que tú', 
                     icon: 'error',

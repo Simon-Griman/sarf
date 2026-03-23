@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Resumen;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class ResumenController extends Controller
+class ResumenController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:resumen.create', only: ['create']),
+            
+            new Middleware('permission:resumen.index', only: ['index']),
+
+            new Middleware('permission:resumen.edit', only: ['edit']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,42 +39,10 @@ class ResumenController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
         return view('resumen.edit', compact('id'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

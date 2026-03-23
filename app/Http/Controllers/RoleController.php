@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RoleController extends Controller
+
+class RoleController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:roles.create', only: ['create']),
+            
+            new Middleware('permission:roles.index', only: ['index']),
+
+            new Middleware('permission:roles.edit', only: ['edit']),
+        ];
+    }
+
     public function index() {
         $roles = Role::all();
         return view('roles.index', compact('roles'));
@@ -19,9 +34,18 @@ class RoleController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate(['name' => 'required|unique:roles,name']);
         
-        $role = Role::create(['name' => $request->name]);
+        $peso = auth()->user()->roles->max('peso') ?? 0;
+
+        $request->validate([
+            'name' => 'required|unique:roles,name',
+            'peso' => 'nullable|integer|max:'.$peso,
+        ]);
+        
+        $role = Role::create([
+            'name' => $request->name,
+            'peso' => $request->peso,
+        ]);
         
         // Sincronizar los permisos seleccionados
         if ($request->has('permissions')) {
@@ -37,9 +61,19 @@ class RoleController extends Controller
     }
 
     public function update(Request $request, Role $role) {
-        $request->validate(['name' => 'required|unique:roles,name,' . $role->id]);
+
+        $peso = auth()->user()->roles->max('peso') ?? 0;
+
+        $request->validate([
+            'name' => 'required|unique:roles,name,' . $role->id,
+            'peso' => 'nullable|integer|max:'.$peso,
+        ]);
         
-        $role->update(['name' => $request->name]);
+        $role->update([
+            'name' => $request->name,
+            'peso' => $request->peso,
+        ]);
+
         $role->syncPermissions($request->permissions);
 
         return redirect()->route('roles.index')->with('success', 'Rol actualizado');

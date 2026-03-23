@@ -55,17 +55,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(TerminalOrigen::class);
     }
-
-    public function getRoleLevelAttribute()
-    {
-        $rolesWeight = [
-            'super-admin'  => 10,
-            'admin' => 5,
-            'user'   => 3,
-            'cintillo' => 2,
-        ];
-
-        // Retorna el peso del rol más alto que tenga el usuario
-        return $rolesWeight[$this->getRoleNames()->first()] ?? 0;
-    }
 }

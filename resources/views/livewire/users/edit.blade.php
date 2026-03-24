@@ -72,6 +72,7 @@
                         >
                             <div class="p-2 space-y-1 max-h-60 overflow-y-auto bg-zinc-50 dark:bg-zinc-800/5 custom-scrollbar">
                                 @foreach($roles as $role)
+                                    @if($role->peso <= auth()->user()->roles->max('peso'))
                                     <label class="flex items-center px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md cursor-pointer group transition-colors">
                                         <input 
                                             type="checkbox" 
@@ -84,6 +85,7 @@
                                             {{ $role->name }}
                                         </span>
                                     </label>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

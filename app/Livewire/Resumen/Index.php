@@ -14,7 +14,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $borrarResumen, $nro_embarque, $operacion;
+    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarResumen, $nro_embarque, $operacion, $documentos;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -27,6 +27,14 @@ class Index extends Component
         'volumen' => '',
         'fecha_inicio' => '',
         'fecha_fin' => '',
+        'nominacion' => '',
+        'embarque' => '',
+        'cantidad' => '',
+        'calidad' => '',
+        'hoja_tiempo' => '',
+        'acta' => '',
+        'ullage_inicial' => '',
+        'ullage_final' => '',
     ];
 
     public $columns = [
@@ -39,6 +47,7 @@ class Index extends Component
         'producto' => true,
         'volumen' => false,
         'fecha' => false,
+        'documentos' => true,
     ];
 
     public function updatingFilters()
@@ -95,6 +104,13 @@ class Index extends Component
     public function crearResumen($operacion)
     {
         return redirect()->route('resumen.create', compact('operacion'));
+    }
+
+    public function modalDocumento($id)
+    {
+        $this->documentos = Resumen::find($id);
+
+        $this->modalOpen3 = true;
     }
 
     public function render()

@@ -74,6 +74,13 @@
                 </div>
 
                 <div class="sm:col-span-2">
+                    <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="inspector" type="text" name="inspector" autocomplete="family-name" placeholder="SAMH" wire:model.blur="inspector" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
                     <label for="cantidad_determinada" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Cantidad Determinada<span class="text-red-500">*</span></label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="cantidad_determinada" name="cantidad_determinada" autocomplete="cantidad_determinada" wire:model.blur="cantidad_determinada" @blur="$wire.$refresh()">
@@ -283,6 +290,67 @@
                     <label for="VEF" class="block text-sm/6 font-medium text-gray-800 dark:text-white">VEF<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="VEF" type="number" step="0.0001" name="VEF" autocomplete="family-name" wire:model.blur="VEF" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-6 text-center">
+                    <hr class="mb-4">
+                    <h2 class="">Documentos</h2>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación</label>
+                    <div class="mt-2 border-red-500 dark:border-red-700 bg-red-700 p-0.5 rounded-md">
+                        <x-form-text-input id="nominacion" type="file" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="embarque" type="file" name="embarque" autocomplete="family-name" wire:model.blur="embarque" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="cantidad" type="file" name="cantidad" autocomplete="family-name" wire:model.blur="cantidad" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="calidad" type="file" name="calidad" autocomplete="family-name" wire:model.blur="calidad" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="hoja_tiempo" type="file" name="hoja_tiempo" autocomplete="family-name" wire:model.blur="hoja_tiempo" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="acta" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Acta</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="acta" type="file" name="acta" autocomplete="family-name" wire:model.blur="acta" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="ullage_inicial" type="file" name="ullage_inicial" autocomplete="family-name" wire:model.blur="ullage_inicial" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
+                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final</label>
+                    <div class="mt-2">
+                        <x-form-text-input id="ullage_final" type="file" name="ullage_final" autocomplete="family-name" wire:model.blur="ullage_final" @blur="$wire.$refresh()" />
                     </div>
                 </div>
             </div>

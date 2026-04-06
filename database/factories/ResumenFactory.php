@@ -42,6 +42,7 @@ class ResumenFactory extends Factory
             'operacion_id' => $operacion_id->id,
             'producto_id' => fake()->randomElement($producto),
             'volumen' => fake()->numberBetween(100000, 999999),
+            'inspector' => 'SAMH',
             'cantidad_determinada' => fake()->randomElement(['Tanque de Tierra', 'Cifras Buque']),
             'documento' => fake()->randomElement(['Borrador', 'Definitivo']),
             'TOV' => fake()->randomFloat(2, 100000, 999999.99),

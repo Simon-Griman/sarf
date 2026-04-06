@@ -10,7 +10,7 @@
         : "focus:border-indigo-500 focus:ring-indigo-500";
 @endphp
 
-<select name="{{ $name }}" {{ $attributes->merge(['class' => "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 dark:bg-zinc-800 py-1.5 pr-8 pl-3 text-base text-gray-800 dark:text-white outline-1 -outline-offset-1 outline-white/10 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 custom-scrollbar $statusClasses"]) }}>
+<select name="{{ $name }}" {{ $attributes->merge(['class' => "col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-8 pl-3 text-base text-gray-800 dark:text-white outline-1 -outline-offset-1 outline-white/10 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 custom-scrollbar bg-zinc-200 dark:bg-zinc-700 $statusClasses"]) }}>
     {{ $slot }}
 </select>
 

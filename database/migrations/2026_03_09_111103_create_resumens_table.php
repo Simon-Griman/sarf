@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
             $table->foreignId('producto_id')->constrained()->onDelete('cascade');
             $table->integer('volumen');
+            $table->string('inspector', 45)->default('SAMH');
             $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque']);
             $table->enum('documento', ['Borrador', 'Definitivo']);
 
@@ -57,6 +58,16 @@ return new class extends Migration
             $table->integer('TDV_ajustado')->nullable();
 
             $table->decimal('VEF', 6, 4)->nullable();
+
+            //documentos
+            $table->string('nominacion')->nullable();
+            $table->string('embarque')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('calidad')->nullable();
+            $table->string('hoja_tiempo')->nullable();
+            $table->string('acta')->nullable();
+            $table->string('ullage_inicial')->nullable();
+            $table->string('ullage_final')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

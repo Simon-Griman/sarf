@@ -36,6 +36,10 @@
                 </th>
                 @endif
 
+                @if($columns['documentos'])
+                <th></th>
+                @endif
+
                 <th></th>
             </tr>
 
@@ -112,6 +116,10 @@
                 </th>
                 @endif
 
+                @if($columns['documentos'])
+                <th></th>
+                @endif
+
                 <th class="pt-2">
                     @can('resumen.create')
                     <x-success-button wire:click="modalResumen"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
@@ -152,6 +160,10 @@
 
                 @if($columns['fecha'])
                 <th class="px-4 py-3.5 text-sm font-medium text-left">Fecha</th>
+                @endif
+
+                @if($columns['documentos'])
+                <th class="px-4 py-3.5 text-sm font-medium text-left">Documentos</th>
                 @endif
 
                 <th class="px-4 py-3.5 text-sm font-medium text-left">Acciones</th>
@@ -213,10 +225,19 @@
                 </td>
                 @endif
 
+                @if($columns['documentos'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
+                    {{--@if(!empty($resumen->nominacion))
+                    <a href="{{ url('storage/'.$resumen->nominacion) }}" target="_blank" class="group inline-flex items-center p-2 bg-zinc-800 rounded-md"><i class="far fa-file-pdf"></i> <span class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-500 ease-in-out group-hover:max-w-xs group-hover:ml-2 invisible group-hover:visible">Nominación</span></a>
 
-                    <a href="{{ route('resumen-pdf', ['id' => $resumen->id]) }}" target="_blank" class="mr-4 text-amber-600" title="Reporte"><i class="far fa-file-pdf"></i></a>
+                    <a href="{{ url('storage/'.$resumen->nominacion) }}" target="_blank" class="group inline-flex items-center p-2 bg-zinc-800 rounded-md"><i class="far fa-file-pdf"></i> <span class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-500 ease-in-out group-hover:max-w-xs group-hover:ml-2 invisible group-hover:visible">Embarque</span></a>
+                    @endif--}}
 
+                    <x-edit-button wire:click="modalDocumento({{ $resumen->id }})"><i class="fas fa-eye"></i> Mostrar</x-edit-button>
+                </td>
+                @endif
+
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
                     @can('resumen.edit')
                     <x-edit-button onclick="window.location.href='{{ route('resumen.edit', $resumen->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
                     @endcan
@@ -348,6 +369,90 @@
                                         <span wire:loading.remove><i class="fa-solid fa-file-export"></i> Exportación</span>
                                         <span wire:loading>Entrando...</span>
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div x-data="{ open: @entangle('modalOpen3') }" 
+        x-show="open" 
+        class="relative z-10" 
+        aria-labelledby="modal-title" 
+        role="dialog" 
+        aria-modal="true"
+        style="display: none;"> 
+        
+        <div x-show="open" 
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            class="fixed inset-0 bg-gray-500/75 transition-opacity dark:bg-gray-900/50">
+        </div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                
+                <div x-show="open"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    @click.away="open = false" 
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl dark:bg-gray-800">
+                    
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-gray-800">
+                        <div class="text-center">
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4">
+                                <h3 class="text-base font-semibold text-gray-900 dark:text-white text-center" id="modal-title">Ver Documentos</h3>
+                                <div class="mt-6 mb-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                    @if(!empty($documentos->nominacion))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->nominacion) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Nominación</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->embarque))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->embarque) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Embarque</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->cantidad))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->cantidad) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Certificado de Cantidad</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->calidad))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->calidad) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Certificado de Calidad
+                                        </a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->hoja_tiempo))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->hoja_tiempo) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Hoja de Tiempo</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->acta))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->acta) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Acta</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->ullage_inicial))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->ullage_inicial) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Ullage Inicial</a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($documentos->ullage_final))
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ url('storage/'.$documentos->ullage_final) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500">Ullage Final</a>
+                                    </div>
+                                    @endif
+
+                                    <div class="sm:col-span-2">
+                                        <a href="{{ route('resumen-pdf', ['id' => $resumen->id]) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500" title="Reporte"><i class="far fa-file-pdf"></i> Resumen</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

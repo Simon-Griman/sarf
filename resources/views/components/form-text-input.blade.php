@@ -14,7 +14,7 @@
         : "focus:border-indigo-500 focus:ring-indigo-500";
 @endphp
 
-<input type="{{ $type }}" name="{{ $name }}" value="{{ $value }}" autocomplete="given-name" {{ $attributes->merge(['class' => "block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-gray-800 dark:text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 $statusClasses"]) }}/>
+<input type="{{ $type }}" name="{{ $name }}" value="{{ $value }}" autocomplete="given-name" {{ $attributes->merge(['class' => "block w-full rounded-md px-3 py-1.5 text-base text-gray-800 dark:text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 bg-zinc-200 dark:bg-zinc-700 file:py-0.5 file:cursor-pointer file:bg-transparent file:border-none file:text-blue-600 dark:file:text-blue-400 file:hover:underline file:active:text-blue-500 $statusClasses"]) }}/>
 
 @if($name)
     @error($name)

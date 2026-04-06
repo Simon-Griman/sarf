@@ -9,12 +9,15 @@ use App\Models\TerminalDestino;
 use App\Models\TerminalOrigen;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     public $tipo_operacion;
 
-    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $nro_viaje, $producto_id, $volumen, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $tabla_VCF, $temp, $API, $VEF;
+    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $nro_viaje, $producto_id, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $tabla_VCF, $temp, $API, $VEF, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -32,6 +35,7 @@ class Create extends Component
             'nro_viaje' => 'required',
             'producto_id' => 'required',
             'volumen' => 'required',
+            'inspector' => 'nullable',
             'cantidad_determinada' => 'required',
             'documento' => 'required',
             'TOV' => 'required',
@@ -62,6 +66,15 @@ class Create extends Component
             'TDV_ajustado' => 'required_if:tipo_operacion,descarga,exportacion',
 
             'VEF' => 'required',
+
+            //archivos
+            'nominacion' => 'required',
+            'embarque' => 'required',
+            'cantidad' => 'required',
+            'calidad' => 'required',
+            'acta' => 'required',
+            'ullage_inicial' => 'required',
+            'ullage_final' => 'required',
         ];
     }
 
@@ -97,6 +110,17 @@ class Create extends Component
             return redirect()->route('resumen.index')->with('error', 'Error en la Operación');
         }
 
+        if ($this->inspector == '') $this->inspector = 'SAMH';
+
+        $nominacion = $this->nominacion->store('images/nominacion', 'public');
+        $embarque = $this->embarque->store('images/embarque', 'public');
+        $cantidad = $this->cantidad->store('images/certificados/cantidad', 'public');
+        $calidad = $this->calidad->store('images/certificados/calidad', 'public');
+        $hoja_tiempo = $this->hoja_tiempo->store('images/hoja_tiempo', 'public');
+        $acta = $this->acta->store('images/acta', 'public');
+        $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
+        $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
+
         Resumen::create([
             'terminal_origen_id' => $this->terminal_origen_id,
             'terminal_destino_id' => $this->terminal_destino_id,
@@ -106,6 +130,7 @@ class Create extends Component
             'operacion_id' => $operacion_id,
             'producto_id' => $this->producto_id,
             'volumen' => $this->volumen,
+            'inspector' => $this->inspector,
             'cantidad_determinada' => $this->cantidad_determinada,
             'documento' => $this->documento,
             'TOV' => $this->TOV,
@@ -136,6 +161,15 @@ class Create extends Component
             'TDV_ajustado' => $this->TDV_ajustado,
 
             'VEF' => $this->VEF,
+
+            'nominacion' => $nominacion,
+            'embarque' => $embarque,
+            'cantidad' => $cantidad,
+            'calidad' => $calidad,
+            'hoja_tiempo' => $hoja_tiempo,
+            'acta' => $acta,
+            'ullage_inicial' => $ullage_inicial,
+            'ullage_final' => $ullage_final,
         ]);
 
         return redirect()->route('resumen.index')->with('success', 'Resumen Agregado Correctamente');

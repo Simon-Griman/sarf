@@ -20,6 +20,7 @@ class Resumen extends Model
         'operacion_id',
         'producto_id',
         'volumen',
+        'inspector',
         'cantidad_determinada',
         'documento',
         'TOV',
@@ -47,6 +48,14 @@ class Resumen extends Model
         'TDV',
         'TDV_ajustado',
         'VEF',
+        'nominacion',
+        'embarque',
+        'cantidad',
+        'calidad',
+        'hoja_tiempo',
+        'acta',
+        'ullage_inicial',
+        'ullage_final',
     ];
 
     public function terminalOrigen(): BelongsTo

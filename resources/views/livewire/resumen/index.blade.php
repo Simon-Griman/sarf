@@ -451,7 +451,7 @@
                                     @endif
 
                                     <div class="sm:col-span-2">
-                                        <a href="{{ route('resumen-pdf', ['id' => $resumen->id]) }}" target="_blank" class="btn bg-red-600 rounded p-2 hover:bg-red-500" title="Reporte"><i class="far fa-file-pdf"></i> Resumen</a>
+                                        <a href="{{ route('resumen-pdf', ['id' => $resumenPdf_id]) }}" target="_blank" class="btn bg-amber-600 rounded p-2 hover:bg-amber-500" title="Reporte"><i class="far fa-file-pdf"></i> Resumen</a>
                                     </div>
                                 </div>
                             </div>

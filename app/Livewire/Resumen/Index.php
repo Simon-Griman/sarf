@@ -14,7 +14,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarResumen, $nro_embarque, $operacion, $documentos;
+    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarResumen, $nro_embarque, $operacion, $documentos, $resumenPdf_id=0;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -109,6 +109,8 @@ class Index extends Component
     public function modalDocumento($id)
     {
         $this->documentos = Resumen::find($id);
+
+        $this->resumenPdf_id = $id;
 
         $this->modalOpen3 = true;
     }

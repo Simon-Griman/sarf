@@ -70,7 +70,7 @@
                 <td>TOV</td>
                 <td>{{ $resumen->TOV }}</td>
                 <td>{{ round(($resumen->TOV / cons7), 3) }}</td>
-                <td>{{ $resumen->TOV * 42 }}</td>
+                <td>{{ number_format(($resumen->TOV * 42), 2, '.', '') }}</td>
                 <td>{{ round($tl, 4) }}</td>
                 <td>{{ round($tm, 4) }}</td>
                 <td>{{ round($tm * 1000, 1) }}</td>
@@ -89,7 +89,7 @@
                 <td>GOV</td>
                 <td>{{ $resumen->GOV }}</td>
                 <td>{{ round(($resumen->GOV / cons7), 3) }}</td>
-                <td>{{ $resumen->GOV * 42 }}</td>
+                <td>{{ number_format(($resumen->GOV * 42), 2, '.', '') }}</td>
                 <td>{{ round($tl, 4) }}</td>
                 <td>{{ round($tm, 4) }}</td>
                 <td>{{ round($tm * 1000, 1) }}</td>
@@ -108,7 +108,7 @@
                 <td>GSV</td>
                 <td>{{ $resumen->GSV }}</td>
                 <td>{{ round(($resumen->GSV / cons7), 3) }}</td>
-                <td>{{ $resumen->GSV * 42 }}</td>
+                <td>{{ number_format(($resumen->GSV * 42), 2, '.', '') }}</td>
                 <td>{{ round($tl, 4) }}</td>
                 <td>{{ round($tm, 4) }}</td>
                 <td>{{ round($tm * 1000, 1) }}</td>
@@ -127,7 +127,7 @@
                 <td>NSV</td>
                 <td>{{ $resumen->NSV }}</td>
                 <td>{{ round(($resumen->NSV / cons7), 3) }}</td>
-                <td>{{ $resumen->NSV * 42 }}</td>
+                <td>{{ number_format(($resumen->NSV * 42), 2, '.', '') }}</td>
                 <td>{{ round($tl, 4) }}</td>
                 <td>{{ round($tm, 4) }}</td>
                 <td>{{ round($tm * 1000, 1) }}</td>
@@ -146,7 +146,7 @@
                 <td>TCV</td>
                 <td>{{ $resumen->TCV }}</td>
                 <td>{{ round(($resumen->TCV / cons7), 3) }}</td>
-                <td>{{ $resumen->TCV * 42 }}</td>
+                <td>{{ number_format(($resumen->TCV * 42), 2, '.', '') }}</td>
                 <td>{{ round($tl, 4) }}</td>
                 <td>{{ round($tm, 4) }}</td>
                 <td>{{ round($tm * 1000, 1) }}</td>
@@ -308,7 +308,7 @@
         </thead>
         <tbody>
             <tr class="center">
-                <td>{{ $resumen->TCV }}</td>
+                <td>{{ round($resumen->TCV, 0) }}</td>
 
                 @if($resumen->operacion->nombre == 'Carga' || $resumen->operacion->nombre == 'Importación')
                 <td>{{ $resumen->TRV_ajustado }}</td>

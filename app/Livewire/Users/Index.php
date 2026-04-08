@@ -4,6 +4,7 @@ namespace App\Livewire\Users;
 
 use App\Models\TerminalOrigen;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -110,13 +111,14 @@ class Index extends Component
 
     public function render()
     {
-        $users = User::select('users.*', 'nombre', 'roles.name as role_name')
+        $users = User::select('users.*', 'nombre', DB::raw('GROUP_CONCAT(roles.name SEPARATOR ", ") as role_names'))
             ->join('terminal_origens', 'terminal_origens.id', '=', 'users.terminal_origen_id')
             ->leftjoin('model_has_roles', function($join) {
                 $join->on('model_has_roles.model_id', '=', 'users.id')
                     ->where('model_has_roles.model_type', '=', User::class);
             })
             ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+            ->groupBy('users.id')
         ;
 
         foreach ($this->filters as $column => $value)
@@ -149,6 +151,6 @@ class Index extends Component
 
         $terminal = TerminalOrigen::orderBy('nombre')->get();
 
-        return view('livewire.users.index', ['users' => $users->paginate($this->paginate), 'terminal' => $terminal]);
+        return view('livewire.users.index', ['users' => $users->groupBy('users.id')->paginate($this->paginate), 'terminal' => $terminal]);
     }
 }

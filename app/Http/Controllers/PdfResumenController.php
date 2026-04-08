@@ -10,7 +10,7 @@ class PdfResumenController extends Controller
 {
     public function generarDocumento($id)
     {
-        $qrInfo = 'http://162.122.77.104/resumen-pdf/'.$id;
+        $qrInfo = 'http://162.122.77.107/resumen-pdf/'.$id;
 
         $qrcode = base64_encode(QrCode::format('png')->color(100, 100, 100)->size(100)->margin(1)->generate($qrInfo));
 

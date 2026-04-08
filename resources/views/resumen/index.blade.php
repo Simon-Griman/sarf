@@ -30,7 +30,7 @@
                 const isDark = document.documentElement.classList.contains('dark');
                 
                 Swal.fire({
-                    title: '¡Hecho!',
+                    title: '¡Error!',
                     text: "{{ session('error') }}", // Aquí tomamos el mensaje de la sesión
                     icon: 'error',
                     toast: true,

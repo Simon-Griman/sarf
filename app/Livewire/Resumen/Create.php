@@ -17,7 +17,7 @@ class Create extends Component
 
     public $tipo_operacion;
 
-    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $nro_viaje, $producto_id, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $tabla_VCF, $temp, $API, $VEF, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
+    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $fecha_operacion, $nro_viaje, $producto_id, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -32,6 +32,7 @@ class Create extends Component
             'terminal_destino_id' => 'required',
             'buque' => 'required',
             'nro_embarque' => 'required',
+            'fecha_operacion' => 'required',
             'nro_viaje' => 'required',
             'producto_id' => 'required',
             'volumen' => 'required',
@@ -45,9 +46,10 @@ class Create extends Component
             'TCV' => 'required',
             'sediment_water' => 'required',
             'free_water' => 'required',
-            'tabla_VCF' => 'required',
+            'agua_sedimento' => 'required',
             'temp' => 'required',
             'API' => 'required',
+            'azufre' => 'required',
 
             'OBQ' => 'required_if:tipo_operacion,carga,importacion',
             'OBQ_agua' => 'required_if:tipo_operacion,carga,importacion',
@@ -126,6 +128,7 @@ class Create extends Component
             'terminal_destino_id' => $this->terminal_destino_id,
             'buque' => $this->buque,
             'nro_embarque' => $this->nro_embarque,
+            'fecha_operacion' => $this->fecha_operacion,
             'nro_viaje' => $this->nro_viaje,
             'operacion_id' => $operacion_id,
             'producto_id' => $this->producto_id,
@@ -140,9 +143,10 @@ class Create extends Component
             'TCV' => $this->TCV,
             'sediment_water' => $this->sediment_water,
             'free_water' => $this->free_water,
-            'tabla_VCF' => $this->tabla_VCF,
+            'agua_sedimento' => $this->agua_sedimento,
             'temp' => $this->temp,
             'API' => $this->API,
+            'azufre' => $this->azufre,
 
             'OBQ' => $this->OBQ,
             'OBQ_agua' => $this->OBQ_agua,

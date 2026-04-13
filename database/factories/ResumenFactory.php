@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use function Symfony\Component\Clock\now;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Resumen>
  */
@@ -38,6 +40,7 @@ class ResumenFactory extends Factory
             'terminal_destino_id' => fake()->randomElement($terminalDestino),
             'buque' => fake()->name(),
             'nro_embarque' => fake()->numberBetween(100000000000, 999999999999),
+            'fecha_operacion' => fake()->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'nro_viaje' => fake()->unique()->numberBetween(10000, 99999),
             'operacion_id' => $operacion_id->id,
             'producto_id' => fake()->randomElement($producto),
@@ -52,9 +55,10 @@ class ResumenFactory extends Factory
             'TCV' => fake()->randomFloat(2, 100000, 999999.99),
             'sediment_water' => fake()->randomFloat(2, 100, 999.99),
             'free_water' => fake()->randomFloat(2, 100, 999.99),
-            'tabla_VCF' => strtoupper(fake()->bothify('?#')),
+            'agua_sedimento' => fake()->randomFloat(2, 100, 999.99),
             'temp' => fake()->numberBetween(10, 100),
             'API' => fake()->numberBetween(10, 100),
+            'azufre' => fake()->numberBetween(100, 1000),
 
             //carga
             'OBQ' => $carga ? fake()->numberBetween(0, 10) : null,

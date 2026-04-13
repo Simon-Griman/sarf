@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td><b>Nro Embarque:</b> {{ $resumen->nro_embarque }}</td>
-                <td><b>Codigo SARF:</b></td>
+                <td><b>Fecha de Operación:</b> {{ $resumen->fecha_operacion }}</td>
                 <td><b>Nro viaje:</b> {{ $resumen->nro_viaje }}</td>
             </tr>
             <tr>
@@ -178,17 +178,19 @@
         <thead>
             <tr>
                 <th>Producto</th>
-                <th>Tabla VCF</th>
-                <th>Temp</th>
                 <th>API</th>
+                <th>Agua y Sedimento</th>
+                <th>Temp</th>
+                <th>Azufre</th>
             </tr>
         </thead>
         <tbody>
             <tr class="center">
                 <td>{{ $resumen->producto->nombre }}</td>
-                <td>{{ $resumen->tabla_VCF }}</td>
-                <td>{{ $resumen->temp }}</td>
                 <td>{{ $resumen->API }}</td>
+                <td>{{ $resumen->agua_sedimento }}</td>
+                <td>{{ $resumen->temp }}</td>
+                <td>{{ $resumen->azufre }}</td>
             </tr>
         </tbody>
     </table>

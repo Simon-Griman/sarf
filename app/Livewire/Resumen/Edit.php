@@ -16,7 +16,7 @@ class Edit extends Component
 
     public $resumen_id;
 
-    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $nro_viaje, $producto_id, $tipo_operacion, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $tabla_VCF, $temp, $API, $VEF, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente;
+    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $fecha_operacion, $nro_viaje, $producto_id, $tipo_operacion, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente;
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -45,7 +45,8 @@ class Edit extends Component
         $this->TCV = $resumen->TCV;
         $this->sediment_water = $resumen->sediment_water;
         $this->free_water = $resumen->free_water;
-        $this->tabla_VCF = $resumen->tabla_VCF;
+        $this->agua_sedimento = $resumen->agua_sedimento;
+        $this->azufre = $resumen->azufre;
         $this->temp = $resumen->temp;
         $this->API = $resumen->API;
         //carga
@@ -97,7 +98,8 @@ class Edit extends Component
             'TCV' => 'required',
             'sediment_water' => 'required',
             'free_water' => 'required',
-            'tabla_VCF' => 'required',
+            'agua_sedimento' => 'required',
+            'azufre' => 'required',
             'temp' => 'required',
             'API' => 'required',
 
@@ -209,7 +211,8 @@ class Edit extends Component
             'TCV' => $this->TCV,
             'sediment_water' => $this->sediment_water,
             'free_water' => $this->free_water,
-            'tabla_VCF' => $this->tabla_VCF,
+            'agua_sedimento' => $this->agua_sedimento,
+            'azufre' => $this->azufre,
             'temp' => $this->temp,
             'API' => $this->API,
 

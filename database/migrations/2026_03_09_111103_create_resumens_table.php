@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('terminal_destino_id')->constrained()->onDelete('cascade');
             $table->string('buque', 45);
             $table->bigInteger('nro_embarque'); //12 digitos
+            $table->date('fecha_operacion');
             $table->bigInteger('nro_viaje')->unique();
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
             $table->foreignId('producto_id')->constrained()->onDelete('cascade');
@@ -35,9 +36,10 @@ return new class extends Migration
             $table->decimal('free_water', 6, 2);
 
             //detalles tierra
-            $table->string('tabla_VCF', 45);
             $table->integer('temp');
             $table->integer('API');
+            $table->integer('agua_sedimento');
+            $table->integer('azufre');
 
             //datos buque
             //carga

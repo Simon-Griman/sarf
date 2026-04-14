@@ -32,6 +32,7 @@ class Edit extends Component
         $this->terminal_destino_id = $resumen->terminal_destino_id;
         $this->buque = $resumen->buque;
         $this->nro_embarque = $resumen->nro_embarque;
+        $this->fecha_operacion = $resumen->fecha_operacion;
         $this->nro_viaje = $resumen->nro_viaje;
         $this->producto_id = $resumen->producto_id;
         $this->volumen = $resumen->volumen;
@@ -85,6 +86,7 @@ class Edit extends Component
             'terminal_destino_id' => 'required',
             'buque' => 'required',
             'nro_embarque' => 'required',
+            'fecha_operacion' => 'required',
             'nro_viaje' => 'required',
             'producto_id' => 'required',
             'volumen' => 'required',
@@ -197,6 +199,7 @@ class Edit extends Component
             'terminal_destino_id' => $this->terminal_destino_id,
             'buque' => $this->buque,
             'nro_embarque' => $this->nro_embarque,
+            'fecha_operacion' => $this->fecha_operacion,
             'nro_viaje' => $this->nro_viaje,
             //'operacion_id' => $operacion_id,
             'producto_id' => $this->producto_id,

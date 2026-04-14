@@ -48,6 +48,13 @@
                 </div>
 
                 <div class="sm:col-span-2">
+                    <label for="fecha_operacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Fecha Final de Operación<span class="text-red-500">*</span></label>
+                    <div class="mt-2">
+                        <x-form-text-input id="fecha_operacion" type="date" name="fecha_operacion" autocomplete="family-name" wire:model.blur="fecha_operacion" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-2">
                     <label for="nro_viaje" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Numero de Viaje<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="nro_viaje" type="number" name="nro_viaje" autocomplete="family-name" wire:model.blur="nro_viaje" @blur="$wire.$refresh()" />
@@ -307,7 +314,7 @@
 
                 <div class="sm:col-span-2">
                     <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación</label>
-                    <div class="mt-2 border-red-500 dark:border-red-700 bg-red-700 p-0.5 rounded-md">
+                    <div class="mt-2">
                         <x-form-text-input id="nominacion" type="file" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
                     </div>
                 </div>

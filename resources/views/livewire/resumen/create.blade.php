@@ -313,56 +313,56 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación</label>
+                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="nominacion" type="file" class="file:py-0.5 file:cursor-pointer file:bg-transparent file:border-none file:text-blue-400 file:hover:underline file:active:text-blue-500" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque</label>
+                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="embarque" type="file" name="embarque" autocomplete="family-name" wire:model.blur="embarque" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad</label>
+                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="cantidad" type="file" name="cantidad" autocomplete="family-name" wire:model.blur="cantidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad</label>
+                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="calidad" type="file" name="calidad" autocomplete="family-name" wire:model.blur="calidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo</label>
+                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="hoja_tiempo" type="file" name="hoja_tiempo" autocomplete="family-name" wire:model.blur="hoja_tiempo" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="acta" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Acta</label>
+                    <label for="acta" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Acta<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="acta" type="file" name="acta" autocomplete="family-name" wire:model.blur="acta" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial</label>
+                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_inicial" type="file" name="ullage_inicial" autocomplete="family-name" wire:model.blur="ullage_inicial" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final</label>
+                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_final" type="file" name="ullage_final" autocomplete="family-name" wire:model.blur="ullage_final" @blur="$wire.$refresh()" />
                     </div>

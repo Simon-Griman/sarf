@@ -45,24 +45,24 @@
 
             <tr>
                 <th class="text-left px-2">
-                    <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 w-full custom-scrollbar" wire:model.live.debounce.300ms="filters.terminal_origen_id">
+                    <x-index-select wire:model.live.debounce.300ms="filters.terminal_origen_id">
                         <option value="">Todo</option>
 
                         @foreach ($origenes as $ori)
                             <option value="{{ $ori->id }}">{{ $ori->nombre }}</option>
                         @endforeach
-                    </select>
+                    </x-index-select>
                 </th>
 
                 @if($columns['destino'])
                 <th class="text-left pr-2">
-                    <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 w-full custom-scrollbar" wire:model.live.debounce.300ms="filters.terminal_destino_id">
+                    <x-index-select wire:model.live.debounce.300ms="filters.terminal_destino_id">
                         <option value="">Todo</option>
 
                         @foreach ($destinos as $desti)
                             <option value="{{ $desti->id }}">{{ $desti->nombre }}</option>
                         @endforeach
-                    </select>
+                    </x-index-select>
                 </th>
                 @endif
 
@@ -82,25 +82,25 @@
 
                 @if($columns['operacion'])
                 <th class="text-left pr-2">
-                    <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 w-full custom-scrollbar" wire:model.live.debounce.300ms="filters.operacion_id">
+                    <x-index-select wire:model.live.debounce.300ms="filters.operacion_id">
                         <option value="">Todo</option>
 
                         @foreach ($operaciones as $opera)
                             <option value="{{ $opera->id }}">{{ $opera->nombre }}</option>
                         @endforeach
-                    </select>
+                    </x-index-select>
                 </th>
                 @endif
 
                 @if($columns['producto'])
                 <th class="text-left pr-2">
-                    <select class="border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 focus:border-indigo-500 dark:focus:border-zinc-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-2 w-full custom-scrollbar" wire:model.live.debounce.300ms="filters.producto_id">
+                    <x-index-select wire:model.live.debounce.300ms="filters.producto_id">
                         <option value="">Todo</option>
 
                         @foreach ($productos as $pro)
                             <option value="{{ $pro->id }}">{{ $pro->nombre }}</option>
                         @endforeach
-                    </select>
+                    </x-index-select>
                 </th>
                 @endif
 

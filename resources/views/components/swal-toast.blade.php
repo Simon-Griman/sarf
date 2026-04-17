@@ -1,18 +1,30 @@
 @props([
-    'icon' => 'success',
-    'title' => '¡Hecho!',
-    'session' => 'success'
+    'title' => null,
 ])
 
-@if(session()->has($session))
+{{-- Definimos los tipos de alerta que queremos escuchar --}}
+@php
+    $types = ['success', 'error', 'info', 'warning', 'question'];
+    $activeType = collect($types)->first(fn($type) => session()->has($type));
+@endphp
+
+@if($activeType)
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const isDark = document.documentElement.classList.contains('dark');
             
+            // Mapeo de colores para los iconos (opcional)
+            const iconColors = {
+                success: '#10b981',
+                error: '#ef4444',
+                warning: '#f59e0b',
+                info: '#3b82f6'
+            };
+
             window.Swal.fire({
-                title: "{{ $title }}",
-                text: "{{ session($session) }}",
-                icon: "{{ $icon }}",
+                title: "{{ $title ?? ($activeType === 'success' ? '¡Hecho!' : 'Atención') }}",
+                text: "{{ session($activeType) }}",
+                icon: "{{ $activeType }}",
                 toast: true,
                 //position: 'top-end',
                 showConfirmButton: false,
@@ -20,7 +32,7 @@
                 timerProgressBar: true,
                 background: isDark ? '#1f2937' : '#ffffff',
                 color: isDark ? '#ffffff' : '#1f2937',
-                iconColor: "{{ $icon === 'success' ? '#10b981' : '' }}", 
+                iconColor: iconColors["{{ $activeType }}"] || '',
             });
         });
     </script>

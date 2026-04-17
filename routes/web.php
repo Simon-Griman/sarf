@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/roles', RoleController::class)->except('show');
 
     Route::get('/cintillos', CintilloController::class)->name('cintillos')->middleware('permission:cintillos.index');
+
+    Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 
 require __DIR__.'/auth.php';

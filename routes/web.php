@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cintillos', CintilloController::class)->name('cintillos')->middleware('permission:cintillos.index');
 
+    Route::get('/sesiones', function() {
+        return view('auditoria.sesiones');
+    })->name('sesiones')->middleware('permission:auditoria.sesiones');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

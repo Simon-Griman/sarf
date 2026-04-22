@@ -6,6 +6,9 @@ use App\Models\Cintillo;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Events\Login; // El evento nativo de Laravel
+use App\Listeners\LogSuccessfulLogin; // Tu listener
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,5 +52,11 @@ class AppServiceProvider extends ServiceProvider
         
         View::share('cintilloOscuro', $cintilloOscuro);
         View::share('cintilloClaro', $cintilloClaro);
+
+        // Registramos el Listener para el evento Login
+        Event::listen(
+            Login::class,
+            LogSuccessfulLogin::class
+        );
     }
 }

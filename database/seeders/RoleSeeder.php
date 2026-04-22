@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
         $rolUser = Role::create(['name' => 'user', 'peso' => 3]);
         $rolCintillo = Role::create(['name' => 'cintillo', 'peso' => 2]);
         $rolResumen = Role::create(['name' => 'resumen', 'peso' => 1]);
+        $rolAuditoria = Role::create(['name' => 'auditoria', 'peso' => 1]);
 
         Permission::create(['name' => 'users.index'])->assignRole([$rolAdmin, $rolUser]);
         Permission::create(['name' => 'users.create'])->assignRole([$rolAdmin, $rolUser]);
@@ -39,5 +40,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'resumen.create'])->assignRole([$rolAdmin, $rolResumen]);
         Permission::create(['name' => 'resumen.edit'])->assignRole([$rolAdmin, $rolResumen]);
         Permission::create(['name' => 'resumen.destroy'])->assignRole([$rolAdmin, $rolResumen]);
+
+        Permission::create(['name' => 'auditoria.sesiones'])->assignRole([$rolAdmin, $rolAuditoria]);
+        Permission::create(['name' => 'auditoria.creados'])->assignRole([$rolAdmin, $rolAuditoria]);
+        Permission::create(['name' => 'auditoria.editados'])->assignRole([$rolAdmin, $rolAuditoria]);
+        Permission::create(['name' => 'auditoria.eliminados'])->assignRole([$rolAdmin, $rolAuditoria]);
     }
 }

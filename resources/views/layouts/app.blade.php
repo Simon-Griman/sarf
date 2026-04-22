@@ -66,6 +66,12 @@
                     <div x-show="open" 
                         x-collapse.duration.700ms 
                         class="mt-1 ml-4 border-l border-gray-200 dark:border-zinc-700 space-y-1">
+
+                        @can('auditoria.sesiones')
+                        <a href="{{ route('sesiones') }}" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('sesiones') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                            <i class="far fa-circle text-[8px] mr-3"></i> Sesiones
+                        </a>
+                        @endcan
                         
                         @can('auditoria.creados')
                         <a href="#" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
@@ -90,7 +96,7 @@
 
                 @can('roles.index')
                 <a href="{{ route('roles.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
-                    <i class="fas fa-users mr-3"></i> Roles
+                    <i class="fas fa-unlock mr-3"></i> Roles
                 </a>
                 @endcan
 

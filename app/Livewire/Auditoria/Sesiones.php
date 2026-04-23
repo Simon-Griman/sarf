@@ -15,7 +15,7 @@ class Sesiones extends Component
 
     public function ver($id)
     {
-        $this->log_usuario = UserLogin::where('user_id', $id)->get();
+        $this->log_usuario = UserLogin::where('user_id', $id)->orderBy('login_at', 'desc')->get();
 
         $this->name = User::find($id)->name;
 
@@ -33,7 +33,7 @@ class Sesiones extends Component
         ->whereHas('user', function ($query) {
             $query->where('name', 'like', '%' . $this->buscar . '%');
         })
-        ->orderBy('created_at', 'desc')
+        ->orderBy('login_at', 'desc')
         ->paginate();
 
         return view('livewire.auditoria.sesiones', compact('sesiones'));

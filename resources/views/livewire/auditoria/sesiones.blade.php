@@ -37,13 +37,13 @@
     </x-table>
 
     <div x-data="{ open: @entangle('modalOpen') }" 
-        x-show="open" 
-        class="relative z-10" 
-        aria-labelledby="modal-title" 
-        role="dialog" 
-        aria-modal="true"
-        style="display: none;"> 
-        
+    x-show="open" 
+    class="relative z-10" 
+    aria-labelledby="modal-title" 
+    role="dialog" 
+    aria-modal="true"
+    style="display: none;"> 
+    
         <div x-show="open" 
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0"
@@ -51,48 +51,49 @@
             class="fixed inset-0 bg-zinc-500/75 transition-opacity dark:bg-zinc-900/50">
         </div>
 
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="fixed inset-0 z-10 w-screen overflow-hidden">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 
                 <div x-show="open"
                     x-transition:enter="ease-out duration-300"
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                     @click.away="open = false" 
-                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg dark:bg-zinc-800">
+                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl dark:bg-zinc-800 max-h-[90vh]">
                     
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-zinc-800">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">Sesiones de {{ $name }}</h3>
-                                <div class="mt-2">
-                                    <table>
-                                        <thead>
-                                            <th class="py-2">IP</th>
-                                            <th>Sistema</th>
-                                            <th class="pr-4">Navegador</th>
-                                            <th>Fecha y Hora</th>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($log_usuario as $item)
-                                            <tr class="hover:bg-zinc-700">
-                                                <td class="py-2">{{ $item->login_at }}</td>
-                                                <td>{{ $item->sistema }}</td>
-                                                <td>{{ $item->navegador }}</td>
-                                                <td>{{ $item->login_at }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
+                            Sesiones de {{ $name }}
+                        </h2>
+                    </div>
+
+                    <div class="overflow-y-auto p-4 sm:p-6 bg-white dark:bg-zinc-800 custom-scrollbar">
+                        <div class="mt-2">
+                            <table class="w-full text-sm">
+                                <thead class="bg-white dark:bg-zinc-800 z-10">
+                                    <tr class="text-gray-500 dark:text-gray-400">
+                                        <th class="py-2 text-left">IP</th>
+                                        <th class="text-left">Sistema</th>
+                                        <th class="text-left">Navegador</th>
+                                        <th class="text-left">Fecha y Hora</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-zinc-700">
+                                @foreach ($log_usuario as $item)
+                                    <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+                                        <td class="py-2">{{ $item->ip_address }}</td>
+                                        <td>{{ $item->sistema }}</td>
+                                        <td>{{ $item->navegador }}</td>
+                                        <td class="whitespace-nowrap">{{ $item->login_at }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 dark:bg-gray-700/25">
-                        <button type="button" @click="open = false" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 sm:mt-0 sm:w-auto hover:bg-gray-300 active:bg-white">
-                            Cerrar
-                        </button>
+                    <div class="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cerrar</button>
                     </div>
                 </div>
             </div>

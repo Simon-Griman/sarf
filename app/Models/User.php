@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserLogin::class);
     }
+
+    public function registrosCreados(): HasMany
+    {
+        return $this->hasMany(RegistrosCreados::class);
+    }
 }

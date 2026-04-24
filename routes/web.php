@@ -39,6 +39,18 @@ Route::middleware('auth')->group(function () {
         return view('auditoria.sesiones');
     })->name('sesiones')->middleware('permission:auditoria.sesiones');
 
+    Route::get('/creados', function() {
+        return view('auditoria.creados');
+    })->name('creados')->middleware('permission:auditoria.creados');
+
+    Route::get('/editados', function() {
+        return view('auditoria.editados');
+    })->name('editados')->middleware('permission:auditoria.editados');
+
+    Route::get('/eliminados', function() {
+        return view('auditoria.eliminados');
+    })->name('eliminados')->middleware('permission:auditoria.eliminados');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

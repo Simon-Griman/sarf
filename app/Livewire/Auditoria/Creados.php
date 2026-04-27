@@ -2,26 +2,38 @@
 
 namespace App\Livewire\Auditoria;
 
+use App\Models\Cintillo;
 use App\Models\RegistrosCreados;
 use App\Models\Resumen;
+use App\Models\Role;
+use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
 
 class Creados extends Component
 {
-    public $nombre, $tabla, $registro_id, $fecha_hora, $registro;
+    public $nombre, $tabla, $registro_id, $fecha_hora, $registro, $modalOpen=false, $modelo;
 
     public function mount()
     {
-        $this->registro = Resumen::find(1);
+        $this->registro = new Resumen;
     }
 
     public function ver($id, $tabla)
     {
-        if ($tabla == 'Resumen')
-        {
-            $this->registro = Resumen::find($id);
-        }
+        $this->modelo = $tabla;
+
+        if ($tabla == 'Resumen') $this->registro = Resumen::find($id);
+
+        elseif ($tabla == 'User') $this->registro = User::find($id);
+
+        elseif ($tabla == 'Role') $this->registro = Role::find($id);
+
+        elseif ($tabla == 'Cintillo') $this->registro = Cintillo::find($id);
+
+        else return;
+
+        $this->modalOpen = true;
     }
 
     public function render()

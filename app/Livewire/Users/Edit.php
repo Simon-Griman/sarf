@@ -67,6 +67,8 @@ class Edit extends Component
     {
         $user = User::find($this->user_id);
 
+        if ($user->roles->max('peso') >= auth()->user()->roles->max('peso')) return redirect()->route('users.index')->with('error', 'No puedes editar un usuario con el mismo o mayor rol que tú');
+
         $user->update([
             'password' => Hash::make($user->cedula),
         ]);

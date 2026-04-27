@@ -39,7 +39,7 @@ class RoleController extends Controller implements HasMiddleware
 
         $request->validate([
             'name' => 'required|unique:roles,name',
-            'peso' => 'nullable|integer|max:'.$peso,
+            'peso' => 'required|integer|max:'.$peso,
         ]);
         
         $role = Role::create([
@@ -66,7 +66,7 @@ class RoleController extends Controller implements HasMiddleware
 
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
-            'peso' => 'nullable|integer|max:'.$peso,
+            'peso' => 'required|integer|max:'.$peso,
         ]);
         
         $role->update([

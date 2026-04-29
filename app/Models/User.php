@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\TracksCreacion;
+use App\Traits\TracksEdicion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,7 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, HasRoles, TracksCreacion;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles, TracksCreacion, TracksEdicion;
 
     /**
      * The attributes that are mass assignable.
@@ -67,5 +68,10 @@ class User extends Authenticatable
     public function registrosCreados(): HasMany
     {
         return $this->hasMany(RegistrosCreados::class);
+    }
+
+    public function registrosEditados(): HasMany
+    {
+        return $this->hasMany(RegistrosEditados::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\TracksCreacion;
+use App\Traits\TracksEdicion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Resumen extends Model
 {
-    use HasFactory, SoftDeletes, TracksCreacion;
+    use HasFactory, SoftDeletes, TracksCreacion, TracksEdicion;
 
     protected $fillable = [
         'terminal_origen_id',

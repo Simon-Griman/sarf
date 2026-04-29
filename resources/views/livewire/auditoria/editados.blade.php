@@ -86,9 +86,9 @@
                                     @if ($modalOpen)
                                     @foreach ($batch as $batch_id)
                                     <tr class="dark:hover:bg-zinc-700 hover:bg-zinc-200">
-                                        <td class="py-2">{{ $batch_id->campo }}</td>
-                                        <td class="dark:bg-red-600 bg-red-500">{{ $batch_id->valor_antes }}</td>
-                                        <td class="dark:bg-green-600 bg-green-500">{{ $batch_id->valor_despues }}</td>
+                                        <td class="py-2 px-2">{{ $batch_id->campo }}</td>
+                                        <td class="dark:bg-red-600 bg-red-500 px-2">{{ $batch_id->valor_antes }}</td>
+                                        <td class="dark:bg-green-600 bg-green-500 px-2">{{ $batch_id->valor_despues }}</td>
                                     </tr>
                                     @endforeach
                                     @endif

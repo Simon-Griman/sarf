@@ -74,6 +74,7 @@ class Create extends Component
             'embarque' => 'required',
             'cantidad' => 'required',
             'calidad' => 'required',
+            'hoja_tiempo' => 'required',
             'acta' => 'required',
             'ullage_inicial' => 'required',
             'ullage_final' => 'required',

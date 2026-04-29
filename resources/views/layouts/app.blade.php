@@ -49,11 +49,11 @@
                 @endcan
 
                 @can('auditoria.index')
-                <div x-data="{ open: {{ request()->routeIs('auditoria.*') ? 'true' : 'false' }} }">
+                <div x-data="{ open: {{ request()->routeIs('sesiones', 'creados', 'editados', 'borrados') ? 'true' : 'false' }} }">
                     <button @click="open = !open" 
                             class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group 
                                 text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700"
-                            :class="open ? 'bg-gray-50 dark:bg-zinc-800 text-gray-900 dark:text-zinc-100'  : ''">
+                            :class="open ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-100'  : ''">
                         
                         <div class="flex items-center">
                             <i class="fas fa-eye w-5 h-5 mr-3"></i> <span class="font-medium dark:hover:bg-zinc-700">Auditoría</span>

@@ -5,6 +5,7 @@ namespace App\Livewire\Users;
 use App\Models\TerminalOrigen;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -15,12 +16,15 @@ class Create extends Component
 
     public $selectedRoles = [];
 
-    protected $rules = [
-        'nombre' => 'required',
-        'cedula' => 'required|integer|min:1000000|max:40000000|unique:users,cedula',
-        'correo' => 'required|email|unique:users,email',
-        'terminal_user' => 'required',
-    ];
+    public function rules()
+    {
+        return [
+            'nombre' => 'required',
+            'cedula' => 'required|integer|min:1000000|max:40000000|unique:users,cedula',
+            'correo' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
+            'terminal_user' => 'required',
+        ];
+    }
 
     public function updated($propertyName)
     {

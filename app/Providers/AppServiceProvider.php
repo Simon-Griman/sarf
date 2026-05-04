@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Login; // El evento nativo de Laravel
 use App\Listeners\LogSuccessfulLogin; // Tu listener
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,29 +30,22 @@ class AppServiceProvider extends ServiceProvider
             return $user->hasRole('super-admin') ? true : null;
         });
 
-        $cintilloOscuroModel = Cintillo::where('activo', '1')->where('modo', 'oscuro')->first();
-        $cintilloClaroModel = Cintillo::where('activo', '1')->where('modo', 'claro')->first();
-
-        if ($cintilloOscuroModel)
-        {
-            $cintilloOscuro = $cintilloOscuroModel->nombre;
-        }
-        else
-        {
-            $cintilloOscuro = '';
-        }
-
-        if ($cintilloClaroModel)
-        {
-            $cintilloClaro = $cintilloClaroModel->nombre;
-        }
-        else
-        {
-            $cintilloClaro = '';
-        }
+        if (Schema::hasTable('cintillos')) {
         
-        View::share('cintilloOscuro', $cintilloOscuro);
-        View::share('cintilloClaro', $cintilloClaro);
+            $cintilloOscuroModel = Cintillo::where('activo', '1')->where('modo', 'oscuro')->first();
+            $cintilloClaroModel = Cintillo::where('activo', '1')->where('modo', 'claro')->first();
+
+            View::share('cintilloOscuro', $cintilloOscuroModel->nombre ?? '');
+            View::share('cintilloClaro', $cintilloClaroModel->nombre ?? '');
+        } 
+
+        else {
+            // Valores por defecto si la tabla no existe aún (durante migraciones)
+            View::share('cintilloOscuro', '');
+            View::share('cintilloClaro', '');
+        }
+
+        
 
         // Registramos el Listener para el evento Login
         Event::listen(

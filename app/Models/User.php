@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Traits\TracksCreacion;
 use App\Traits\TracksEdicion;
+use App\Traits\TracksEliminacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,7 +18,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, HasRoles, TracksCreacion, TracksEdicion;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles, TracksCreacion, TracksEdicion, TracksEliminacion;
 
     /**
      * The attributes that are mass assignable.

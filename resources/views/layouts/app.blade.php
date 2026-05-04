@@ -49,7 +49,7 @@
                 @endcan
 
                 @can('auditoria.index')
-                <div x-data="{ open: {{ request()->routeIs('sesiones', 'creados', 'editados', 'borrados') ? 'true' : 'false' }} }">
+                <div x-data="{ open: {{ request()->routeIs('sesiones', 'creados', 'editados', 'eliminados') ? 'true' : 'false' }} }">
                     <button @click="open = !open" 
                             class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group 
                                 text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700"

@@ -15,12 +15,17 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // Eliminamos el índice anterior
             $table->dropUnique(['email']);
+            $table->dropUnique(['cedula']);
 
             // Creamos un índice funcional
             // Si deleted_at es NULL, el índice usa el email. 
             // Si NO es NULL (está borrado), el índice se vuelve NULL y MySQL ignora la restricción.
             $sql = 'ALTER TABLE users ADD UNIQUE INDEX users_email_active_unique ((IF(deleted_at IS NULL, email, NULL)))';
+
+            $sql2 = 'ALTER TABLE users ADD UNIQUE INDEX users_cedula_active_unique ((IF(deleted_at IS NULL, cedula, NULL)))';
+
             DB::statement($sql);
+            DB::statement($sql2);
         });
     }
 

@@ -14,7 +14,7 @@ class Eliminados extends Component
 
     public function mount()
     {
-        $this->registro = User::first();
+        $this->registro = Resumen::first();
     }
 
     public function ver($id, $tabla)
@@ -26,6 +26,66 @@ class Eliminados extends Component
         elseif ($tabla == 'Resumen') $this->registro = Resumen::withTrashed()->find($id);
 
         $this->modalOpen = true;
+    }
+
+    public function restaurar()
+    {
+        $this->modalOpen = false;
+
+        if ($this->modelo == 'Resumen')
+        {
+            $nro_viaje = $this->registro->nro_viaje;
+
+            $match = Resumen::where('nro_viaje', $nro_viaje)->first();
+
+            if (!$match)
+            {
+                $this->registro->restore();
+
+                $this->dispatch('notify', 
+                    message: 'Resumen restaurado correctamente', 
+                    icon: 'success',
+                    title: '¡Hecho!'
+                );
+            }
+
+            else
+            {
+                $this->dispatch('notify', 
+                    message: 'El resumen ya existe', 
+                    icon: 'error',
+                    title: '¡Error!'
+                );
+            }
+        }
+
+        elseif ($this->modelo == 'User')
+        {
+            $cedula = $this->registro->cedula;
+            $email = $this->registro->email;
+
+            $match = User::where('cedula', $cedula)->orWhere('email', $email)->first();
+
+            if (!$match)
+            {
+                $this->registro->restore();
+
+                $this->dispatch('notify', 
+                    message: 'Usuario restaurado correctamente', 
+                    icon: 'success',
+                    title: '¡Hecho!'
+                );
+            }
+
+            else
+            {
+                $this->dispatch('notify', 
+                    message: 'El usuario ya existe', 
+                    icon: 'error',
+                    title: '¡Error!'
+                );
+            }
+        }
     }
 
     public function render()

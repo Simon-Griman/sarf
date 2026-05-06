@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('role_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('campo', 45);
             $table->string('valor_antes')->nullable();
-            $table->string('valor_despues');
+            $table->string('valor_despues')->nullable();
             $table->string('batch_id');
             $table->timestamps();
         });

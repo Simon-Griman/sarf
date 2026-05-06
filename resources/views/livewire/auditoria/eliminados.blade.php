@@ -20,21 +20,23 @@
             </tr>
         </x-slot>
 
-            @foreach ($eliminados as $eliminado)
-                <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200 text-gray-700 dark:text-gray-200">
-                    <td class="py-2 px-4">{{ $eliminado->name }}</td>
-                    <td class="pl-4">{{ $eliminado->model_name }}</td>
-                    <td class="pl-4">{{ $eliminado->model_id }}</td>
-                    <td class="pl-4">
-                        @if ($fecha->parse($eliminado->fecha)->gt(now()->subDay()))
-                            {{ $fecha->create($eliminado->fecha)->diffForHumans() }}
-                        @else
-                            {{ $fecha->create($eliminado->fecha)->format('d/m/Y H:i:s') }}
-                        @endif
-                    </td>
-                    <td class="px-4"><x-edit-button wire:click="ver({{ $eliminado->model_id }}, '{{ $eliminado->model_name }}')"><i class="fas fa-eye"></i> Ver Registro</x-edit-button></td>
-                </tr>
-            @endforeach
+        @foreach ($eliminados as $eliminado)
+            <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200 text-gray-700 dark:text-gray-200">
+                <td class="py-2 px-4">{{ $eliminado->name }}</td>
+                <td class="pl-4">{{ $eliminado->model_name }}</td>
+                <td class="pl-4">{{ $eliminado->model_id }}</td>
+                <td class="pl-4">
+                    @if ($fecha->parse($eliminado->fecha)->gt(now()->subDay()))
+                        {{ $fecha->create($eliminado->fecha)->diffForHumans() }}
+                    @else
+                        {{ $fecha->create($eliminado->fecha)->format('d/m/Y H:i:s') }}
+                    @endif
+                </td>
+                <td class="px-4">
+                    <x-edit-button wire:click="ver({{ $eliminado->model_id }}, '{{ $eliminado->model_name }}')"><i class="fas fa-eye"></i> Ver Registro</x-edit-button>
+                </td>
+            </tr>
+        @endforeach
         
         <x-slot name="tfoot">
             <td colspan="6" class="p-2">{{ $eliminados->links() }}</td>
@@ -134,9 +136,10 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cerrar</button>
+                        <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 mx-2 text-sm font-semibold text-gray-900 shadow-sm border-red-600 hover:bg-red-400 sm:mt-0 sm:w-auto">Cerrar</button>
+
+                        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm border-green-6' hover:bg-green-400 sm:mt-0 sm:w-auto" wire:click="restaurar">Restaurar</button>
                     </div>
                 </div>
             </div>

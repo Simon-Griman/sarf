@@ -3,6 +3,7 @@
 namespace App\Livewire\Auditoria;
 
 use App\Models\RegistrosEliminados;
+use App\Models\RespaldoBorrados;
 use App\Models\Resumen;
 use App\Models\User;
 use Carbon\Carbon;
@@ -24,6 +25,8 @@ class Eliminados extends Component
         if ($tabla == 'User') $this->registro = User::withTrashed()->find($id);
 
         elseif ($tabla == 'Resumen') $this->registro = Resumen::withTrashed()->find($id);
+
+        elseif ($tabla == 'Role') $this->registro = RespaldoBorrados::where('role_id', $id)->first();
 
         $this->modalOpen = true;
     }

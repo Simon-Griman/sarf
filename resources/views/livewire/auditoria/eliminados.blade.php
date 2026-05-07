@@ -33,7 +33,9 @@
                     @endif
                 </td>
                 <td class="px-4">
+                    @if(!($eliminado->model_name == 'Cintillo'))
                     <x-edit-button wire:click="ver({{ $eliminado->model_id }}, '{{ $eliminado->model_name }}')"><i class="fas fa-eye"></i> Ver Registro</x-edit-button>
+                    @endif
                 </td>
             </tr>
         @endforeach
@@ -70,7 +72,7 @@
                     
                     <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
-                            {{ $this->modelo == 'Resumen' ? 'Detalles del Resumen' : ($this->modelo == 'User' ? 'Detalles del Usuario' : ($this->modelo === 'Role' ? 'Detalles del Rol' : 'Detalles del Cintillo')) }}
+                            {{ $this->modelo == 'Resumen' ? 'Detalles del Resumen' : ($this->modelo == 'User' ? 'Detalles del Usuario' : ($this->modelo === 'Role' ? 'Detalles del Rol' : 'Detalles')) }}
                         </h2>
                     </div>
 
@@ -98,9 +100,8 @@
                                         @elseif ($modelo == 'Role')
                                         <th class="py-2 text-left">Nombre</th>
                                         <th class="text-left">Peso</th>
+                                        <th class="text-left">Borrado</th>
 
-                                        @elseif ($modelo == 'Cintillo')
-                                        <th></th>
                                         @endif
                                     </tr>
                                 </thead>
@@ -123,13 +124,9 @@
                                         <td>{{ $registro->terminalOrigen->nombre }}</td>
 
                                         @elseif ($modelo == 'Role')
-                                        <td>{{ $registro->name }}</td>
-                                        <td>{{ $registro->peso }}</td>
-                                        
-                                        @elseif ($modelo == 'Cintillo')
-                                        <td class="text-center">
-                                            <img src="{{ asset('storage/' . $registro->nombre) }}" alt="Cintillo" class="mx-auto h-16">
-                                        </td>
+                                        <td>{{ $registro->role ?? '' }}</td>
+                                        <td>{{ $registro->peso ?? ''}}</td>
+                                        <td>{{ $registro->deleted_at ?? '' }}</td>
                                         @endif
                                     </tr>
                                 </tbody>
@@ -138,8 +135,10 @@
                     </div>
                     <div class="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 mx-2 text-sm font-semibold text-gray-900 shadow-sm border-red-600 hover:bg-red-400 sm:mt-0 sm:w-auto">Cerrar</button>
-
+                        
+                        @if($modelo == 'User' || $modelo == 'Resumen')
                         <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm border-green-6' hover:bg-green-400 sm:mt-0 sm:w-auto" wire:click="restaurar">Restaurar</button>
+                        @endif
                     </div>
                 </div>
             </div>

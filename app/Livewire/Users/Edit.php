@@ -5,6 +5,7 @@ namespace App\Livewire\Users;
 use App\Models\TerminalOrigen;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -19,9 +20,9 @@ class Edit extends Component
     protected function rules()
     {
         return [
-            'nombre' => 'required',
-            'cedula' => 'required|integer|min:1000000|max:40000000|unique:users,cedula,' . $this->user_id,
-            'correo' => 'required|email|unique:users,email,' . $this->user_id,
+            'nombre' => 'required|max:45',
+            'cedula' => ['required', 'integer', 'min:1000000', 'max:40000000', Rule::unique('users', 'cedula')->ignore($this->user_id)->whereNull('deleted_at')],
+            'correo' => ['required', 'email', 'max:45', Rule::unique('users', 'email')->ignore($this->user_id)->whereNull('deleted_at')],
             'terminal_user' => 'required',
         ];
     }

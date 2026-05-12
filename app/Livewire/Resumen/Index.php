@@ -144,7 +144,7 @@ class Index extends Component
             $resumenes->whereDate('resumens.created_at', $this->filters['fecha_inicio']);
         }
 
-        $resumenes = $resumenes->paginate($this->paginate);
+        $resumenes = $resumenes->latest()->paginate($this->paginate);
 
         $origenes = TerminalOrigen::orderBy('nombre')->get();
         $destinos = TerminalDestino::orderBy('nombre')->get();

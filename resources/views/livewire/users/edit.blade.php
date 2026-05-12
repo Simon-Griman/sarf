@@ -44,11 +44,11 @@
                 <div class="sm:col-span-3" x-data="{ open: false }">
                     <label class="block text-sm/6 font-medium text-gray-800 dark:text-white">Roles</label>
                     
-                    <div class="relative mt-2 @click.away="open = false">
+                    <div class="relative mt-2" @click.away="open = false">
                         <button 
                             @click="open = !open" 
                             type="button" 
-                            class="w-full flex items-center justify-between bg-white/5 dark:bg-zinc-800 border border-zinc-500 rounded-md px-4 py-1.5 text-left text-gray-300 hover:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                            class="w-full flex items-center justify-between bg-white/5 dark:bg-zinc-700 border border-zinc-500 rounded-md px-4 py-1.5 text-left text-gray-300 hover:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
                         >
                             <span class="truncate text-gray-800 dark:text-white">
                                 @if(count($selectedRoles) > 0)
@@ -70,7 +70,7 @@
                             class="absolute z-50 w-full bg-[#252525] border border-zinc-700 rounded-lg shadow-2xl overflow-hidden"
                             style="display: none;"
                         >
-                            <div class="p-2 space-y-1 max-h-60 overflow-y-auto bg-zinc-50 dark:bg-zinc-800/5 custom-scrollbar">
+                            <div class="p-2 space-y-1 max-h-60 overflow-y-auto bg-zinc-50 dark:bg-zinc-700 custom-scrollbar">
                                 @foreach($roles as $role)
                                     @if($role->peso <= auth()->user()->roles->max('peso'))
                                     <label class="flex items-center px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md cursor-pointer group transition-colors">

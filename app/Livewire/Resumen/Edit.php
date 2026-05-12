@@ -7,6 +7,7 @@ use App\Models\Resumen;
 use App\Models\TerminalDestino;
 use App\Models\TerminalOrigen;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -84,44 +85,43 @@ class Edit extends Component
         return [
             'terminal_origen_id' => 'required',
             'terminal_destino_id' => 'required',
-            'buque' => 'required',
-            'nro_embarque' => 'required',
-            'fecha_operacion' => 'required',
-            'nro_viaje' => 'required',
+            'buque' => 'required|max:45',
+            'nro_embarque' => 'required|integer|max:999999999999|min:10',
+            'fecha_operacion' => 'required|date',
+            'nro_viaje' => ['required', 'integer', 'min:10000', 'max:10000000', Rule::unique('resumens', 'nro_viaje')->ignore($this->resumen_id)->whereNull('deleted_at')],
             'producto_id' => 'required',
-            'volumen' => 'required',
-            'inspector' => 'nullable',
+            'volumen' => 'required|integer|max:999999999999|min:100',
+            'inspector' => 'nullable|max:45',
             'cantidad_determinada' => 'required',
             'documento' => 'required',
-            'TOV' => 'required',
-            'GOV' => 'required',
-            'GSV' => 'required',
-            'NSV' => 'required',
-            'TCV' => 'required',
-            'sediment_water' => 'required',
-            'free_water' => 'required',
-            'agua_sedimento' => 'required',
-            'azufre' => 'required',
-            'temp' => 'required',
-            'API' => 'required',
+            'TOV' => 'required|decimal:2|max:999999.99|min:1.00',
+            'GOV' => 'required|decimal:2|max:999999.99|min:1.00',
+            'GSV' => 'required|decimal:2|max:999999.99|min:1.00',
+            'NSV' => 'required|decimal:2|max:999999.99|min:1.00',
+            'TCV' => 'required|decimal:2|max:999999.99|min:1.00',
+            'sediment_water' => 'required|decimal:2|max:9999.99|min:1.00',
+            'free_water' => 'required|decimal:2|max:9999.99|min:1.00',
+            'agua_sedimento' => 'required|decimal:2|max:9999.99|min:1.00',
+            'temp' => 'required|integer|max:9999',
+            'API' => 'required|integer|max:9999',
+            'azufre' => 'required|integer|max:9999',
 
-            'OBQ' => 'required_if:tipo_operacion,Carga,Importación',
-            'OBQ_agua' => 'required_if:tipo_operacion,Carga,Importación',
-            'TCV_carga' => 'required_if:tipo_operacion,Carga,Importación',
-            'GSV_carga' => 'required_if:tipo_operacion,Carga,Importación',
-            'NSV_carga' => 'required_if:tipo_operacion,Carga,Importación',
-            'TRV' => 'required_if:tipo_operacion,Carga,Importación',
-            'TRV_ajustado' => 'required_if:tipo_operacion,Carga,Importación',
+            'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'TCV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'GSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'NSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'TRV' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'TRV_ajustado' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
 
-            'ROB' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'ROB_agua' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'TCV_descarga' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'GSV_descarga' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'NSV_descarga' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'TDV' => 'required_if:tipo_operacion,Descarga,Exportación',
-            'TDV_ajustado' => 'required_if:tipo_operacion,Descarga,Exportación',
-
-            'VEF' => 'required',
+            'ROB' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'ROB_agua' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'TCV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'GSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'NSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'TDV' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'TDV_ajustado' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'VEF' => 'required|decimal:4|max:10.0000|min:0.0001',
         ];
     }
 
@@ -155,42 +155,42 @@ class Edit extends Component
         if ($this->cantidad)
         {
             $cantidad = $this->cantidad->store('images/certificados/cantidad', 'public');
-            //Storage::disk('public')->delete($this->cantidad_existente);
+            Storage::disk('public')->delete($this->cantidad_existente);
         }
         else $cantidad = $resumen->cantidad;
 
         if ($this->calidad)
         {
             $calidad = $this->calidad->store('images/certificados/calidad', 'public');
-            //Storage::disk('public')->delete($this->calidad_existente);
+            Storage::disk('public')->delete($this->calidad_existente);
         }
         else $calidad = $resumen->calidad;
 
         if ($this->hoja_tiempo)
         {
             $hoja_tiempo = $this->hoja_tiempo->store('images/hoja_tiempo', 'public');
-            //Storage::disk('public')->delete($this->hoja_tiempo_existente);
+            Storage::disk('public')->delete($this->hoja_tiempo_existente);
         }
         else $hoja_tiempo = $resumen->hoja_tiempo;
 
         if ($this->acta)
         {
             $acta = $this->acta->store('images/acta', 'public');
-            //Storage::disk('public')->delete($this->acta);
+            Storage::disk('public')->delete($this->acta);
         }
         else $acta = $resumen->acta;
 
         if ($this->ullage_inicial)
         {
             $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
-            //Storage::disk('public')->delete($this->ullage_inicial);
+            Storage::disk('public')->delete($this->ullage_inicial);
         }
         else $ullage_inicial = $resumen->ullage_inicial;
 
         if ($this->ullage_final)
         {
             $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
-            //Storage::disk('public')->delete($this->ullage_final);
+            Storage::disk('public')->delete($this->ullage_final);
         }
         else $ullage_final = $resumen->ullage_final;
 

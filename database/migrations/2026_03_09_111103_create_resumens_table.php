@@ -38,7 +38,7 @@ return new class extends Migration
             //detalles tierra
             $table->integer('temp');
             $table->integer('API');
-            $table->integer('agua_sedimento');
+            $table->decimal('agua_sedimento', 6, 2);
             $table->integer('azufre');
 
             //datos buque

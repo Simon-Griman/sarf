@@ -19,9 +19,9 @@ class Create extends Component
     public function rules()
     {
         return [
-            'nombre' => 'required',
+            'nombre' => 'required|max:45',
             'cedula' => ['required', 'integer', 'min:1000000', 'max:40000000', Rule::unique('users', 'cedula')->whereNull('deleted_at')],
-            'correo' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
+            'correo' => ['required', 'email', 'max:45', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'terminal_user' => 'required',
         ];
     }

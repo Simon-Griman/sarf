@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('cedula')->unique();
             $table->string('password');
+            $table->enum('new_user', [0, 1])->default(1);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

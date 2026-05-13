@@ -23,35 +23,42 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/home', function() {
         return view('home');
-    })->name('home');
+    })->middleware('check.new.user')->name('home');
 
-    Route::resource('/resumen', ResumenController::class)->only('index', 'create', 'edit')->names('resumen');
+    Route::resource('/resumen', ResumenController::class)->only('index', 'create', 'edit')->middleware('check.new.user')->names('resumen');
 
-    Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->name('resumen-pdf');
+    Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->middleware('check.new.user')->name('resumen-pdf');
 
-    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->names('users');
+    Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->middleware('check.new.user')->names('users');
 
-    Route::resource('/roles', RoleController::class)->except('show');
+    Route::resource('/roles', RoleController::class)->except('show')->middleware('check.new.user');
 
-    Route::get('/cintillos', CintilloController::class)->name('cintillos')->middleware('permission:cintillos.index');
+    Route::get('/cintillos', CintilloController::class)->name('cintillos')->middleware('permission:cintillos.index', 'check.new.user');
 
     Route::get('/sesiones', function() {
         return view('auditoria.sesiones');
-    })->name('sesiones')->middleware('permission:auditoria.sesiones');
+    })->name('sesiones')->middleware('permission:auditoria.sesiones', 'check.new.user');
 
     Route::get('/creados', function() {
         return view('auditoria.creados');
-    })->name('creados')->middleware('permission:auditoria.creados');
+    })->name('creados')->middleware('permission:auditoria.creados', 'check.new.user');
 
     Route::get('/editados', function() {
         return view('auditoria.editados');
-    })->name('editados')->middleware('permission:auditoria.editados');
+    })->name('editados')->middleware('permission:auditoria.editados', 'check.new.user');
 
     Route::get('/eliminados', function() {
         return view('auditoria.eliminados');
-    })->name('eliminados')->middleware('permission:auditoria.eliminados');
+    })->name('eliminados')->middleware('permission:auditoria.eliminados', 'check.new.user');
+
+    Route::get('/nueva-clave', function() {
+        return view('cambiar_clave');
+    })->name('nueva-clave');
 
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 
 require __DIR__.'/auth.php';
+
+
+//TODO: Agregar middleware para verificar si el usuario es nuevo y redirigirlo a la página de cambio de contraseña.

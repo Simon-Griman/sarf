@@ -30,7 +30,8 @@ class User extends Authenticatable
         'email',
         'password',
         'cedula',
-        'terminal_origen_id'
+        'terminal_origen_id',
+        'new_user',
     ];
 
     /**

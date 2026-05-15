@@ -3,29 +3,34 @@ import Swal from 'sweetalert2';
 import '@fortawesome/fontawesome-free/js/all.js';
 window.Swal = Swal;
 
-//DASHBOARD
+// --- DASHBOARD (Protegido con ?) ---
 const sidebar = document.getElementById('sidebar');
 const openBtn = document.getElementById('open-sidebar');
 const closeBtn = document.getElementById('close-sidebar');
 const overlay = document.getElementById('sidebar-overlay');
 
 function toggleSidebar() {
-    sidebar.classList.toggle('-translate-x-full');
-    overlay.classList.toggle('hidden');
+    if (sidebar && overlay) { // Validación extra
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+    }
 }
 
-openBtn.addEventListener('click', toggleSidebar);
-closeBtn.addEventListener('click', toggleSidebar);
-overlay.addEventListener('click', toggleSidebar);
+// El signo "?" evita que JS explote si el botón no existe
+openBtn?.addEventListener('click', toggleSidebar);
+closeBtn?.addEventListener('click', toggleSidebar);
+overlay?.addEventListener('click', toggleSidebar);
 
 
-//DARK MODE
+// --- DARK MODE (Protegido con ?) ---
 const themeToggleBtn = document.getElementById('theme-toggle');
 const darkIcon = document.getElementById('theme-toggle-dark-icon');
 const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-// 1. FUNCIÓN PARA ACTUALIZAR ICONOS
 function updateIcons() {
+    // Si los iconos no existen en esta página, salimos de la función
+    if (!lightIcon || !darkIcon) return;
+
     if (document.documentElement.classList.contains('dark')) {
         lightIcon.classList.remove('hidden');
         darkIcon.classList.add('hidden');
@@ -35,7 +40,6 @@ function updateIcons() {
     }
 }
 
-// 2. LÓGICA DE CARGA INICIAL (Prioriza LocalStorage, luego Sistema)
 function loadTheme() {
     const savedTheme = localStorage.getItem('color-theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -48,45 +52,37 @@ function loadTheme() {
     updateIcons();
 }
 
-// Ejecutar al cargar la página
 loadTheme();
 
-// 3. EVENTO DE CLIC
-themeToggleBtn.addEventListener('click', function() {
-    // Alternar clase dark
+themeToggleBtn?.addEventListener('click', function() {
     document.documentElement.classList.toggle('dark');
     
-    // Guardar la elección explícita del usuario
     if (document.documentElement.classList.contains('dark')) {
         localStorage.setItem('color-theme', 'dark');
     } else {
         localStorage.setItem('color-theme', 'light');
     }
-    
     updateIcons();
 });
 
-//SWEETALERT2
+// --- SWEETALERT2 (Ahora sí se ejecutará siempre) ---
 window.addEventListener('notify', event => {
+    // En Livewire 3 los datos suelen venir en event.detail[0]
+    // Si usas Livewire 2, es event.detail directamente
+    const data = Array.isArray(event.detail) ? event.detail[0] : event.detail;
 
-    const data = event.detail;
-
-    // Detectamos si el sistema está en modo oscuro
     const isDark = document.documentElement.classList.contains('dark');
 
     Swal.fire({
         title: data.title || 'Notificación',
-        text: data.message, 
+        text: data.message || data.text, // Acepta 'message' o 'text'
         icon: data.icon || 'info',
         toast: true,
         //position: 'top-end',
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
         timerProgressBar: true,
-
-        // --- ADAPTACIÓN DE COLORES ---
-        background: isDark ? '#1f2937' : '#ffffff', // bg-gray-800 o blanco
-        color: isDark ? '#ffffff' : '#1f2937',      // texto blanco o gris oscuro
-        iconColor: data.icon === 'success' ? '#10b981' : undefined, // verde tailwind opcional
+        background: isDark ? '#1f2937' : '#ffffff',
+        color: isDark ? '#ffffff' : '#1f2937',
     });
 });

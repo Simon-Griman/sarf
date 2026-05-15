@@ -23,6 +23,12 @@
                 document.documentElement.classList.remove('dark');
             }
         </script>
+
+        <!--Estilos-->
+        @livewireStyles
+
+        <!-- Scripts -->
+        @livewireScripts
     </head>
     <body class="font-sans text-zinc-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-zinc-100 dark:bg-zinc-900">

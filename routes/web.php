@@ -12,6 +12,10 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('forgot-password', function () {
+    return view('auth.forgot-password');
+})->name('password.request');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('cedula')->unique();
-            $table->string('password');
             $table->enum('new_user', [0, 1])->default(1);
+            $table->string('password');
             $table->rememberToken();
+            $table->timestamp('reset_password_sent_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

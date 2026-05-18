@@ -105,6 +105,17 @@
                     <i class="fas fa-flag mr-3"></i> Cintillos
                 </a>
                 @endcan
+
+                @can('reset-pass')
+                <a href="{{ route('reset-pass') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('reset-pass') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                    <i class="fas fa-key mr-3"></i> Resetear Clave
+                    @if (App\Models\User::whereNotNull('reset_password_sent_at')->count())
+                    <span class="flex items-center justify-center w-6 h-6 text-xs font-bold rounded-md absolute right-5 {{ request()->routeIs('reset-pass') ? 'bg-white/20 text-white' : 'bg-amber-500 text-white' }}">
+                        {{ App\Models\User::whereNotNull('reset_password_sent_at')->count() }}
+                    </span>
+                    @endif
+                </a>
+                @endcan
             </nav>
         </aside>
 

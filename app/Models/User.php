@@ -32,6 +32,7 @@ class User extends Authenticatable
         'cedula',
         'terminal_origen_id',
         'new_user',
+        'reset_password_sent_at'
     ];
 
     /**

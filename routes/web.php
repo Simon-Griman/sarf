@@ -59,6 +59,10 @@ Route::middleware('auth')->group(function () {
         return view('cambiar_clave');
     })->name('nueva-clave');
 
+    Route::get('/reset-password', function() {
+        return view('reset_password');
+    })->name('reset-pass');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

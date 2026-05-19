@@ -63,6 +63,14 @@ Route::middleware('auth')->group(function () {
         return view('reset_password');
     })->name('reset-pass');
 
+    Route::get('/origen', function() {
+        return view('terminal.origen');
+    })->name('origen');
+
+    Route::get('/destino', function() {
+        return view('terminal.destino');
+    })->name('destino');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

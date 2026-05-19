@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Origen extends Component
 {
-    public $origen, $modalOpen = false, $accion, $terminalOrigen;
+    public $origen, $modalOpen = false, $accion, $terminalOrigen, $nombre;
 
     protected $rules = [
         'origen' => 'required|max:45|unique:terminal_origens,nombre',
@@ -92,7 +92,9 @@ class Origen extends Component
 
     public function render()
     {
-        $origenes = TerminalOrigen::orderBy('nombre')->get();
+        $origenes = TerminalOrigen::orderBy('nombre')
+        ->where('nombre', 'like', '%' . $this->nombre . '%')
+        ->get();
 
         return view('livewire.terminal.origen', compact('origenes'));
     }

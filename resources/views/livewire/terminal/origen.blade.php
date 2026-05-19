@@ -1,6 +1,7 @@
 <div>
     <x-card class="text-center pt-0">
         <x-primary-button class="my-4" wire:click="modalCrear">Añadir</x-primary-button>
+        <x-text-input wire:model.live.debounce.300ms="nombre" placeholder="Buscar:" class="w-full mb-2" />
         <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700 text-left">
             <thead>
                 <tr>

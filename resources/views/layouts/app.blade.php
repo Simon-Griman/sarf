@@ -128,6 +128,12 @@
                     <i class="fas fa-flag mr-3"></i> Terminal Destino
                 </a>
                 @endcan
+
+                @can('producto')
+                <a href="{{ route('producto') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('producto') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                    <i class="fas fa-flag mr-3"></i> Productos
+                </a>
+                @endcan
             </nav>
         </aside>
 

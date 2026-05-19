@@ -71,6 +71,10 @@ Route::middleware('auth')->group(function () {
         return view('terminal.destino');
     })->name('destino');
 
+    Route::get('/producto', function() {
+        return view('producto');
+    })->name('producto');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

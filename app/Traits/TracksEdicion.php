@@ -98,6 +98,13 @@ trait TracksEdicion
                         $campo = 'Origen';
                     }
 
+                    elseif ($key == 'password')
+                    {
+                        $valorAntes = '';
+                        $valorDespues = '';
+                        $campo = 'Contraseña';
+                    }
+
                     else
                     {
                         $valorAntes = $antes;
@@ -109,8 +116,8 @@ trait TracksEdicion
                         'user_id' => $model->id,
                         'batch_id' => $batchId,
                         'campo' => $key,
-                        'valor_antes' => $antes,
-                        'valor_despues' => $value,
+                        'valor_antes' => $valorAntes,
+                        'valor_despues' => $valorDespues,
                     ]);
                 }
 

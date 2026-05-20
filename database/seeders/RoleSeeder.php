@@ -17,9 +17,9 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'super-admin', 'peso' => 10]);
         $rolAdmin = Role::create(['name' => 'admin', 'peso' => 5]);
         $rolUser = Role::create(['name' => 'user', 'peso' => 3]);
-        $rolCintillo = Role::create(['name' => 'cintillo', 'peso' => 2]);
         $rolResumen = Role::create(['name' => 'resumen', 'peso' => 1]);
         $rolAuditoria = Role::create(['name' => 'auditoria', 'peso' => 1]);
+        $rolConfiguracion = Role::create(['name' => 'configuracion', 'peso' => 2]);
 
         Permission::create(['name' => 'users.index'])->assignRole([$rolAdmin, $rolUser]);
         Permission::create(['name' => 'users.create'])->assignRole([$rolAdmin, $rolUser]);
@@ -31,10 +31,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'roles.edit'])->assignRole([$rolAdmin]);
         Permission::create(['name' => 'roles.destroy'])->assignRole([$rolAdmin]);
 
-        Permission::create(['name' => 'cintillos.index'])->assignRole([$rolAdmin, $rolCintillo]);
-        Permission::create(['name' => 'cintillos.create'])->assignRole([$rolAdmin, $rolCintillo]);
-        Permission::create(['name' => 'cintillos.activar'])->assignRole([$rolAdmin, $rolCintillo]);
-        Permission::create(['name' => 'cintillos.destroy'])->assignRole([$rolAdmin, $rolCintillo]);
+        Permission::create(['name' => 'cintillos.index'])->assignRole([$rolAdmin, $rolConfiguracion]);
+        Permission::create(['name' => 'cintillos.create'])->assignRole([$rolAdmin, $rolConfiguracion]);
+        Permission::create(['name' => 'cintillos.activar'])->assignRole([$rolAdmin, $rolConfiguracion]);
+        Permission::create(['name' => 'cintillos.destroy'])->assignRole([$rolAdmin, $rolConfiguracion]);
 
         Permission::create(['name' => 'resumen.index'])->assignRole([$rolAdmin, $rolResumen]);
         Permission::create(['name' => 'resumen.create'])->assignRole([$rolAdmin, $rolResumen]);
@@ -45,5 +45,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'auditoria.creados'])->assignRole([$rolAdmin, $rolAuditoria]);
         Permission::create(['name' => 'auditoria.editados'])->assignRole([$rolAdmin, $rolAuditoria]);
         Permission::create(['name' => 'auditoria.eliminados'])->assignRole([$rolAdmin, $rolAuditoria]);
+
+        Permission::create(['name' => 'terminal.origen'])->assignRole([$rolAdmin, $rolConfiguracion]);
+        Permission::create(['name' => 'terminal.destino'])->assignRole([$rolAdmin, $rolConfiguracion]);
+
+        Permission::create(['name' => 'producto'])->assignRole([$rolAdmin, $rolConfiguracion]);
+
+        Permission::create(['name' => 'reset-pass'])->assignRole([$rolAdmin]);
     }
 }

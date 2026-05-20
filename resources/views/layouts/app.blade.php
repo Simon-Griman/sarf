@@ -48,12 +48,10 @@
                 </a>
                 @endcan
 
-                @can('auditoria.index')
+               @if(auth()->user()->can('auditoria.sesiones') || auth()->user()->can('auditoria.creados') || auth()->user()->can('auditoria.editados') || auth()->user()->can('auditoria.eliminados'))
                 <div x-data="{ open: {{ request()->routeIs('sesiones', 'creados', 'editados', 'eliminados') ? 'true' : 'false' }} }">
                     <button @click="open = !open" 
-                            class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group 
-                                text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700"
-                            :class="open ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-100'  : ''">
+                        class="w-full flex items-center justify-between p-2 rounded-lg transition-colors duration-200 group text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700" :class="open ? 'bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-zinc-100'  : ''">
                         
                         <div class="flex items-center">
                             <i class="fas fa-eye w-5 h-5 mr-3"></i> <span class="font-medium dark:hover:bg-zinc-700">Auditoría</span>
@@ -92,7 +90,7 @@
                         @endcan
                     </div>
                 </div>
-                @endcan
+                @endif
 
                 @can('roles.index')
                 <a href="{{ route('roles.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
@@ -131,7 +129,7 @@
 
                 @can('producto')
                 <a href="{{ route('producto') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('producto') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
-                    <i class="fas fa-flag mr-3"></i> Productos
+                    <i class="fas fa-oil-well mr-3"></i> Productos
                 </a>
                 @endcan
             </nav>

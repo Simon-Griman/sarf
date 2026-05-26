@@ -82,4 +82,9 @@ class Resumen extends Model
     {
         return $this->belongsTo(Producto::class);
     }
+
+    public function inspector(): BelongsTo
+    {
+        return $this->belongsTo(Inspector::class);
+    }
 }

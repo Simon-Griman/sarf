@@ -22,9 +22,8 @@ return new class extends Migration
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
             $table->foreignId('producto_id')->constrained()->onDelete('cascade');
             $table->integer('volumen');
-            $table->string('inspector', 45)->default('SAMH');
+            $table->foreignId('inspector_id')->constrained()->onDelete('cascade');
             $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque']);
-            $table->enum('documento', ['Borrador', 'Definitivo']);
 
             //datos tierra
             $table->decimal('TOV', 8, 2);
@@ -36,20 +35,20 @@ return new class extends Migration
             $table->decimal('free_water', 6, 2);
 
             //detalles tierra
-            $table->integer('temp');
-            $table->integer('API');
+            $table->decimal('temp', 8, 1);
+            $table->decimal('API', 8, 1);
             $table->decimal('agua_sedimento', 6, 2);
-            $table->integer('azufre');
+            $table->decimal('azufre', 8, 3);
 
             //datos buque
             //carga
-            $table->integer('OBQ')->nullable();
-            $table->integer('OBQ_agua')->nullable();
-            $table->integer('TCV_carga')->nullable();
-            $table->integer('GSV_carga')->nullable();
-            $table->integer('NSV_carga')->nullable();
-            $table->integer('TRV')->nullable();
-            $table->integer('TRV_ajustado')->nullable();
+            $table->decimal('OBQ', 8, 2)->nullable();
+            $table->decimal('OBQ_agua', 8, 2)->nullable();
+            $table->decimal('TCV_carga', 8, 2)->nullable();
+            $table->decimal('GSV_carga', 8, 2)->nullable();
+            $table->decimal('NSV_carga', 8, 2)->nullable();
+            $table->decimal('TRV', 8, 2)->nullable();
+            $table->decimal('TRV_ajustado', 8, 2)->nullable();
             //descarga
             $table->integer('ROB')->nullable();
             $table->integer('ROB_agua')->nullable();

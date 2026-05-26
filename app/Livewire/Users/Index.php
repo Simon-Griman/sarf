@@ -151,6 +151,6 @@ class Index extends Component
 
         $terminal = TerminalOrigen::orderBy('nombre')->get();
 
-        return view('livewire.users.index', ['users' => $users->groupBy('users.id')->paginate($this->paginate), 'terminal' => $terminal]);
+        return view('livewire.users.index', ['users' => $users->groupBy('users.id')->latest()->paginate($this->paginate), 'terminal' => $terminal]);
     }
 }

@@ -22,6 +22,7 @@ class ResumenFactory extends Factory
         $terminalDestino = \App\Models\TerminalDestino::pluck('id');
         $operacion = \App\Models\Operacion::select('id', 'nombre')->get();
         $producto = \App\Models\Producto::pluck('id');
+        $inspector = \App\Models\Inspector::pluck('id');
 
         $operacion_id = fake()->randomElement($operacion);
 
@@ -45,9 +46,8 @@ class ResumenFactory extends Factory
             'operacion_id' => $operacion_id->id,
             'producto_id' => fake()->randomElement($producto),
             'volumen' => fake()->numberBetween(100000, 999999),
-            'inspector' => 'SAMH',
+            'inspector_id' => fake()->randomElement($inspector),
             'cantidad_determinada' => fake()->randomElement(['Tanque de Tierra', 'Cifras Buque']),
-            'documento' => fake()->randomElement(['Borrador', 'Definitivo']),
             'TOV' => fake()->randomFloat(2, 100000, 999999.99),
             'GOV' => fake()->randomFloat(2, 100000, 999999.99),
             'GSV' => fake()->randomFloat(2, 100000, 999999.99),

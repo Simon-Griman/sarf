@@ -25,18 +25,18 @@
             </tr>
             <tr>
                 <td><b>Nro Embarque:</b> {{ $resumen->nro_embarque }}</td>
-                <td><b>Fecha de Operación:</b> {{ $resumen->fecha_operacion }}</td>
+                <td><b>Fecha de Operación:</b> {{ \Carbon\Carbon::parse($resumen->fecha_operacion)->format('d/m/Y') }}</td>
                 <td><b>Nro viaje:</b> {{ $resumen->nro_viaje }}</td>
             </tr>
             <tr>
                 <td><b>Tipo de Operación:</b> {{ $resumen->operacion->nombre }}</td>
                 <td><b>Producto:</b> {{ $resumen->producto->nombre }}</td>
-                <td><b>Volumen Nominal:</b> {{ $resumen->volumen }}</td>
+                <td><b>Volumen Nominal:</b> {{ number_format(($resumen->volumen), 0, ',', '.') }}</td>
             </tr>
             <tr>
                 <td><b>Compañía Inspectora:</b> SAMH</td>
                 <td><b>Cantidad Determinada</b> {{ $resumen->cantidad_determinada }}</td>
-                <td><b>Tipo de Documento:</b> {{ $resumen->documento }}</td>
+                <td><b>Tipo de Documento:</b> Definitivo</td>
             </tr>
         </tbody>
     </table>
@@ -68,12 +68,12 @@
                 @endphp
 
                 <td>TOV</td>
-                <td>{{ $resumen->TOV }}</td>
-                <td>{{ round(($resumen->TOV / cons7), 3) }}</td>
-                <td>{{ number_format(($resumen->TOV * 42), 2, '.', '') }}</td>
-                <td>{{ round($tl, 4) }}</td>
-                <td>{{ round($tm, 4) }}</td>
-                <td>{{ round($tm * 1000, 1) }}</td>
+                <td>{{ number_format(($resumen->TOV), 0, ',', '.') }}</td>
+                <td>{{ number_format((round(($resumen->TOV / cons7), 3)), 3, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->TOV * 42), 2, ',', '.') }}</td>
+                <td>{{ number_format((round($tl, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm * 1000, 1)), 1, ',', '.') }}</td>
             </tr>
             <tr>
                 @php
@@ -87,12 +87,12 @@
                 @endphp
                 
                 <td>GOV</td>
-                <td>{{ $resumen->GOV }}</td>
-                <td>{{ round(($resumen->GOV / cons7), 3) }}</td>
-                <td>{{ number_format(($resumen->GOV * 42), 2, '.', '') }}</td>
-                <td>{{ round($tl, 4) }}</td>
-                <td>{{ round($tm, 4) }}</td>
-                <td>{{ round($tm * 1000, 1) }}</td>
+                <td>{{ number_format(($resumen->GOV), 0, ',', '.') }}</td>
+                <td>{{ number_format((round(($resumen->GOV / cons7), 3)), 3, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->GOV * 42), 2, ',', '.') }}</td>
+                <td>{{ number_format((round($tl, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm * 1000, 1)), 1, ',', '.') }}</td>
             </tr>
             <tr>
                 @php
@@ -106,12 +106,12 @@
                 @endphp
 
                 <td>GSV</td>
-                <td>{{ $resumen->GSV }}</td>
-                <td>{{ round(($resumen->GSV / cons7), 3) }}</td>
-                <td>{{ number_format(($resumen->GSV * 42), 2, '.', '') }}</td>
-                <td>{{ round($tl, 4) }}</td>
-                <td>{{ round($tm, 4) }}</td>
-                <td>{{ round($tm * 1000, 1) }}</td>
+                <td>{{ number_format(($resumen->GSV), 0, ',', '.') }}</td>
+                <td>{{ number_format((round(($resumen->GSV / cons7), 3)), 3, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->GSV * 42), 2, ',', '.') }}</td>
+                <td>{{ number_format((round($tl, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm * 1000, 1)), 1, ',', '.') }}</td>
             </tr>
             <tr>
                 @php
@@ -125,12 +125,12 @@
                 @endphp
 
                 <td>NSV</td>
-                <td>{{ $resumen->NSV }}</td>
-                <td>{{ round(($resumen->NSV / cons7), 3) }}</td>
-                <td>{{ number_format(($resumen->NSV * 42), 2, '.', '') }}</td>
-                <td>{{ round($tl, 4) }}</td>
-                <td>{{ round($tm, 4) }}</td>
-                <td>{{ round($tm * 1000, 1) }}</td>
+                <td>{{ number_format(($resumen->NSV), 0, ',', '.') }}</td>
+                <td>{{ number_format((round(($resumen->NSV / cons7), 3)), 3, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->NSV * 42), 2, ',', '.') }}</td>
+                <td>{{ number_format((round($tl, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm * 1000, 1)), 1, ',', '.') }}</td>
             </tr>
             <tr>
                 @php
@@ -144,16 +144,16 @@
                 @endphp
 
                 <td>TCV</td>
-                <td>{{ $resumen->TCV }}</td>
-                <td>{{ round(($resumen->TCV / cons7), 3) }}</td>
-                <td>{{ number_format(($resumen->TCV * 42), 2, '.', '') }}</td>
-                <td>{{ round($tl, 4) }}</td>
-                <td>{{ round($tm, 4) }}</td>
-                <td>{{ round($tm * 1000, 1) }}</td>
+                <td>{{ number_format(($resumen->TCV), 0, ',', '.') }}</td>
+                <td>{{ number_format((round(($resumen->TCV / cons7), 3)), 3, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->TCV * 42), 2, ',', '.') }}</td>
+                <td>{{ number_format((round($tl, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm, 4)), 4, ',', '.') }}</td>
+                <td>{{ number_format((round($tm * 1000, 1)), 1, ',', '.') }}</td>
             </tr>
             <tr>
-                <td>SEDIMIENT & WATER</td>
-                <td>{{ $resumen->sediment_water }}</td>
+                <td>Agua y Sedimento</td>
+                <td>{{ number_format(($resumen->sediment_water), 0, ',', '.') }}</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -161,8 +161,8 @@
                 <td></td>
             </tr>
             <tr>
-                <td>FREE WATER</td>
-                <td>{{ $resumen->free_water }}</td>
+                <td>Agua Libre</td>
+                <td>{{ number_format(($resumen->free_water), 0, ',', '.') }}</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -172,25 +172,25 @@
         </tbody>
     </table>
 
-    <h3>Detalles de tierra</h3>
+    <h3>Calidades</h3>
 
     <table class="tierra">
         <thead>
             <tr>
                 <th>Producto</th>
                 <th>API</th>
-                <th>Agua y Sedimento</th>
+                <th>% Agua y Sedimento</th>
                 <th>Temp</th>
-                <th>Azufre</th>
+                <th>% Azufre</th>
             </tr>
         </thead>
         <tbody>
             <tr class="center">
                 <td>{{ $resumen->producto->nombre }}</td>
-                <td>{{ $resumen->API }}</td>
-                <td>{{ $resumen->agua_sedimento }}</td>
-                <td>{{ $resumen->temp }}</td>
-                <td>{{ $resumen->azufre }}</td>
+                <td>{{ number_format(($resumen->API), 1, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->agua_sedimento), 2, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->temp), 1, ',', '.') }}</td>
+                <td>{{ number_format(($resumen->azufre), 3, ',', '.') }}</td>
             </tr>
         </tbody>
     </table>
@@ -209,91 +209,91 @@
             @if($resumen->operacion->nombre == 'Carga' || $resumen->operacion->nombre == 'Importación')
             <tr>
                 <td>OBQ: (CANTIDAD A BORDO)</td>
-                <td>{{ $resumen->OBQ }}</td>
-                <td>{{ round($resumen->OBQ / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->OBQ), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->OBQ / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>OBQ: CANTIDAD A BORDO (AGUA)</td>
-                <td>{{ $resumen->OBQ_agua }}</td>
-                <td>{{ round($resumen->OBQ_agua / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->OBQ_agua), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->OBQ_agua / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>TCV: DESPUES DE LA CARGA</td>
-                <td>{{ $resumen->TCV_carga }}</td>
-                <td>{{ round($resumen->TCV_carga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->TCV_carga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->TCV_carga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>GSV: DESPUES DE LA CARGA</td>
-                <td>{{ $resumen->GSV_carga }}</td>
-                <td>{{ round($resumen->GSV_carga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->GSV_carga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->GSV_carga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>NSV: DESPUES DE LA CARGA</td>
-                <td>{{ $resumen->NSV_carga }}</td>
-                <td>{{ round($resumen->NSV_carga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->NSV_carga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->NSV_carga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>VEF</td>
-                <td>{{ $resumen->VEF }}</td>
+                <td>{{ number_format(($resumen->VEF), 4, ',', '.') }}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>TRV (TOTAL VOLUMEN RECIBIDO)</td>
-                <td>{{ $resumen->TRV }}</td>
+                <td>{{ number_format(($resumen->TRV), 0, ',', '.') }}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>TRV AJUSTADO</td>
-                <td>{{ $resumen->TRV_ajustado }}</td>
+                <td>{{ number_format(($resumen->TRV_ajustado), 0, ',', '.') }}</td>
                 <td></td>
             </tr>
 
             @elseif($resumen->operacion->nombre == 'Descarga' || $resumen->operacion->nombre == 'Exportación')
             <tr>
                 <td>ROB: (REMANENTE A BORDO)</td>
-                <td>{{ $resumen->ROB }}</td>
-                <td>{{ round($resumen->ROB / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->ROB), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->ROB / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>ROB: REMANENTE A BORDO (AGUA)</td>
-                <td>{{ $resumen->ROB_agua }}</td>
-                <td>{{ round($resumen->ROB_agua / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->ROB_agua), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->ROB_agua / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>TCV: ANTES DE LA DESCARGA</td>
-                <td>{{ $resumen->TCV_descarga }}</td>
-                <td>{{ round($resumen->TCV_descarga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->TCV_descarga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->TCV_descarga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>GSV: ANTES DE LA DESCARGA</td>
-                <td>{{ $resumen->GSV_descarga }}</td>
-                <td>{{ round($resumen->GSV_descarga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->GSV_descarga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->GSV_descarga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>NSV: ANTES DE LA DESCARGA</td>
-                <td>{{ $resumen->NSV_descarga }}</td>
-                <td>{{ round($resumen->NSV_descarga / cons7, 3) }}</td>
+                <td>{{ number_format(($resumen->NSV_descarga), 0, ',', '.') }}</td>
+                <td>{{ number_format((round($resumen->NSV_descarga / cons7, 3)), 3, ',', '.') }}</td>
             </tr>
             <tr>
                 <td>VEF</td>
-                <td>{{ $resumen->VEF }}</td>
+                <td>{{ number_format(($resumen->VEF), 4, ',', '.') }}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>TDV (TOTAL VOLUMEN DESCARGADO)</td>
-                <td>{{ $resumen->TDV }}</td>
+                <td>{{ number_format(($resumen->TDV), 0, ',', '.') }}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>TDV AJUSTADO</td>
-                <td>{{ $resumen->TDV_ajustado }}</td>
+                <td>{{ number_format(($resumen->TDV_ajustado), 0, ',', '.') }}</td>
                 <td></td>
             </tr>
             @endif
         </tbody>
     </table>
 
-    <h3>CONCILIACIÓN</h3>
+    <h3>Conciliación</h3>
 
     <table class="tierra">
         <thead>
@@ -310,20 +310,20 @@
         </thead>
         <tbody>
             <tr class="center">
-                <td>{{ round($resumen->TCV, 0) }}</td>
+                <td>{{ number_format((round($resumen->TCV, 0)), 0, ',', '.') }}</td>
 
                 @if($resumen->operacion->nombre == 'Carga' || $resumen->operacion->nombre == 'Importación')
-                <td>{{ $resumen->TRV_ajustado }}</td>
+                <td>{{ number_format(($resumen->TRV_ajustado), 0, ',', '.') }}</td>
                 @elseif($resumen->operacion->nombre == 'Descarga' || $resumen->operacion->nombre == 'Exportación')
-                <td>{{ $resumen->TDV_ajustado }}</td>
+                <td>{{ number_format(($resumen->TDV_ajustado), 0, ',', '.') }}</td>
                 @endif
 
                 @if($resumen->operacion->nombre == 'Carga' || $resumen->operacion->nombre == 'Importación')
-                <td>{{ $resumen->TRV_ajustado - $resumen->TCV }}</td>
-                <td>{{ round((($resumen->TRV_ajustado - $resumen->TCV) / $resumen->TCV) * 100, 2) }}</td>
+                <td>{{ number_format(($resumen->TRV_ajustado - $resumen->TCV), 0, ',', '.') }}</td>
+                <td>{{ number_format((($resumen->TRV_ajustado - $resumen->TCV) / $resumen->TCV) * 100, 2, ',', '.') }}</td>
                 @elseif($resumen->operacion->nombre == 'Descarga' || $resumen->operacion->nombre == 'Exportación')
-                <td>{{ $resumen->TDV_ajustado - $resumen->TCV }}</td>
-                <td>{{ round(((($resumen->TDV_ajustado - $resumen->TCV) / $resumen->TCV) * 100), 2) }}</td>
+                <td>{{ number_format(($resumen->TDV_ajustado - $resumen->TCV), 0, ',', '.') }}</td>
+                <td>{{ number_format(((($resumen->TDV_ajustado - $resumen->TCV) / $resumen->TCV) * 100), 2, ',', '.') }}</td>
                 @endif
             </tr>
         </tbody>

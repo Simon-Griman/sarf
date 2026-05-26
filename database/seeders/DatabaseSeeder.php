@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TerminalDestinoSeeder::class);
         $this->call(OperacionSeeder::class);
         $this->call(ProductoSeeder::class);
+        $this->call(InspectorSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ResumenSeeder::class);
         $this->call(UserLoginSeeder::class);

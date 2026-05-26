@@ -117,7 +117,7 @@ class Index extends Component
 
     public function render()
     {
-        $resumenes = Resumen::orderBy('created_at')->with(['terminalOrigen', 'terminalDestino', 'operacion', 'producto']);
+        $resumenes = Resumen::with(['terminalOrigen', 'terminalDestino', 'operacion', 'producto']);
 
         foreach ($this->filters as $column => $value)
         {

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Resumen;
 
+use App\Models\Inspector;
 use App\Models\Operacion;
 use App\Models\Producto;
 use App\Models\Resumen;
@@ -18,7 +19,7 @@ class Create extends Component
 
     public $tipo_operacion;
 
-    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $fecha_operacion, $nro_viaje, $producto_id, $volumen, $inspector, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
+    public $terminal_origen_id, $terminal_destino_id, $buque, $nro_embarque, $fecha_operacion, $nro_viaje, $producto_id, $volumen, $inspector_id, $cantidad_determinada, $documento, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -34,39 +35,38 @@ class Create extends Component
             'buque' => 'required|max:45',
             'nro_embarque' => 'required|integer|max:999999999999|min:10',
             'fecha_operacion' => 'required|date',
-            'nro_viaje' => ['required', 'integer', 'min:10000', 'max:10000000', Rule::unique('resumens', 'nro_viaje')->whereNull('deleted_at')],
+            'nro_viaje' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::unique('resumens', 'nro_viaje')->whereNull('deleted_at')],
             'producto_id' => 'required',
             'volumen' => 'required|integer|max:999999999999|min:100',
-            'inspector' => 'nullable|max:45',
+            'inspector_id' => 'required',
             'cantidad_determinada' => 'required',
-            'documento' => 'required',
             'TOV' => 'required|decimal:2|max:999999.99|min:1.00',
             'GOV' => 'required|decimal:2|max:999999.99|min:1.00',
             'GSV' => 'required|decimal:2|max:999999.99|min:1.00',
             'NSV' => 'required|decimal:2|max:999999.99|min:1.00',
             'TCV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'sediment_water' => 'required|decimal:2|max:9999.99|min:1.00',
-            'free_water' => 'required|decimal:2|max:9999.99|min:1.00',
-            'agua_sedimento' => 'required|decimal:2|max:9999.99|min:1.00',
-            'temp' => 'required|integer|max:9999',
-            'API' => 'required|integer|max:9999',
-            'azufre' => 'required|integer|max:9999',
+            'sediment_water' => 'required|decimal:2|max:9999.99|min:0.00',
+            'free_water' => 'required|decimal:2|max:9999.99|min:0.00',
+            'agua_sedimento' => 'required|decimal:2|max:9999.99|min:0.00',
+            'temp' => 'required|decimal:1|max:9999',
+            'API' => 'required|decimal:1|max:9999',
+            'azufre' => 'required|decimal:3|max:9999',
 
-            'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'TCV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'GSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'NSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'TRV' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
-            'TRV_ajustado' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'integer', 'max:999999'],
+            'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'TCV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'GSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'NSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'TRV' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
+            'TRV_ajustado' => ['nullable', 'required_if:tipo_operacion,carga,importacion', 'decimal:2', 'max:999999'],
 
-            'ROB' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'ROB_agua' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'TCV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'GSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'NSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'TDV' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
-            'TDV_ajustado' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'integer', 'max:999999'],
+            'ROB' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'ROB_agua' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'TCV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'GSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'NSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'TDV' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
+            'TDV_ajustado' => ['nullable', 'required_if:tipo_operacion,descarga,exportacion', 'decimal:2', 'max:999999'],
             'VEF' => 'required|decimal:4|max:10.0000|min:0.0001',
 
             //archivos
@@ -75,7 +75,7 @@ class Create extends Component
             'cantidad' => 'required',
             'calidad' => 'required',
             'hoja_tiempo' => 'required',
-            'acta' => 'required',
+            'acta' => 'nullable',
             'ullage_inicial' => 'required',
             'ullage_final' => 'required',
         ];
@@ -113,14 +113,16 @@ class Create extends Component
             return redirect()->route('resumen.index')->with('error', 'Error en la Operación');
         }
 
-        if ($this->inspector == '') $this->inspector = 'SAMH';
-
         $nominacion = $this->nominacion->store('images/nominacion', 'public');
         $embarque = $this->embarque->store('images/embarque', 'public');
         $cantidad = $this->cantidad->store('images/certificados/cantidad', 'public');
         $calidad = $this->calidad->store('images/certificados/calidad', 'public');
         $hoja_tiempo = $this->hoja_tiempo->store('images/hoja_tiempo', 'public');
-        $acta = $this->acta->store('images/acta', 'public');
+        if ($this->acta) {
+            $acta = $this->acta->store('images/acta', 'public');
+        } else {
+            $acta = null;
+        }
         $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
         $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
 
@@ -134,9 +136,8 @@ class Create extends Component
             'operacion_id' => $operacion_id,
             'producto_id' => $this->producto_id,
             'volumen' => $this->volumen,
-            'inspector' => $this->inspector,
+            'inspector_id' => $this->inspector_id,
             'cantidad_determinada' => $this->cantidad_determinada,
-            'documento' => $this->documento,
             'TOV' => $this->TOV,
             'GOV' => $this->GOV,
             'GSV' => $this->GSV,
@@ -185,7 +186,8 @@ class Create extends Component
         $origenes = TerminalOrigen::orderBy('nombre')->get();
         $destinos = TerminalDestino::orderBy('nombre')->get();
         $productos = Producto::orderBy('nombre')->get();
+        $inspectores = Inspector::orderBy('nombre')->get();
 
-        return view('livewire.resumen.create', compact('origenes', 'destinos', 'productos'));
+        return view('livewire.resumen.create', compact('origenes', 'destinos', 'productos', 'inspectores'));
     }
 }

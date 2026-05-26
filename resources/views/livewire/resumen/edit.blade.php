@@ -82,8 +82,13 @@
 
                 <div class="sm:col-span-2">
                     <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora</label>
-                    <div class="mt-2">
-                        <x-form-text-input id="inspector" type="text" name="inspector" autocomplete="family-name" placeholder="SAMH" wire:model.blur="inspector" @blur="$wire.$refresh()" />
+                    <div class="mt-2 grid grid-cols-1">
+                        <x-form-select id="inspector" name="inspector_id" autocomplete="inspector_id" wire:model.blur="inspector_id" @blur="$wire.$refresh()">
+                            <option value="">-- Seleccionar --</option>
+                            @foreach ($inspectores as $inspector)
+                                <option value="{{ $inspector->id }}">{{ $inspector->nombre }}</option>
+                            @endforeach
+                        </x-form-select>
                     </div>
                 </div>
 
@@ -94,17 +99,6 @@
                             <option value="">-- Seleccionar --</option>
                             <option value="Tanque de Tierra">Tanque de Tierra</option>
                             <option value="Cifras Buque">Cifras Buque</option>
-                        </x-form-select>
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="documento" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Documento<span class="text-red-500">*</span></label>
-                    <div class="mt-2 grid grid-cols-1">
-                        <x-form-select id="documento" name="documento" autocomplete="documento" wire:model.blur="documento" @blur="$wire.$refresh()">
-                            <option value="">-- Seleccionar --</option>
-                            <option value="Borrador">Borrador</option>
-                            <option value="Definitivo">Definitivo</option>
                         </x-form-select>
                     </div>
                 </div>
@@ -150,14 +144,14 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="sediment_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Sediment Water<span class="text-red-500">*</span></label>
+                    <label for="sediment_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Agua y Sedimento<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="sediment_water" type="number" step="0.01" name="sediment_water" autocomplete="family-name" wire:model.blur="sediment_water" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="sediment_water" type="number" step="0.01" name="sediment_water" autocomplete="family-name" placeholder="Bbls" wire:model.blur="sediment_water" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="free_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Free Water<span class="text-red-500">*</span></label>
+                    <label for="free_water" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Agua Libre<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="free_water" type="number" step="0.01" name="free_water" autocomplete="family-name" wire:model.blur="free_water" @blur="$wire.$refresh()" />
                     </div>
@@ -166,28 +160,28 @@
                 <div class="sm:col-span-2">
                     <label for="agua_sedimento" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Agua y Sedimento<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="agua_sedimento" type="number" step="0.01" name="agua_sedimento" autocomplete="family-name" wire:model.blur="agua_sedimento" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="agua_sedimento" type="number" step="0.01" name="agua_sedimento" autocomplete="family-name" placeholder="%" wire:model.blur="agua_sedimento" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="temp" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Temp<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="temp" type="number" step="0.01" name="temp" autocomplete="family-name" wire:model.blur="temp" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="temp" type="number" step="0.1" name="temp" autocomplete="family-name" wire:model.blur="temp" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="API" class="block text-sm/6 font-medium text-gray-800 dark:text-white">API<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="API" type="number" step="0.01" name="API" autocomplete="family-name" wire:model.blur="API" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="API" type="number" step="0.1" name="API" autocomplete="family-name" wire:model.blur="API" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
                     <label for="azufre" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Azufre<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="azufre" type="number" step="0.01" name="azufre" autocomplete="family-name" wire:model.blur="azufre" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="azufre" type="number" step="0.001" name="azufre" autocomplete="family-name" wire:model.blur="azufre" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 

@@ -197,7 +197,7 @@
 
                 @if($columns['nro_viaje'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    {{ $resumen->nro_viaje ?? 'Sin nro viaje' }}
+                    {{ number_format($resumen->nro_viaje, 0, ',', '.') ?? 'Sin nro viaje' }}
                 </td>
                 @endif
 

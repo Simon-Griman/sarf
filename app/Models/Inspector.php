@@ -12,4 +12,9 @@ class Inspector extends Model
     {
         return $this->hasMany(Resumen::class);
     }
+
+    public function cargamentos()
+    {
+        return $this->hasMany(Cargamento::class);
+    }
 }

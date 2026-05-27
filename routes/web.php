@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CargamentoController;
 use App\Http\Controllers\CintilloController;
 use App\Http\Controllers\PdfResumenController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     })->middleware('check.new.user')->name('home');
 
     Route::resource('/resumen', ResumenController::class)->only('index', 'create', 'edit')->middleware('check.new.user')->names('resumen');
+
+    Route::resource('/cargamento', CargamentoController::class)->only('index', 'create', 'edit')->middleware('check.new.user')->names('cargamento');
 
     Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->middleware('check.new.user')->name('resumen-pdf');
 

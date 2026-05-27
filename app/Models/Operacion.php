@@ -18,4 +18,9 @@ class Operacion extends Model
     {
         return $this->hasMany(Resumen::class);
     }
+
+    public function cargamentos(): HasMany
+    {
+        return $this->hasMany(Cargamento::class);
+    }
 }

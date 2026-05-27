@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TerminalDestino extends Model
@@ -17,5 +18,10 @@ class TerminalDestino extends Model
     public function resumens(): HasMany
     {
         return $this->hasMany(Resumen::class);
+    }
+
+    public function cargamentos(): BelongsToMany
+    {
+        return $this->belongsToMany(Cargamento::class);
     }
 }

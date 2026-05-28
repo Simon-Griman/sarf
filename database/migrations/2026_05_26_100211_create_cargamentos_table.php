@@ -22,6 +22,17 @@ return new class extends Migration
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
             $table->foreignId('inspector_id')->constrained()->onDelete('cascade');
             $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque']);
+
+            //documentos
+            $table->string('nominacion')->nullable();
+            $table->string('embarque')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('calidad')->nullable();
+            $table->string('hoja_tiempo')->nullable();
+            $table->string('acta')->nullable();
+            $table->string('ullage_inicial')->nullable();
+            $table->string('ullage_final')->nullable();
+            
             $table->softDeletes();
             $table->timestamps();
         });

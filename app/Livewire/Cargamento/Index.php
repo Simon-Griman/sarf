@@ -14,7 +14,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarCargamento, $nro_embarque, $operacion, $documentos, $cargamentoPdf_id=0;
+    public $paginate = 10, $modalOpen = false, $modalOpen3 = false, $borrarCargamento, $nro_embarque, $documentos, $cargamentoPdf_id=0;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -88,16 +88,6 @@ class Index extends Component
             icon: 'success',
             title: '¡Hecho!'
         );
-    }
-
-    public function modalCargamento()
-    {
-        $this->modalOpen2 = true;
-    }
-
-    public function crearCargamento($operacion)
-    {
-        return redirect()->route('cargamento.create', compact('operacion'));
     }
 
     public function modalDocumento($id)

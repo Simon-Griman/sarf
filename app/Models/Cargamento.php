@@ -23,6 +23,14 @@ class Cargamento extends Model
         'operacion_id',
         'inspector_id',
         'cantidad_determinada',
+        'nominacion',
+        'embarque',
+        'cantidad',
+        'calidad',
+        'hoja_tiempo',
+        'acta',
+        'ullage_inicial',
+        'ullage_final',
     ];
 
     public function terminalOrigen(): BelongsTo

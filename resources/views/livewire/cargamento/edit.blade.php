@@ -1,12 +1,12 @@
-<form wire:submit.prevent="save" onsubmit="document.activeElement.blur()">
+<form wire:submit.prevent="update" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6" style="height: 79vh">
         <div class="border-b border-gray-400 dark:border-white/10 pb-12">
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Crear Cargamento</h2>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Editar Resumen de {{ $tipo_operacion }}</h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                 <div class="sm:col-span-6 text-center">
-                    <h2 class="">Agregar Cargamento</h2>
+                    <h2 class="">Resumen del Cargamento</h2>
                 </div>
 
                 <div class="sm:col-span-2">
@@ -102,35 +102,35 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación<span class="text-red-500">*</span></label>
+                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación</label>
                     <div class="mt-2">
-                        <x-form-text-input id="nominacion" type="file" class="file:py-0.5 file:cursor-pointer file:bg-transparent file:border-none file:text-blue-400 file:hover:underline file:active:text-blue-500" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="nominacion" type="file" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque<span class="text-red-500">*</span></label>
+                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque</label>
                     <div class="mt-2">
                         <x-form-text-input id="embarque" type="file" name="embarque" autocomplete="family-name" wire:model.blur="embarque" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad<span class="text-red-500">*</span></label>
+                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad</label>
                     <div class="mt-2">
                         <x-form-text-input id="cantidad" type="file" name="cantidad" autocomplete="family-name" wire:model.blur="cantidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad<span class="text-red-500">*</span></label>
+                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad</label>
                     <div class="mt-2">
                         <x-form-text-input id="calidad" type="file" name="calidad" autocomplete="family-name" wire:model.blur="calidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo<span class="text-red-500">*</span></label>
+                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo</label>
                     <div class="mt-2">
                         <x-form-text-input id="hoja_tiempo" type="file" name="hoja_tiempo" autocomplete="family-name" wire:model.blur="hoja_tiempo" @blur="$wire.$refresh()" />
                     </div>
@@ -144,25 +144,19 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial<span class="text-red-500">*</span></label>
+                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial</label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_inicial" type="file" name="ullage_inicial" autocomplete="family-name" wire:model.blur="ullage_inicial" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final<span class="text-red-500">*</span></label>
+                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final</label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_final" type="file" name="ullage_final" autocomplete="family-name" wire:model.blur="ullage_final" @blur="$wire.$refresh()" />
                     </div>
                 </div>
             </div>
-            @if ($errors->any())
-                <div class="mt-6">
-                    <h3 class="text-mediun">Errores por Corregir:</h3>
-                    <x-input-error :messages="$errors->all()" />
-                </div>
-            @endif
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6 px-6 pb-4">
             <x-cancel-button href="{{ route('resumen.index') }}" />

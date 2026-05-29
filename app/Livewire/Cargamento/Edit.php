@@ -44,6 +44,8 @@ class Edit extends Component
         $this->acta_existente = $cargamento->acta;
         $this->ullage_inicial_existente = $cargamento->ullage_inicial;
         $this->ullage_final_existente = $cargamento->ullage_final;
+
+        $this->terminales_destinos_ids = $cargamento->terminalDestinos()->pluck('terminal_destino_id')->toArray();
     }
 
     public function rules()
@@ -110,21 +112,21 @@ class Edit extends Component
         if ($this->acta)
         {
             $acta = $this->acta->store('images/acta', 'public');
-            Storage::disk('public')->delete($this->acta);
+            Storage::disk('public')->delete($this->acta_existente);
         }
         else $acta = $cargamento->acta;
 
         if ($this->ullage_inicial)
         {
             $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
-            Storage::disk('public')->delete($this->ullage_inicial);
+            Storage::disk('public')->delete($this->ullage_inicial_existente);
         }
         else $ullage_inicial = $cargamento->ullage_inicial;
 
         if ($this->ullage_final)
         {
             $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
-            Storage::disk('public')->delete($this->ullage_final);
+            Storage::disk('public')->delete($this->ullage_final_existente);
         }
         else $ullage_final = $cargamento->ullage_final;
 
@@ -147,6 +149,8 @@ class Edit extends Component
             'ullage_inicial' => $ullage_inicial,
             'ullage_final' => $ullage_final,
         ]);
+
+        $cargamento->terminalDestinos()->sync($this->terminales_destinos_ids);
 
         return redirect()->route('cargamento.index')->with('success', 'Cargamento Actualizado Correctamente');
     }

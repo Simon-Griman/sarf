@@ -84,7 +84,7 @@ class Create extends Component
             'acta' => $acta,
             'ullage_inicial' => $ullage_inicial,
             'ullage_final' => $ullage_final,
-        ]);
+        ])->terminalDestinos()->sync($this->terminales_destinos_ids);
 
         return redirect()->route('cargamento.index')->with('success', 'Cargamento Agregado Correctamente');
     }

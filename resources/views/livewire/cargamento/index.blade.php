@@ -323,9 +323,9 @@
                                     </div>
                                     @endif
 
-                                    <div class="sm:col-span-2">
+                                    {{-- <div class="sm:col-span-2">
                                         <a href="{{ route('resumen-pdf', ['id' => $cargamentoPdf_id]) }}" target="_blank" class="btn bg-amber-600 rounded p-2 hover:bg-amber-500" title="Reporte"><i class="far fa-file-pdf"></i> Resumen</a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

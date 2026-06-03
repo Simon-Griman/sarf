@@ -13,6 +13,7 @@ class Parcela extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'cargamento_id',
         'producto_id',
         'volumen',
         'TOV',
@@ -41,14 +42,6 @@ class Parcela extends Model
         'TDV',
         'TDV_ajustado',
         'VEF',
-        'nominacion',
-        'embarque',
-        'cantidad',
-        'calidad',
-        'hoja_tiempo',
-        'acta',
-        'ullage_inicial',
-        'ullage_final',
     ];
 
     public function cargamento(): BelongsTo

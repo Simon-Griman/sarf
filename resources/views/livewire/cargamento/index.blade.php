@@ -33,9 +33,8 @@
                 </th>
                 @endif
 
-                @if($columns['documentos'])
-                <th></th>
-                @endif
+                @if($columns['documentos'])<th></th>@endif
+                @if($columns['parcelas'])<th></th>@endif
 
                 <th></th>
             </tr>
@@ -83,9 +82,8 @@
                 </th>
                 @endif
 
-                @if($columns['documentos'])
-                <th></th>
-                @endif
+                @if($columns['documentos'])<th></th>@endif
+                @if($columns['parcelas'])<th></th>@endif
 
                 <th class="pt-2">
                     @can('cargamento.create')
@@ -119,6 +117,10 @@
 
                 @if($columns['documentos'])
                 <th class="px-4 py-3.5 text-sm font-medium text-left">Documentos</th>
+                @endif
+
+                @if($columns['parcelas'])
+                <th class="px-4 py-3.5 text-sm font-medium text-left">Parcelas</th>
                 @endif
 
                 <th class="px-4 py-3.5 text-sm font-medium text-left">Acciones</th>
@@ -164,7 +166,19 @@
 
                 @if($columns['documentos'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    <x-edit-button wire:click="modalDocumento({{ $cargamento->id }})"><i class="fas fa-eye"></i> Mostrar</x-edit-button>
+                    <x-view-button wire:click="modalDocumento({{ $cargamento->id }})"><i class="fas fa-eye"></i> Mostrar</x-view-button>
+                </td>
+                @endif
+                
+                @if($columns['parcelas'])
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                    @can('cargamento.add')
+                    <x-edit-button onclick="window.location.href='{{ route('parcelas.create', $cargamento->id) }}'"><i class="fas fa-plus"></i> Añadir</x-edit-button>
+                    @endcan
+
+                    @can('cargamento.view')
+                    <x-view-button class="ml-2" wire:click="verParcelas({{ $cargamento->id }})"><i class="fas fa-eye"></i> Ver</x-view-button>
+                    @endcan
                 </td>
                 @endif
 
@@ -245,6 +259,80 @@
                         <button type="button" @click="open = false" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 sm:mt-0 sm:w-auto">
                             Cancelar
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div x-data="{ open: @entangle('modalOpen2') }" 
+    x-show="open" 
+    class="relative z-10" 
+    aria-labelledby="modal-title" 
+    role="dialog" 
+    aria-modal="true"
+    style="display: none;"> 
+    
+        <div x-show="open" 
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            class="fixed inset-0 bg-zinc-500/75 transition-opacity dark:bg-zinc-900/50">
+        </div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-hidden">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                
+                <div x-show="open"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    @click.away="open = false" 
+                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl dark:bg-zinc-800 max-h-[90vh]">
+                    
+                    <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
+                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
+                            Parcelas
+                        </h2>
+                    </div>
+
+                    <div class="overflow-y-auto p-4 sm:p-6 bg-white dark:bg-zinc-800 custom-scrollbar">
+                        <div class="mt-2">
+                            @if(blank($parcelas))
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    No hay parcelas asociadas a este cargamento.
+                                </p>
+                            @else
+                                <table class="w-full text-sm">
+                                    <thead class="bg-white dark:bg-zinc-800 z-10">
+                                        <tr class="text-gray-500 dark:text-gray-400">
+                                            <th class="py-2 text-left">Producto</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-zinc-700">
+                                    @foreach ($parcelas as $parcela)
+                                        <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+                                            <td class="py-2">{{ $parcela->producto->nombre }}</td>
+                                            <td class="text-right">
+                                                @can('parcela.edit')
+                                                <x-edit-button onclick="window.location.href='{{ route('cargamento.edit', $parcela->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
+                                                @endcan
+
+                                                @can('parcela.destroy')
+                                                <x-delete-button wire:click="modalBorrar({{ $cargamento->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
+                                                @endcan
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cerrar</button>
                     </div>
                 </div>
             </div>

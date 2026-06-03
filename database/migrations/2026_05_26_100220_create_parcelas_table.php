@@ -53,16 +53,6 @@ return new class extends Migration
 
             $table->decimal('VEF', 6, 4)->nullable();
 
-            //documentos
-            $table->string('nominacion')->nullable();
-            $table->string('embarque')->nullable();
-            $table->string('cantidad')->nullable();
-            $table->string('calidad')->nullable();
-            $table->string('hoja_tiempo')->nullable();
-            $table->string('acta')->nullable();
-            $table->string('ullage_inicial')->nullable();
-            $table->string('ullage_final')->nullable();
-
             $table->softDeletes();
             $table->timestamps();
         });

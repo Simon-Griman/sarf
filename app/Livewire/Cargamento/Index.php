@@ -14,7 +14,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $modalOpen3 = false, $borrarCargamento, $nro_embarque, $documentos, $cargamentoPdf_id=0;
+    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarCargamento, $nro_embarque, $documentos, $cargamentoPdf_id=0, $parcelas;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -42,6 +42,7 @@ class Index extends Component
         'operacion' => true,
         'fecha' => false,
         'documentos' => true,
+        'parcelas' => true,
     ];
 
     public function updatingFilters()
@@ -88,6 +89,14 @@ class Index extends Component
             icon: 'success',
             title: '¡Hecho!'
         );
+    }
+
+    public function verParcelas($id)
+    {
+        $cargamento = Cargamento::with('parcelas')->find($id);
+        $this->parcelas = $cargamento->parcelas;
+        
+        $this->modalOpen2 = true;
     }
 
     public function modalDocumento($id)

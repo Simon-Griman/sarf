@@ -17,13 +17,10 @@ class Create extends Component
 
     public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
 
-    public $terminales_destinos_ids = [];
-
     public function rules()
     {
         return [
             'terminal_origen_id' => 'required',
-            'terminales_destinos_ids' => 'required',
             'buque' => 'required|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:9999999999999', Rule::unique('cargamentos', 'nro_embarque')->whereNull('deleted_at')],
             'fecha_operacion' => 'required|date',
@@ -84,7 +81,7 @@ class Create extends Component
             'acta' => $acta,
             'ullage_inicial' => $ullage_inicial,
             'ullage_final' => $ullage_final,
-        ])->terminalDestinos()->sync($this->terminales_destinos_ids);
+        ]);
 
         return redirect()->route('cargamento.index')->with('success', 'Cargamento Agregado Correctamente');
     }

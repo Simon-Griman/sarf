@@ -3,14 +3,15 @@
 namespace App\Livewire\Parcela;
 
 use App\Models\Cargamento;
+use App\Models\Parcela;
 use App\Models\Producto;
 use App\Models\TerminalDestino;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
-    public $cargamentoId;
+    public $parcelaId;
 
     public $producto_id, $volumen, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $tipo_operacion;
 
@@ -24,7 +25,40 @@ class Create extends Component
 
     public function mount()
     {
-        $this->tipo_operacion = Str::slug(Cargamento::find($this->cargamentoId)->operacion->nombre);
+        $parcela = Parcela::find($this->parcelaId);
+
+        $this->tipo_operacion = Str::slug($parcela->cargamento->operacion->nombre);
+
+        $this->producto_id = $parcela->producto_id;
+        $this->volumen = $parcela->volumen;
+        $this->TOV = $parcela->TOV;
+        $this->GOV = $parcela->GOV;
+        $this->GSV = $parcela->GSV;
+        $this->NSV = $parcela->NSV;
+        $this->TCV = $parcela->TCV;
+        $this->sediment_water = $parcela->sediment_water;
+        $this->free_water = $parcela->free_water;
+        $this->agua_sedimento = $parcela->agua_sedimento;
+        $this->azufre = $parcela->azufre;
+        $this->temp = $parcela->temp;
+        $this->API = $parcela->API;
+        $this->VEF = $parcela->VEF;
+        $this->OBQ = $parcela->OBQ;
+        $this->OBQ_agua = $parcela->OBQ_agua;
+        $this->TCV_carga = $parcela->TCV_carga;
+        $this->GSV_carga = $parcela->GSV_carga;
+        $this->NSV_carga = $parcela->NSV_carga;
+        $this->TRV = $parcela->TRV;
+        $this->TRV_ajustado = $parcela->TRV_ajustado;
+        $this->ROB = $parcela->ROB;
+        $this->ROB_agua = $parcela->ROB_agua;
+        $this->TCV_descarga = $parcela->TCV_descarga;
+        $this->GSV_descarga = $parcela->GSV_descarga;
+        $this->NSV_descarga = $parcela->NSV_descarga;
+        $this->TDV = $parcela->TDV;
+        $this->TDV_ajustado = $parcela->TDV_ajustado;
+
+        $this->terminales_destinos_ids = $parcela->terminalDestinos()->pluck('terminal_destino_id')->toArray();
     }
 
     public function rules()
@@ -69,15 +103,13 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
-
-
     public function save()
     {
         $this->validate();
 
-        $cargamento = Cargamento::find($this->cargamentoId);
+        $parcela = Parcela::find($this->parcelaId);
 
-        $cargamento->parcelas()->create([
+        $parcela->update([
             'producto_id' => $this->producto_id,
             'volumen' => $this->volumen,
             'TOV' => $this->TOV,
@@ -109,9 +141,11 @@ class Create extends Component
             'TDV_ajustado' => $this->TDV_ajustado,
 
             'VEF' => $this->VEF,
-        ])->terminalDestinos()->sync($this->terminales_destinos_ids);
+        ]);
 
-        return redirect()->route('cargamento.index')->with('success', 'Parcela Agregada Correctamente');
+        $parcela->terminalDestinos()->sync($this->terminales_destinos_ids);
+
+        return redirect()->route('cargamento.index')->with('success', 'Parcela Editada Correctamente');
     }
 
     public function render()
@@ -119,6 +153,6 @@ class Create extends Component
         $productos = Producto::orderBy('nombre')->get();
         $destinos = TerminalDestino::orderBy('nombre')->get();
 
-        return view('livewire.parcela.create', compact('productos', 'destinos'));
+        return view('livewire.parcela.edit', compact('productos', 'destinos'));
     }
 }

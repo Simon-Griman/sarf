@@ -20,8 +20,6 @@ class Edit extends Component
 
     public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion;
 
-    public $terminales_destinos_ids = [];
-
     public function mount()
     {
         $cargamento = Cargamento::find($this->cargamento_id);
@@ -45,14 +43,13 @@ class Edit extends Component
         $this->ullage_inicial_existente = $cargamento->ullage_inicial;
         $this->ullage_final_existente = $cargamento->ullage_final;
 
-        $this->terminales_destinos_ids = $cargamento->terminalDestinos()->pluck('terminal_destino_id')->toArray();
+        //$this->terminales_destinos_ids = $cargamento->terminalDestinos()->pluck('terminal_destino_id')->toArray();
     }
 
     public function rules()
     {
         return [
             'terminal_origen_id' => 'required',
-            'terminales_destinos_ids' => 'required',
             'buque' => 'required|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:999999999999', Rule::unique('cargamentos', 'nro_embarque')->ignore($this->cargamento_id)->whereNull('deleted_at')],
             'fecha_operacion' => 'required|date',
@@ -150,7 +147,7 @@ class Edit extends Component
             'ullage_final' => $ullage_final,
         ]);
 
-        $cargamento->terminalDestinos()->sync($this->terminales_destinos_ids);
+        //$cargamento->terminalDestinos()->sync($this->terminales_destinos_ids);
 
         return redirect()->route('cargamento.index')->with('success', 'Cargamento Actualizado Correctamente');
     }
@@ -161,10 +158,9 @@ class Edit extends Component
         $this->tipo_operacion = $cargamento->operacion->nombre;
 
         $origenes = TerminalOrigen::orderBy('nombre')->get();
-        $destinos = TerminalDestino::orderBy('nombre')->get();
         $inspectores = Inspector::orderBy('nombre')->get();
         $operaciones = Operacion::orderBy('nombre')->get();
 
-        return view('livewire.cargamento.edit', compact('cargamento', 'origenes', 'destinos', 'inspectores', 'operaciones'));
+        return view('livewire.cargamento.edit', compact('cargamento', 'origenes', 'inspectores', 'operaciones'));
     }
 }

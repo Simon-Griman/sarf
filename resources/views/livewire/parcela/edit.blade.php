@@ -1,7 +1,7 @@
 <form wire:submit.prevent="save" onsubmit="document.activeElement.blur()">
     <div class="space-y-12 sm:px-6" style="height: 79vh">
         <div class="border-b border-gray-400 dark:border-white/10 pb-12">
-            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Añadir Parcela al Cargamento</h2>
+            <h2 class="text-xl font-semibold text-gray-800 dark:text-white inline-flex">Editar Parcela</h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 

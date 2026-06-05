@@ -4,6 +4,7 @@ namespace App\Livewire\Cargamento;
 
 use App\Models\Cargamento;
 use App\Models\Operacion;
+use App\Models\Parcela;
 use App\Models\Producto;
 use App\Models\TerminalDestino;
 use App\Models\TerminalOrigen;
@@ -14,7 +15,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarCargamento, $nro_embarque, $documentos, $cargamentoPdf_id=0, $parcelas;
+    public $paginate = 10, $modalOpen = false, $modalOpen2 = false, $modalOpen3 = false, $borrarCargamento, $borrarParcela, $nro_embarque, $documentos, $cargamentoPdf_id=0, $parcelas;
 
     public $filters = [
         'terminal_origen_id' => '',
@@ -93,10 +94,44 @@ class Index extends Component
 
     public function verParcelas($id)
     {
-        $cargamento = Cargamento::with('parcelas')->find($id);
-        $this->parcelas = $cargamento->parcelas;
+        $cargamento = Cargamento::with('parcelas.terminalDestinos')->find($id);
+
+        // Nos aseguramos con un operador ternario de que si el cargamento no existe,
+        // no rompa la aplicación y devuelva una colección vacía.
+        $this->parcelas = $cargamento ? $cargamento->parcelas : collect();
         
         $this->modalOpen2 = true;
+    }
+
+    public function modalBorrarParcela($id)
+    {
+        $parcela = Parcela::find($id);
+
+        if ($parcela) {
+            $cargamentoId = $parcela->cargamento_id; // Guardamos el ID del cargamento
+
+            // 2. Eliminar la parcela
+            $parcela->delete();
+
+            // 3. REFRESCAR la propiedad en memoria con las parcelas que quedan
+            $cargamento = Cargamento::with('parcelas.terminalDestinos')->find($cargamentoId);
+            $this->parcelas = $cargamento ? $cargamento->parcelas : collect();
+            
+            // 4. Lanzar notificación de éxito opcional
+            $this->dispatch('notify', 
+                message: 'Parcela eliminada correctamente', 
+                icon: 'success',
+                title: '¡Hecho!'
+            );
+        }
+        else {
+            // Lanzar notificación de error si la parcela no se encuentra
+            $this->dispatch('notify', 
+                message: 'No se ha encontrado la parcela para eliminar', 
+                icon: 'error',
+                title: '¡Error!'
+            );
+        }
     }
 
     public function modalDocumento($id)

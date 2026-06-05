@@ -43,13 +43,13 @@ return new class extends Migration
             $table->decimal('TRV', 8, 2)->nullable();
             $table->decimal('TRV_ajustado', 8, 2)->nullable();
             //descarga
-            $table->integer('ROB')->nullable();
-            $table->integer('ROB_agua')->nullable();
-            $table->integer('TCV_descarga')->nullable();
-            $table->integer('GSV_descarga')->nullable();
-            $table->integer('NSV_descarga')->nullable();
-            $table->integer('TDV')->nullable();
-            $table->integer('TDV_ajustado')->nullable();
+            $table->decimal('ROB', 8, 2)->nullable();
+            $table->decimal('ROB_agua', 8, 2)->nullable();
+            $table->decimal('TCV_descarga', 8, 2)->nullable();
+            $table->decimal('GSV_descarga', 8, 2)->nullable();
+            $table->decimal('NSV_descarga', 8, 2)->nullable();
+            $table->decimal('TDV', 8, 2)->nullable();
+            $table->decimal('TDV_ajustado', 8, 2)->nullable();
 
             $table->decimal('VEF', 6, 4)->nullable();
 

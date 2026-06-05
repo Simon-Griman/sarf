@@ -20,7 +20,7 @@ class TerminalDestino extends Model
         return $this->hasMany(Resumen::class);
     }
 
-    public function cargamentos(): BelongsToMany
+    public function parcelas(): BelongsToMany
     {
         return $this->belongsToMany(Cargamento::class);
     }

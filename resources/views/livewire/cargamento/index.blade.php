@@ -288,7 +288,7 @@
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                     @click.away="open = false" 
-                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl dark:bg-zinc-800 max-h-[90vh]">
+                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:w-full sm:max-w-3xl dark:bg-zinc-800 max-h-[90vh]">
                     
                     <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
@@ -298,7 +298,7 @@
 
                     <div class="overflow-y-auto p-4 sm:p-6 bg-white dark:bg-zinc-800 custom-scrollbar">
                         <div class="mt-2">
-                            @if(blank($parcelas))
+                            @if(blank($this->parcelas))
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
                                     No hay parcelas asociadas a este cargamento.
                                 </p>
@@ -307,20 +307,32 @@
                                     <thead class="bg-white dark:bg-zinc-800 z-10">
                                         <tr class="text-gray-500 dark:text-gray-400">
                                             <th class="py-2 text-left">Producto</th>
-                                            <th class="text-center">Acciones</th>
+                                            <th class="text-left">Terminal Destino</th>
+                                            <th class="text-right">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-zinc-700">
                                     @foreach ($parcelas as $parcela)
                                         <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
                                             <td class="py-2">{{ $parcela->producto->nombre }}</td>
+                                            <td class="whitespace-nowrap">
+                                                @foreach ($parcela->terminalDestinos as $terminal)
+                                                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-1 rounded">
+                                                        {{ $terminal->nombre }}
+                                                    </span>
+                                                @endforeach
+                                            </td>
                                             <td class="text-right">
+                                                @can('parcela.resumen')
+                                                <x-edit-button class="!text-amber-500 dark:text-amber-400 hover:text-amber-400 dark:hover:text-amber-500" onclick="window.location.href='{{ route('cargamento.edit', $cargamento->id) }}'"><i class="fas fa-file-pdf"></i> Resumen</x-edit-button>
+                                                @endcan
+
                                                 @can('parcela.edit')
-                                                <x-edit-button onclick="window.location.href='{{ route('cargamento.edit', $parcela->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
+                                                <x-edit-button onclick="window.location.href='{{ route('parcelas.edit', $parcela->id) }}'"><i class="fas fa-pen-to-square"></i> Editar</x-edit-button>
                                                 @endcan
 
                                                 @can('parcela.destroy')
-                                                <x-delete-button wire:click="modalBorrar({{ $cargamento->id }})"><i class="fas fa-trash"></i> Borrar</x-delete-button>
+                                                <x-delete-button wire:click="modalBorrarParcela({{ $parcela->id }})" wire:confirm="¿Estás seguro de que deseas eliminar esta parcela? Esta acción no se puede deshacer."><i class="fas fa-trash"></i> Borrar</x-delete-button>
                                                 @endcan
                                             </td>
                                         </tr>

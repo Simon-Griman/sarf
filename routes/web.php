@@ -3,6 +3,7 @@
 use App\Http\Controllers\CargamentoController;
 use App\Http\Controllers\CintilloController;
 use App\Http\Controllers\ParcelaController;
+use App\Http\Controllers\PdfCargamentoController;
 use App\Http\Controllers\PdfResumenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumenController;
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/parcelas/edit/{id}', [ParcelaController::class, 'edit'])->middleware('check.new.user')->name('parcelas.edit');
 
     Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->middleware('check.new.user')->name('resumen-pdf');
+
+    Route::get('/cargamento-pdf/{id}', [PdfCargamentoController::class, 'generarDocumento'])->middleware('check.new.user')->name('cargamento-pdf');
 
     Route::resource('/users', UserController::class)->except('show', 'store', 'destroy')->middleware('check.new.user')->names('users');
 
@@ -87,6 +90,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
-//TODO: Agregar middleware para verificar si el usuario es nuevo y redirigirlo a la página de cambio de contraseña.

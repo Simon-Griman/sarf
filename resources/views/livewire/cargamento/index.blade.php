@@ -324,7 +324,7 @@
                                             </td>
                                             <td class="text-right">
                                                 @can('parcela.resumen')
-                                                <x-edit-button class="!text-amber-500 dark:text-amber-400 hover:text-amber-400 dark:hover:text-amber-500" onclick="window.location.href='{{ route('cargamento.edit', $cargamento->id) }}'"><i class="fas fa-file-pdf"></i> Resumen</x-edit-button>
+                                                <x-edit-button class="!text-amber-500 dark:text-amber-400 hover:text-amber-400 dark:hover:text-amber-500" onclick="window.open('{{ route('cargamento-pdf', $parcela->id) }}', '_blank')"><i class="fas fa-file-pdf"></i> Resumen</x-edit-button>
                                                 @endcan
 
                                                 @can('parcela.edit')

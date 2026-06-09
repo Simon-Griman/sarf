@@ -172,11 +172,11 @@
                 
                 @if($columns['parcelas'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    @can('cargamento.add')
+                    @can('parcela.add')
                     <x-edit-button onclick="window.location.href='{{ route('parcelas.create', $cargamento->id) }}'"><i class="fas fa-plus"></i> Añadir</x-edit-button>
                     @endcan
 
-                    @can('cargamento.view')
+                    @can('parcela.view')
                     <x-view-button class="ml-2" wire:click="verParcelas({{ $cargamento->id }})"><i class="fas fa-eye"></i> Ver</x-view-button>
                     @endcan
                 </td>

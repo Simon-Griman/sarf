@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/parcelas/create/{cargamento_id}', [ParcelaController::class, 'create'])->middleware('check.new.user')->name('parcelas.create');
 
-    Route::get('/parcelas/edit/{id}', [ParcelaController::class, 'edit'])->middleware('check.new.user')->name('parcelas.edit');
+    Route::get('/parcelas/edit/{id}', [ParcelaController::class, 'edit'])->middleware('check.new.user', 'permission:parcela.edit')->name('parcelas.edit');
 
     Route::get('/resumen-pdf/{id}', [PdfResumenController::class, 'generarDocumento'])->middleware('check.new.user')->name('resumen-pdf');
 

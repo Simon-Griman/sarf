@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'super-admin', 'peso' => 10]);
         $rolAdmin = Role::create(['name' => 'admin', 'peso' => 5]);
         $rolUser = Role::create(['name' => 'user', 'peso' => 3]);
-        $rolResumen = Role::create(['name' => 'resumen', 'peso' => 1]);
+        $rolCargamento = Role::create(['name' => 'cargamento', 'peso' => 1]);
         $rolAuditoria = Role::create(['name' => 'auditoria', 'peso' => 1]);
         $rolConfiguracion = Role::create(['name' => 'configuracion', 'peso' => 2]);
 
@@ -36,10 +36,16 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'cintillos.activar'])->assignRole([$rolAdmin, $rolConfiguracion]);
         Permission::create(['name' => 'cintillos.destroy'])->assignRole([$rolAdmin, $rolConfiguracion]);
 
-        Permission::create(['name' => 'resumen.index'])->assignRole([$rolAdmin, $rolResumen]);
-        Permission::create(['name' => 'resumen.create'])->assignRole([$rolAdmin, $rolResumen]);
-        Permission::create(['name' => 'resumen.edit'])->assignRole([$rolAdmin, $rolResumen]);
-        Permission::create(['name' => 'resumen.destroy'])->assignRole([$rolAdmin, $rolResumen]);
+        Permission::create(['name' => 'cargamento.index'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'cargamento.create'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'cargamento.edit'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'cargamento.destroy'])->assignRole([$rolAdmin, $rolCargamento]);
+
+        Permission::create(['name' => 'parcela.add'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'parcela.view'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'parcela.edit'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'parcela.resumen'])->assignRole([$rolAdmin, $rolCargamento]);
+        Permission::create(['name' => 'parcela.destroy'])->assignRole([$rolAdmin, $rolCargamento]);
 
         Permission::create(['name' => 'auditoria.sesiones'])->assignRole([$rolAdmin, $rolAuditoria]);
         Permission::create(['name' => 'auditoria.creados'])->assignRole([$rolAdmin, $rolAuditoria]);

@@ -2,8 +2,11 @@
 
 namespace App\Traits;
 
+use App\Models\Cargamento;
 use App\Models\Cintillo;
+use App\Models\Inspector;
 use App\Models\Operacion;
+use App\Models\Parcela;
 use App\Models\Producto;
 use App\Models\RegistrosEditados;
 use App\Models\RespaldoEditados;
@@ -82,6 +85,77 @@ trait TracksEdicion
 
                     RespaldoEditados::create([
                         'resumen_id' => $model->id,
+                        'batch_id' => $batchId,
+                        'campo' => $campo,
+                        'valor_antes' => $valorAntes,
+                        'valor_despues' => $valorDespues,
+                    ]);
+                }
+
+                elseif ($model instanceof Cargamento)
+                {
+                    if ($key == 'terminal_origen_id')
+                    {
+                        $valorAntes = TerminalOrigen::find($antes)->nombre;
+                        $valorDespues = TerminalOrigen::find($value)->nombre;
+                        $campo = 'Origen';
+                    }
+
+                    elseif ($key == 'operacion_id')
+                    {
+                        $valorAntes = Operacion::find($antes)->nombre;
+                        $valorDespues = Operacion::find($value)->nombre;
+                        $campo = 'Operación';
+                    }
+
+                    elseif ($key == 'inspector_id')
+                    {
+                        $valorAntes = Inspector::find($antes)->nombre;
+                        $valorDespues = Inspector::find($value)->nombre;
+                        $campo = 'Inspector';
+                    }
+
+                    else
+                    {
+                        $valorAntes = $antes;
+                        $valorDespues = $value;
+                        $campo = $key;
+                    }
+
+                    RespaldoEditados::create([
+                        'cargamento_id' => $model->id,
+                        'batch_id' => $batchId,
+                        'campo' => $campo,
+                        'valor_antes' => $valorAntes,
+                        'valor_despues' => $valorDespues,
+                    ]);
+                }
+
+                elseif ($model instanceof Parcela)
+                {
+                    if ($key == 'terminal_destino_id')
+                    {
+                        $valorAntes = TerminalDestino::find($antes)->nombre;
+                        $valorDespues = TerminalDestino::find($value)->nombre;
+                        $campo = 'Destino';
+                    }
+
+                    elseif ($key == 'producto_id')
+                    {
+                        $valorAntes = Producto::find($antes)->nombre;
+                        $valorDespues = Producto::find($value)->nombre;
+                        $campo = 'Producto';
+                    }
+
+                    else
+                    {
+                        $valorAntes = $antes;
+                        $valorDespues = $value;
+                        $campo = $key;
+                    }
+
+                    RespaldoEditados::create([
+                        'parcela_id' => $model->id,
                         'batch_id' => $batchId,
                         'campo' => $campo,
                         'valor_antes' => $valorAntes,

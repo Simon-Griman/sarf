@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Auditoria;
 
+use App\Models\Cargamento;
 use App\Models\Cintillo;
+use App\Models\Parcela;
 use App\Models\RegistrosCreados;
 use App\Models\Resumen;
 use App\Models\Role;
@@ -24,6 +26,10 @@ class Creados extends Component
         $this->modelo = $tabla;
 
         if ($tabla == 'Resumen') $this->registro = Resumen::find($id);
+
+        elseif ($tabla == 'Cargamento') $this->registro = Cargamento::find($id);
+
+        elseif ($tabla == 'Parcela') $this->registro = Parcela::find($id);
 
         elseif ($tabla == 'User') $this->registro = User::find($id);
 

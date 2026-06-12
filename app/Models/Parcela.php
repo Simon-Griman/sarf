@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\TracksCreacion;
+use App\Traits\TracksEdicion;
+use App\Traits\TracksEliminacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Parcela extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, TracksCreacion, TracksEdicion, TracksEliminacion;
 
     protected $fillable = [
         'cargamento_id',

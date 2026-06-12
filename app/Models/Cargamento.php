@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\TracksCreacion;
+use App\Traits\TracksEdicion;
+use App\Traits\TracksEliminacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cargamento extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes, HasFactory, TracksCreacion, TracksEdicion, TracksEliminacion;
 
     protected $fillable = [
         'terminal_origen_id',

@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td><b>Tipo de Operación:</b> {{ $parcela->cargamento->operacion->nombre }}</td>
-                <td><b>Producto:</b> {{ $parcela->producto->nombre }}</td>
+                <td><b>Hidrocarburo:</b> {{ $parcela->producto->nombre }}</td>
                 <td><b>Volumen Nominal:</b> {{ number_format(($parcela->volumen), 0, ',', '.') }}</td>
             </tr>
             <tr>

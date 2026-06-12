@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('respaldo_editados', function (Blueprint $table) {
             $table->id();
             $table->foreignId('resumen_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('cargamento_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('parcela_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('cintillo_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('role_id')->nullable()->constrained()->cascadeOnDelete();

@@ -24,7 +24,7 @@ class Resumen extends Model
         'operacion_id',
         'producto_id',
         'volumen',
-        'inspector',
+        'inspector_id',
         'cantidad_determinada',
         'documento',
         'TOV',

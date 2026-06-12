@@ -74,6 +74,7 @@
 
                     <div class="overflow-y-auto p-4 sm:p-6 bg-white dark:bg-zinc-800 custom-scrollbar">
                         <div class="mt-2">
+                            @if ($registro)
                             <table class="w-full text-sm">
                                 <thead class="bg-white dark:bg-zinc-800 z-10">
                                     <tr class="text-gray-500 dark:text-gray-400">
@@ -162,6 +163,10 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            @else
+                                <p class="text-red-500">Este registro fue eliminado.</p>
+                                <p>Puede buscarlo en Registros Eliminados.</p>
+                            @endif
                         </div>
                     </div>
 

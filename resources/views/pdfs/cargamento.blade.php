@@ -30,7 +30,7 @@
             <tr>
                 <td><b>Nro Embarque:</b> {{ $parcela->cargamento->nro_embarque }}</td>
                 <td><b>Fecha de Operación:</b> {{ \Carbon\Carbon::parse($parcela->cargamento->fecha_operacion)->format('d/m/Y') }}</td>
-                <td><b>Nro viaje:</b> {{ $parcela->cargamento->nro_viaje }}</td>
+                <td><b>Nro Ruta:</b> {{ $parcela->cargamento->nro_ruta }}</td>
             </tr>
             <tr>
                 <td><b>Tipo de Operación:</b> {{ $parcela->cargamento->operacion->nombre }}</td>

@@ -165,7 +165,7 @@
                     <h2 class="">Datos Buque</h2>
                 </div>
 
-                @if ($tipo_operacion === 'carga' || $tipo_operacion === 'importacion')
+                @if ($tipo_operacion === 'carga' || $tipo_operacion === 'exportacion')
 
                 <div class="sm:col-span-2">
                     <label for="OBQ" class="block text-sm/6 font-medium text-gray-800 dark:text-white">OBQ<span class="text-red-500">*</span></label>
@@ -216,7 +216,7 @@
                     </div>
                 </div>
 
-                @elseif ($tipo_operacion === 'descarga' || $tipo_operacion === 'exportacion')
+                @elseif ($tipo_operacion === 'descarga' || $tipo_operacion === 'importacion')
 
                 <div class="sm:col-span-2">
                     <label for="ROB" class="block text-sm/6 font-medium text-gray-800 dark:text-white">ROB<span class="text-red-500">*</span></label>

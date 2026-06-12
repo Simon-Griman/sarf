@@ -135,7 +135,7 @@
                 <div class="sm:col-span-2">
                     <label for="agua_sedimento" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Agua y Sedimento<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="agua_sedimento" type="number" step="0.01" name="agua_sedimento" autocomplete="family-name" placeholder="%" wire:model.blur="agua_sedimento" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="agua_sedimento" type="number" step="0.001" name="agua_sedimento" autocomplete="family-name" placeholder="%" wire:model.blur="agua_sedimento" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
@@ -156,7 +156,7 @@
                 <div class="sm:col-span-2">
                     <label for="azufre" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Azufre<span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <x-form-text-input id="azufre" type="number" step="0.001" name="azufre" autocomplete="family-name" wire:model.blur="azufre" @blur="$wire.$refresh()" />
+                        <x-form-text-input id="azufre" type="number" step="0.01" name="azufre" autocomplete="family-name" wire:model.blur="azufre" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 

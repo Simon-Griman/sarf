@@ -30,8 +30,8 @@ return new class extends Migration
             //detalles tierra
             $table->decimal('temp', 8, 1);
             $table->decimal('API', 8, 1);
-            $table->decimal('agua_sedimento', 6, 2);
-            $table->decimal('azufre', 8, 3);
+            $table->decimal('agua_sedimento', 6, 3);
+            $table->decimal('azufre', 8, 2);
 
             //datos buque
             //carga

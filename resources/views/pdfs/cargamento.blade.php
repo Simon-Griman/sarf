@@ -182,19 +182,19 @@
         <thead>
             <tr>
                 <th>Producto</th>
-                <th>API</th>
-                <th>% Agua y Sedimento</th>
                 <th>Temp</th>
+                <th>API</th>
                 <th>% Azufre</th>
+                <th>% Agua y Sedimento</th>
             </tr>
         </thead>
         <tbody>
             <tr class="center">
                 <td>{{ $parcela->producto->nombre }}</td>
-                <td>{{ number_format(($parcela->API), 1, ',', '.') }}</td>
-                <td>{{ number_format(($parcela->agua_sedimento), 2, ',', '.') }}</td>
                 <td>{{ number_format(($parcela->temp), 1, ',', '.') }}</td>
-                <td>{{ number_format(($parcela->azufre), 3, ',', '.') }}</td>
+                <td>{{ number_format(($parcela->API), 1, ',', '.') }}</td>
+                <td>{{ number_format(($parcela->azufre), 2, ',', '.') }}</td>
+                <td>{{ number_format(($parcela->agua_sedimento), 3, ',', '.') }}</td>
             </tr>
         </tbody>
     </table>

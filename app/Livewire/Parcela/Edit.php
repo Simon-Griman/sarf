@@ -74,10 +74,10 @@ class Edit extends Component
             'TCV' => 'required|decimal:2|max:999999.99|min:1.00',
             'sediment_water' => 'required|decimal:2|max:9999.99|min:0.00',
             'free_water' => 'required|decimal:2|max:9999.99|min:0.00',
-            'agua_sedimento' => 'required|decimal:2|max:9999.99|min:0.00',
+            'agua_sedimento' => 'required|decimal:3|max:999.999|min:0.000',
             'temp' => 'required|decimal:1|max:9999',
             'API' => 'required|decimal:1|max:9999',
-            'azufre' => 'required|decimal:3|max:9999',
+            'azufre' => 'required|decimal:2|max:999999.99|min:0.00',
 
             'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
             'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],

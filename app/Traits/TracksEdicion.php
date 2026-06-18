@@ -50,29 +50,29 @@ trait TracksEdicion
                 {
                     if ($key == 'terminal_origen_id')
                     {
-                        $valorAntes = TerminalOrigen::find($antes)->nombre;
-                        $valorDespues = TerminalOrigen::find($value)->nombre;
+                        $valorAntes = TerminalOrigen::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalOrigen::find($value)->nombre ?? null;
                         $campo = 'Origen';
                     }
 
                     elseif ($key == 'terminal_destino_id')
                     {
-                        $valorAntes = TerminalDestino::find($antes)->nombre;
-                        $valorDespues = TerminalDestino::find($value)->nombre;
+                        $valorAntes = TerminalDestino::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalDestino::find($value)->nombre ?? null;
                         $campo = 'Destino';
                     }
 
                     elseif ($key == 'operacion_id')
                     {
-                        $valorAntes = Operacion::find($antes)->nombre;
-                        $valorDespues = Operacion::find($value)->nombre;
+                        $valorAntes = Operacion::find($antes)->nombre ?? null;
+                        $valorDespues = Operacion::find($value)->nombre ?? null;
                         $campo = 'Operación';
                     }
 
                     elseif ($key == 'producto_id')
                     {
-                        $valorAntes = Producto::find($antes)->nombre;
-                        $valorDespues = Producto::find($value)->nombre;
+                        $valorAntes = Producto::find($antes)->nombre ?? null;
+                        $valorDespues = Producto::find($value)->nombre ?? null;
                         $campo = 'Producto';
                     }
 
@@ -96,22 +96,22 @@ trait TracksEdicion
                 {
                     if ($key == 'terminal_origen_id')
                     {
-                        $valorAntes = TerminalOrigen::find($antes)->nombre;
-                        $valorDespues = TerminalOrigen::find($value)->nombre;
+                        $valorAntes = TerminalOrigen::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalOrigen::find($value)->nombre ?? null;
                         $campo = 'Origen';
                     }
 
                     elseif ($key == 'operacion_id')
                     {
-                        $valorAntes = Operacion::find($antes)->nombre;
-                        $valorDespues = Operacion::find($value)->nombre;
+                        $valorAntes = Operacion::find($antes)->nombre ?? null;
+                        $valorDespues = Operacion::find($value)->nombre ?? null;
                         $campo = 'Operación';
                     }
 
                     elseif ($key == 'inspector_id')
                     {
-                        $valorAntes = Inspector::find($antes)->nombre;
-                        $valorDespues = Inspector::find($value)->nombre;
+                        $valorAntes = Inspector::find($antes)->nombre ?? null;
+                        $valorDespues = Inspector::find($value)->nombre ?? null;
                         $campo = 'Inspector';
                     }
 
@@ -135,15 +135,15 @@ trait TracksEdicion
                 {
                     if ($key == 'terminal_destino_id')
                     {
-                        $valorAntes = TerminalDestino::find($antes)->nombre;
-                        $valorDespues = TerminalDestino::find($value)->nombre;
+                        $valorAntes = TerminalDestino::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalDestino::find($value)->nombre ?? null;
                         $campo = 'Destino';
                     }
 
                     elseif ($key == 'producto_id')
                     {
-                        $valorAntes = Producto::find($antes)->nombre;
-                        $valorDespues = Producto::find($value)->nombre;
+                        $valorAntes = Producto::find($antes)->nombre ?? null;
+                        $valorDespues = Producto::find($value)->nombre ?? null;
                         $campo = 'Producto';
                     }
 
@@ -167,8 +167,8 @@ trait TracksEdicion
                 {
                     if ($key == 'terminal_origen_id')
                     {
-                        $valorAntes = TerminalOrigen::find($antes)->nombre;
-                        $valorDespues = TerminalOrigen::find($value)->nombre;
+                        $valorAntes = TerminalOrigen::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalOrigen::find($value)->nombre ?? null;
                         $campo = 'Origen';
                     }
 

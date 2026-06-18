@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('cargamentos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('terminal_origen_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('terminal_destino_id')->constrained()->onDelete('cascade'); // muchos a muchos con terminales
-            $table->string('buque', 45);
+            $table->foreignId('terminal_origen_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('buque', 45)->nullable();
             $table->bigInteger('nro_embarque'); //12 digitos
-            $table->date('fecha_operacion');
+            $table->date('fecha_operacion')->nullable();
             $table->bigInteger('nro_ruta')->unique();
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
-            $table->foreignId('inspector_id')->constrained()->onDelete('cascade');
-            $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque']);
+            $table->foreignId('inspector_id')->nullable()->constrained()->onDelete('cascade');
+            $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque'])->nullable();
 
             //documentos
             $table->string('nominacion')->nullable();

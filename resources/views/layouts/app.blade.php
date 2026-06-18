@@ -138,6 +138,12 @@
                     <i class="fas fa-oil-well mr-3"></i> Productos
                 </a>
                 @endcan
+
+                @can('validaciones')
+                <a href="{{ route('validaciones') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('validaciones') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                    <i class="fas fa-check mr-3"></i> Validaciones
+                </a>
+                @endcan
             </nav>
         </aside>
 

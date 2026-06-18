@@ -12,6 +12,11 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
+    if (auth()->check()) {
+        return redirect()->route('home');
+    }
+
     return redirect()->route('login');
 });
 
@@ -72,19 +77,23 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reset-password', function() {
         return view('reset_password');
-    })->name('reset-pass');
+    })->name('reset-pass')->middleware('permission:reset-pass', 'check.new.user');
 
     Route::get('/origen', function() {
         return view('terminal.origen');
-    })->name('origen');
+    })->name('origen')->middleware('permission:terminal.origen', 'check.new.user');
 
     Route::get('/destino', function() {
         return view('terminal.destino');
-    })->name('destino');
+    })->name('destino')->middleware('permission:terminal.destino', 'check.new.user');
 
     Route::get('/producto', function() {
         return view('producto');
-    })->name('producto');
+    })->name('producto')->middleware('permission:producto', 'check.new.user');
+
+    Route::get('/validaciones', function() {
+        return view('validaciones');
+    })->name('validaciones')->middleware('permission:validaciones', 'check.new.user');
 
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });

@@ -3,6 +3,7 @@
 namespace App\Livewire\Cargamento;
 
 use App\Models\Cargamento;
+use App\Models\FormField;
 use App\Models\Inspector;
 use App\Models\Operacion;
 use App\Models\TerminalDestino;
@@ -18,7 +19,7 @@ class Edit extends Component
 
     public $cargamento_id;
 
-    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion;
+    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion, $validaciones = [];
 
     public function mount()
     {
@@ -43,26 +44,34 @@ class Edit extends Component
         $this->ullage_inicial_existente = $cargamento->ullage_inicial;
         $this->ullage_final_existente = $cargamento->ullage_final;
 
-        //$this->terminales_destinos_ids = $cargamento->terminalDestinos()->pluck('terminal_destino_id')->toArray();
+        $this->validaciones = FormField::pluck('is_required', 'field_name')->toArray();
     }
 
     public function rules()
     {
         return [
-            'terminal_origen_id' => 'required',
-            'buque' => 'required|max:45',
+            'terminal_origen_id' => ($this->validaciones['terminal_origen'] ?? false) ? 'required' : 'nullable',
+            'buque' => ($this->validaciones['buque'] ?? false) ? 'required|max:45' : 'nullable|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:999999999999', Rule::unique('cargamentos', 'nro_embarque')->ignore($this->cargamento_id)->whereNull('deleted_at')],
-            'fecha_operacion' => 'required|date',
+            'fecha_operacion' => ($this->validaciones['fecha_operacion'] ?? false) ? 'required|date' : 'nullable|date',
             'operacion_id' => 'required',
-            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:100000000', Rule::unique('cargamentos', 'nro_ruta')->ignore($this->cargamento_id)->whereNull('deleted_at')],
-            'inspector_id' => 'required',
-            'cantidad_determinada' => 'required',
+            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::unique('cargamentos', 'nro_ruta')->ignore($this->cargamento_id)->whereNull('deleted_at')],
+            'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
+            'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
         ];
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+
+    // En tu componente de Livewire de Cargamento
+    public function updatedCantidadDeterminada($value)
+    {
+        if ($value === '') {
+            $this->cantidad_determinada = null;
+        }
     }
 
     public function update()
@@ -126,6 +135,10 @@ class Edit extends Component
             Storage::disk('public')->delete($this->ullage_final_existente);
         }
         else $ullage_final = $cargamento->ullage_final;
+
+        if (!$this->terminal_origen_id) {
+            $this->terminal_origen_id = null;
+        }
 
         $cargamento->update([
             'terminal_origen_id' => $this->terminal_origen_id,

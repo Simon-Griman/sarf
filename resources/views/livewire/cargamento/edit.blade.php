@@ -10,7 +10,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="terminal_origen_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminal de Origen<span class="text-red-500">*</span></label>
+                    <label for="terminal_origen_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminal de Origen
+                        @if($validaciones['terminal_origen'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="terminal_origen_id" name="terminal_origen_id" autocomplete="terminal_origen_id" wire:model.blur="terminal_origen_id" @blur="$wire.$refresh()">
                             <option value="">-- Seleccionar --</option>
@@ -22,7 +26,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="buque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Buque<span class="text-red-500">*</span></label>
+                    <label for="buque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Buque
+                        @if($validaciones['buque'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="buque" type="text" name="buque" autocomplete="buque" wire:model.blur="buque" @blur="$wire.$refresh()" />
                     </div>
@@ -36,7 +44,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="fecha_operacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Fecha Final de Operación<span class="text-red-500">*</span></label>
+                    <label for="fecha_operacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Fecha Final de Operación
+                        @if($validaciones['fecha_operacion'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="fecha_operacion" type="date" name="fecha_operacion" autocomplete="family-name" wire:model.blur="fecha_operacion" @blur="$wire.$refresh()" />
                     </div>
@@ -62,7 +74,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora</label>
+                    <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora
+                        @if($validaciones['inspector'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="inspector" name="inspector_id" autocomplete="inspector_id" wire:model.blur="inspector_id" @blur="$wire.$refresh()">
                             <option value="">-- Seleccionar --</option>

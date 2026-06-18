@@ -10,7 +10,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="terminal_origen_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminal de Origen<span class="text-red-500">*</span></label>
+                    <label for="terminal_origen_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminal de Origen
+                        @if($validaciones['terminal_origen'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="terminal_origen_id" name="terminal_origen_id" autocomplete="terminal_origen_id" wire:model.blur="terminal_origen_id" @blur="$wire.$refresh()">
                             <option value="">-- Seleccionar --</option>
@@ -22,21 +26,30 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="buque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Buque<span class="text-red-500">*</span></label>
+                    <label for="buque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Buque
+                        @if($validaciones['buque'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="buque" type="text" name="buque" autocomplete="buque" wire:model.blur="buque" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="nro_embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Numero de Embarque<span class="text-red-500">*</span></label>
+                    <label for="nro_embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Numero de Embarque<span class="text-red-500">*</span>
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="nro_embarque" type="number" name="nro_embarque" autocomplete="family-name" wire:model.blur="nro_embarque" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="fecha_operacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Fecha Final de Operación<span class="text-red-500">*</span></label>
+                    <label for="fecha_operacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Fecha Final de Operación
+                        @if($validaciones['fecha_operacion'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="fecha_operacion" type="date" name="fecha_operacion" autocomplete="family-name" wire:model.blur="fecha_operacion" @blur="$wire.$refresh()" />
                     </div>
@@ -62,7 +75,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora</label>
+                    <label for="inspector" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Compañía Inspectora
+                        @if($validaciones['inspector'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="inspector" name="inspector_id" autocomplete="inspector_id" wire:model.blur="inspector_id" @blur="$wire.$refresh()">
                             <option value="">-- Seleccionar --</option>
@@ -74,7 +91,11 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="cantidad_determinada" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Cantidad Determinada<span class="text-red-500">*</span></label>
+                    <label for="cantidad_determinada" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Cantidad Determinada
+                        @if($validaciones['cantidad_determinada'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="cantidad_determinada" name="cantidad_determinada" autocomplete="cantidad_determinada" wire:model.blur="cantidad_determinada" @blur="$wire.$refresh()">
                             <option value="">-- Seleccionar --</option>
@@ -90,56 +111,88 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación<span class="text-red-500">*</span></label>
+                    <label for="nominacion" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Nominación
+                        @if($validaciones['nominacion'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="nominacion" type="file" class="file:py-0.5 file:cursor-pointer file:bg-transparent file:border-none file:text-blue-400 file:hover:underline file:active:text-blue-500" name="nominacion" autocomplete="family-name" wire:model.blur="nominacion" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque<span class="text-red-500">*</span></label>
+                    <label for="embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Embarque
+                        @if($validaciones['embarque'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="embarque" type="file" name="embarque" autocomplete="family-name" wire:model.blur="embarque" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad<span class="text-red-500">*</span></label>
+                    <label for="cantidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Cantidad
+                        @if($validaciones['cantidad'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="cantidad" type="file" name="cantidad" autocomplete="family-name" wire:model.blur="cantidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad<span class="text-red-500">*</span></label>
+                    <label for="calidad" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Certificado de Calidad
+                        @if($validaciones['calidad'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="calidad" type="file" name="calidad" autocomplete="family-name" wire:model.blur="calidad" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo<span class="text-red-500">*</span></label>
+                    <label for="hoja_tiempo" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Hoja de Tiempo
+                        @if($validaciones['hoja_tiempo'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="hoja_tiempo" type="file" name="hoja_tiempo" autocomplete="family-name" wire:model.blur="hoja_tiempo" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="acta" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Acta</label>
+                    <label for="acta" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Acta
+                        @if($validaciones['acta'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="acta" type="file" name="acta" autocomplete="family-name" wire:model.blur="acta" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial<span class="text-red-500">*</span></label>
+                    <label for="ullage_inicial" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Inicial
+                        @if($validaciones['ullage_inicial'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_inicial" type="file" name="ullage_inicial" autocomplete="family-name" wire:model.blur="ullage_inicial" @blur="$wire.$refresh()" />
                     </div>
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final<span class="text-red-500">*</span></label>
+                    <label for="ullage_final" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Ullage Final
+                        @if($validaciones['ullage_final'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
                     <div class="mt-2">
                         <x-form-text-input id="ullage_final" type="file" name="ullage_final" autocomplete="family-name" wire:model.blur="ullage_final" @blur="$wire.$refresh()" />
                     </div>

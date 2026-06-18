@@ -3,6 +3,7 @@
 namespace App\Livewire\Cargamento;
 
 use App\Models\Cargamento;
+use App\Models\FormField;
 use App\Models\Inspector;
 use App\Models\Operacion;
 use App\Models\TerminalDestino;
@@ -15,29 +16,34 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final;
+    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final, $validaciones = [];
+
+    public function mount()
+    {
+        $this->validaciones = FormField::pluck('is_required', 'field_name')->toArray();
+    }
 
     public function rules()
     {
         return [
-            'terminal_origen_id' => 'required',
-            'buque' => 'required|max:45',
+            'terminal_origen_id' => ($this->validaciones['terminal_origen'] ?? false) ? 'required' : 'nullable',
+            'buque' => ($this->validaciones['buque'] ?? false) ? 'required|max:45' : 'nullable|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:9999999999999', Rule::unique('cargamentos', 'nro_embarque')->whereNull('deleted_at')],
-            'fecha_operacion' => 'required|date',
+            'fecha_operacion' => ($this->validaciones['fecha_operacion'] ?? false) ? 'required|date' : 'nullable|date',
             'operacion_id' => 'required',
             'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::unique('cargamentos', 'nro_ruta')->whereNull('deleted_at')],
-            'inspector_id' => 'required',
-            'cantidad_determinada' => 'required',
+            'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
+            'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
 
             //archivos
-            'nominacion' => 'required',
-            'embarque' => 'required',
-            'cantidad' => 'required',
-            'calidad' => 'required',
-            'hoja_tiempo' => 'required',
-            'acta' => 'nullable',
-            'ullage_inicial' => 'required',
-            'ullage_final' => 'required',
+            'nominacion' => ($this->validaciones['nominacion'] ?? false) ? 'required' : 'nullable',
+            'embarque' => ($this->validaciones['embarque'] ?? false) ? 'required' : 'nullable',
+            'cantidad' => ($this->validaciones['cantidad'] ?? false) ? 'required' : 'nullable',
+            'calidad' => ($this->validaciones['calidad'] ?? false) ? 'required' : 'nullable',
+            'hoja_tiempo' => ($this->validaciones['hoja_tiempo'] ?? false) ? 'required' : 'nullable',
+            'acta' => ($this->validaciones['acta'] ?? false) ? 'required' : 'nullable',
+            'ullage_inicial' => ($this->validaciones['ullage_inicial'] ?? false) ? 'required' : 'nullable',
+            'ullage_final' => ($this->validaciones['ullage_final'] ?? false) ? 'required' : 'nullable',
         ];
     }
 
@@ -46,22 +52,62 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
+    // En tu componente de Livewire de Cargamento
+    public function updatedCantidadDeterminada($value)
+    {
+        if ($value === '') {
+            $this->cantidad_determinada = null;
+        }
+    }
+
     public function save()
     {
         $this->validate();
 
-        $nominacion = $this->nominacion->store('images/nominacion', 'public');
-        $embarque = $this->embarque->store('images/embarque', 'public');
-        $cantidad = $this->cantidad->store('images/certificados/cantidad', 'public');
-        $calidad = $this->calidad->store('images/certificados/calidad', 'public');
-        $hoja_tiempo = $this->hoja_tiempo->store('images/hoja_tiempo', 'public');
+        if ($this->nominacion) {
+            $nominacion = $this->nominacion->store('images/nominacion', 'public');
+        } else {
+            $nominacion = null;
+        }
+        if ($this->embarque) {
+            $embarque = $this->embarque->store('images/embarque', 'public');
+        } else {
+            $embarque = null;
+        }
+        if ($this->cantidad) {
+            $cantidad = $this->cantidad->store('images/certificados/cantidad', 'public');
+        } else {
+            $cantidad = null;
+        }
+        if ($this->calidad) {
+            $calidad = $this->calidad->store('images/certificados/calidad', 'public');
+        } else {
+            $calidad = null;
+        }
+        if ($this->hoja_tiempo) {
+            $hoja_tiempo = $this->hoja_tiempo->store('images/hoja_tiempo', 'public');
+        } else {
+            $hoja_tiempo = null;
+        }
         if ($this->acta) {
             $acta = $this->acta->store('images/acta', 'public');
         } else {
             $acta = null;
         }
-        $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
-        $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
+        if ($this->ullage_inicial) {
+            $ullage_inicial = $this->ullage_inicial->store('images/ullage/inicial', 'public');
+        } else {
+            $ullage_inicial = null;
+        }
+        if ($this->ullage_final) {
+            $ullage_final = $this->ullage_final->store('images/ullage/final', 'public');
+        } else {
+            $ullage_final = null;
+        }
+
+        if (!$this->terminal_origen_id) {
+            $this->terminal_origen_id = null;
+        }
 
         Cargamento::create([
             'terminal_origen_id' => $this->terminal_origen_id,

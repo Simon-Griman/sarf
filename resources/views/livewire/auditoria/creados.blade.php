@@ -128,19 +128,19 @@
                                         <td>{{ $registro->producto->nombre }}</td>
                                         
                                         @elseif ($modelo == 'Cargamento')
-                                        <td>{{ $registro->terminalOrigen->nombre }}</td>
-                                        <td>{{ $registro->buque }}</td>
-                                        <td>{{ $registro->nro_embarque }}</td>
-                                        <td>{{ $registro->fecha_operacion }}</td>
-                                        <td>{{ $registro->nro_ruta }}</td>
-                                        <td>{{ $registro->operacion->nombre }}</td>
+                                        <td>{{ $registro->terminalOrigen->nombre ?? '' }}</td>
+                                        <td>{{ $registro->buque ?? '' }}</td>
+                                        <td>{{ $registro->nro_embarque ?? '' }}</td>
+                                        <td>{{ $registro->fecha_operacion ?? '' }}</td>
+                                        <td>{{ $registro->nro_ruta ?? '' }}</td>
+                                        <td>{{ $registro->operacion->nombre ?? '' }}</td>
 
                                         @elseif ($modelo == 'Parcela')
-                                        <td>{{ $registro->producto->nombre }}</td>
+                                        <td>{{ $registro->producto->nombre ?? '' }}</td>
                                         <td>
                                             @foreach ($registro->terminalDestinos as $destino)
                                                 <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-1 rounded">
-                                                    {{ $destino->nombre }}
+                                                    {{ $destino->nombre ?? '' }}
                                                 </span> 
                                             @endforeach
                                         </td>
@@ -149,7 +149,7 @@
                                         <td>{{ $registro->name }}</td>
                                         <td>{{ $registro->email }}</td>
                                         <td>{{ $registro->cedula }}</td>
-                                        <td>{{ $registro->terminalOrigen->nombre }}</td>
+                                        <td>{{ $registro->terminalOrigen->nombre ?? '' }}</td>
 
                                         @elseif ($modelo == 'Role')
                                         <td>{{ $registro->name }}</td>

@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             <tr>
-                <td><b>Terminal Origen:</b> {{ $parcela->cargamento->terminalOrigen->nombre }}</td>
+                <td><b>Terminal Origen:</b> {{ $parcela->cargamento->terminalOrigen->nombre ?? '' }}</td>
                 <td><b>Terminal Destino:</b> 
                     @foreach ($parcela->terminalDestinos as $destino)
                         {{ $destino->nombre }}@if (!$loop->last), @endif
@@ -210,7 +210,7 @@
             </tr>
         </thead>
         <tbody class="center">
-            @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Importación')
+            @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Exportación')
             <tr>
                 <td>OBQ: (CANTIDAD A BORDO)</td>
                 <td>{{ number_format(($parcela->OBQ), 0, ',', '.') }}</td>
@@ -252,7 +252,7 @@
                 <td></td>
             </tr>
 
-            @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Exportación')
+            @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Importación')
             <tr>
                 <td>ROB: (REMANENTE A BORDO)</td>
                 <td>{{ number_format(($parcela->ROB), 0, ',', '.') }}</td>

@@ -58,5 +58,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'producto'])->assignRole([$rolAdmin, $rolConfiguracion]);
 
         Permission::create(['name' => 'reset-pass'])->assignRole([$rolAdmin]);
+
+        Permission::create(['name' => 'validaciones'])->assignRole([$rolAdmin, $rolConfiguracion]);
     }
 }

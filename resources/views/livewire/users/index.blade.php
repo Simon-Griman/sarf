@@ -65,7 +65,7 @@
 
             <th class="pt-2">
                 @can('users.create')
-                <x-success-button wire:click="crearUsuario"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
+                <x-success-button wire:click="crearUsuario" @keydown.window="if ($event.key.toLowerCase() === 'n' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('users.create') }}' }"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
                 @endcan
             </th>
         </tr>

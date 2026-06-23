@@ -31,8 +31,8 @@
                 </button>
             </div>
 
-            <nav class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
-                <a href="{{ route('home') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('home') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+            <nav x-data="{}" class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+                <a href="{{ route('home') }}" @keydown.window="if ($event.key.toLowerCase() === 'i' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('home') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('home') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-home mr-3"></i> Inicio
                 </a>
 
@@ -43,13 +43,13 @@
                 @endcan
 
                 @can('cargamento.index')
-                <a href="{{ route('cargamento.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('cargamento.*') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('cargamento.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'c' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cargamento.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('cargamento.*') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-ship mr-3"></i> Cargamentos
                 </a>
                 @endcan
 
                 @can('users.index')
-                <a href="{{ route('users.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('users.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('users.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'u' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('users.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('users.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-users mr-3"></i> Usuarios
                 </a>
                 @endcan
@@ -72,26 +72,26 @@
                         class="mt-1 ml-4 border-l border-gray-200 dark:border-zinc-700 space-y-1">
 
                         @can('auditoria.sesiones')
-                        <a href="{{ route('sesiones') }}" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('sesiones') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                        <a href="{{ route('sesiones') }}" @keydown.window="if ($event.key.toLowerCase() === 's' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('sesiones') }}' }" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('sesiones') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Sesiones
                         </a>
                         @endcan
                         
                         @can('auditoria.creados')
-                        <a href="{{ route('creados') }}" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
-                            <i class="far fa-circle text-[8px] mr-3"></i> Registros Creados
+                        <a href="{{ route('creados') }}" @keydown.window="if ($event.key.toLowerCase() === 'a' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('creados') }}' }" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('creados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                            <i class="far fa-circle text-[8px] mr-3"></i> Registros Añadidos
                         </a>
                         @endcan
 
                         @can('auditoria.editados')
-                        <a href="{{ route('editados') }}" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('editados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                        <a href="{{ route('editados') }}" @keydown.window="if ($event.key.toLowerCase() === 'e' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('editados') }}' }" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('editados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                             <i class="far fa-circle text-[8px] mr-3"></i> Registros Editados
                         </a>
                         @endcan
 
                         @can('auditoria.eliminados')
-                        <a href="{{ route('eliminados') }}" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('eliminados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
-                            <i class="far fa-circle text-[8px] mr-3"></i> Registros Eliminados
+                        <a href="{{ route('eliminados') }}" @keydown.window="if ($event.key.toLowerCase() === 'b' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('eliminados') }}' }" class="p-2 pl-6 text-sm rounded-lg transition-all flex items-center dark:text-gray-400 {{ request()->routeIs('eliminados') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                            <i class="far fa-circle text-[8px] mr-3"></i> Registros Borrados
                         </a>
                         @endcan
                     </div>
@@ -99,19 +99,19 @@
                 @endif
 
                 @can('roles.index')
-                <a href="{{ route('roles.index') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('roles.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'r' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('roles.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-unlock mr-3"></i> Roles
                 </a>
                 @endcan
 
                 @can('cintillos.index')
-                <a href="{{ route('cintillos') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('cintillos') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('cintillos') }}" @keydown.window="if ($event.key.toLowerCase() === '1' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cintillos') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('cintillos') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-flag mr-3"></i> Cintillos
                 </a>
                 @endcan
 
                 @can('reset-pass')
-                <a href="{{ route('reset-pass') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('reset-pass') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('reset-pass') }}" @keydown.window="if ($event.key.toLowerCase() === '2' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('reset-pass') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('reset-pass') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-key mr-3"></i> Resetear Clave
                     @if (App\Models\User::whereNotNull('reset_password_sent_at')->count())
                     <span class="flex items-center justify-center w-6 h-6 text-xs font-bold rounded-md absolute right-5 {{ request()->routeIs('reset-pass') ? 'bg-white/20 text-white' : 'bg-amber-500 text-white' }}">
@@ -122,25 +122,25 @@
                 @endcan
 
                 @can('terminal.origen')
-                <a href="{{ route('origen') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('origen') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('origen') }}" @keydown.window="if ($event.key.toLowerCase() === '3' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('origen') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('origen') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-flag mr-3"></i> Terminal Origen
                 </a>
                 @endcan
 
                 @can('terminal.destino')
-                <a href="{{ route('destino') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('destino') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('destino') }}" @keydown.window="if ($event.key.toLowerCase() === '4' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('destino') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('destino') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-flag mr-3"></i> Terminal Destino
                 </a>
                 @endcan
 
                 @can('producto')
-                <a href="{{ route('producto') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('producto') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('producto') }}" @keydown.window="if ($event.key.toLowerCase() === '5' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('producto') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('producto') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-oil-well mr-3"></i> Productos
                 </a>
                 @endcan
 
                 @can('validaciones')
-                <a href="{{ route('validaciones') }}" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('validaciones') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('validaciones') }}" @keydown.window="if ($event.key.toLowerCase() === '6' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('validaciones') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('validaciones') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-check mr-3"></i> Validaciones
                 </a>
                 @endcan

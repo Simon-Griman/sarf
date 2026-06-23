@@ -163,8 +163,8 @@
             </div>
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6 px-6 pb-4">
-            <x-cancel-button href="{{ route('cargamento.index') }}" />
-            <x-primary-button>Guardar</x-primary-button>
+            <x-cancel-button href="{{ route('cargamento.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'escape' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cargamento.index') }}' }"/>
+            <x-primary-button @keydown.window.ctrl.enter.prevent="document.activeElement.blur(); $nextTick(() => $wire.update())">Guardar</x-primary-button>
         </div>
     </div>
 </form>

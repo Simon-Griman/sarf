@@ -4,7 +4,7 @@
     <x-swal-toast />
 
     <x-card>
-        <x-primary-button onclick="window.location.href='{{ route('roles.create') }}'" class="mb-4">Crear Rol</x-primary-button>
+        <x-primary-button onclick="window.location.href='{{ route('roles.create') }}'" @keydown.window="if ($event.key.toLowerCase() === 'n' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cargamento.create') }}' }" class="mb-4">Crear Rol</x-primary-button>
 
         <table class="min-w-full divide-y divide-gray-200 dark:divide-zinc-700">
             <thead>

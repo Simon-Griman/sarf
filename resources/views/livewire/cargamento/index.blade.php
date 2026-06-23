@@ -87,7 +87,7 @@
 
                 <th class="pt-2">
                     @can('cargamento.create')
-                    <x-success-button onclick="window.location.href='{{ route('cargamento.create') }}'"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
+                    <x-success-button onclick="window.location.href='{{ route('cargamento.create') }}'" @keydown.window="if ($event.key.toLowerCase() === 'n' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cargamento.create') }}' }"><i class="fas fa-user-plus pr-2"></i>Crear</x-success-button>
                     @endcan
                 </th>
             </tr>

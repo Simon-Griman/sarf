@@ -316,16 +316,16 @@
             <tr class="center">
                 <td>{{ number_format((round($parcela->TCV, 0)), 0, ',', '.') }}</td>
 
-                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Importación')
+                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Exportación')
                 <td>{{ number_format(($parcela->TRV_ajustado), 0, ',', '.') }}</td>
-                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Exportación')
+                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Importación')
                 <td>{{ number_format(($parcela->TDV_ajustado), 0, ',', '.') }}</td>
                 @endif
 
-                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Importación')
+                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Exportación')
                 <td>{{ number_format(($parcela->TRV_ajustado - $parcela->TCV), 0, ',', '.') }}</td>
                 <td>{{ number_format((($parcela->TRV_ajustado - $parcela->TCV) / $parcela->TCV) * 100, 2, ',', '.') }}</td>
-                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Exportación')
+                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Importación')
                 <td>{{ number_format(($parcela->TDV_ajustado - $parcela->TCV), 0, ',', '.') }}</td>
                 <td>{{ number_format(((($parcela->TDV_ajustado - $parcela->TCV) / $parcela->TCV) * 100), 2, ',', '.') }}</td>
                 @endif

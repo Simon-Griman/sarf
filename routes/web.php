@@ -95,6 +95,10 @@ Route::middleware('auth')->group(function () {
         return view('validaciones');
     })->name('validaciones')->middleware('permission:validaciones', 'check.new.user');
 
+    Route::get('/ruta', function() {
+        return view('ruta');
+    })->name('ruta')->middleware('permission:ruta', 'check.new.user');
+
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });
 

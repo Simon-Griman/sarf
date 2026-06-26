@@ -24,4 +24,9 @@ class TerminalDestino extends Model
     {
         return $this->belongsToMany(Cargamento::class);
     }
+
+    public function rutas(): belongsToMany
+    {
+        return $this->belongsToMany(TerminalDestino::class);
+    }
 }

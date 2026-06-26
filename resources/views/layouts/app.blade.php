@@ -42,6 +42,13 @@
                 </a>
                 @endcan
 
+                @can('ruta')
+                <a href="{{ route('ruta') }}" @keydown.window="if ($event.key.toLowerCase() === 'r' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('ruta') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('ruta') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                    <i class="fas fa-route mr-3"></i> Rutas
+                </a>
+                @endcan
+                
+
                 @can('cargamento.index')
                 <a href="{{ route('cargamento.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'c' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('cargamento.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('cargamento.*') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-ship mr-3"></i> Cargamentos
@@ -99,7 +106,7 @@
                 @endif
 
                 @can('roles.index')
-                <a href="{{ route('roles.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'r' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('roles.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
+                <a href="{{ route('roles.index') }}" @keydown.window="if ($event.key.toLowerCase() === 'p' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('roles.index') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('roles.*') ? 'bg-blue-500 dark:text-white text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-unlock mr-3"></i> Roles
                 </a>
                 @endcan

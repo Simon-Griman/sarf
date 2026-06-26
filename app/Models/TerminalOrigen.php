@@ -23,4 +23,9 @@ class TerminalOrigen extends Model
     {
         return $this->hasMany(Resumen::class);
     }
+
+    public function rutas(): HasMany
+    {
+        return $this->hasMany(Ruta::class);
+    }
 }

@@ -6,8 +6,8 @@ use App\Models\Cargamento;
 use App\Models\FormField;
 use App\Models\Inspector;
 use App\Models\Operacion;
+use App\Models\Ruta;
 use App\Models\TerminalDestino;
-use App\Models\TerminalOrigen;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -16,7 +16,7 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final, $validaciones = [];
+    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final, $validaciones = [];
 
     public function mount()
     {
@@ -26,12 +26,10 @@ class Create extends Component
     public function rules()
     {
         return [
-            'terminal_origen_id' => ($this->validaciones['terminal_origen'] ?? false) ? 'required' : 'nullable',
-            'buque' => ($this->validaciones['buque'] ?? false) ? 'required|max:45' : 'nullable|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:9999999999999', Rule::unique('cargamentos', 'nro_embarque')->whereNull('deleted_at')],
             'fecha_operacion' => ($this->validaciones['fecha_operacion'] ?? false) ? 'required|date' : 'nullable|date',
             'operacion_id' => 'required',
-            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::unique('cargamentos', 'nro_ruta')->whereNull('deleted_at')],
+            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', 'exists:rutas,nro_ruta'],
             'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
             'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
 
@@ -105,17 +103,13 @@ class Create extends Component
             $ullage_final = null;
         }
 
-        if (!$this->terminal_origen_id) {
-            $this->terminal_origen_id = null;
-        }
+        $ruta_id = Ruta::where('nro_ruta', $this->nro_ruta)->first()->id;
 
         Cargamento::create([
-            'terminal_origen_id' => $this->terminal_origen_id,
-            'buque' => $this->buque,
             'nro_embarque' => $this->nro_embarque,
             'fecha_operacion' => $this->fecha_operacion,
             'operacion_id' => $this->operacion_id,
-            'nro_ruta' => $this->nro_ruta,
+            'ruta_id' => $ruta_id,
             'inspector_id' => $this->inspector_id,
             'cantidad_determinada' => $this->cantidad_determinada,
 
@@ -134,11 +128,10 @@ class Create extends Component
 
     public function render()
     {
-        $origenes = TerminalOrigen::orderBy('nombre')->get();
         $destinos = TerminalDestino::orderBy('nombre')->get();
         $inspectores = Inspector::orderBy('nombre')->get();
         $operaciones = Operacion::orderBy('nombre')->get();
 
-        return view('livewire.cargamento.create', compact('origenes', 'destinos', 'inspectores', 'operaciones'));
+        return view('livewire.cargamento.create', compact('destinos', 'inspectores', 'operaciones'));
     }
 }

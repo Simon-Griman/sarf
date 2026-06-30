@@ -10,33 +10,6 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label for="terminal_origen_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminal de Origen
-                        @if($validaciones['terminal_origen'] ?? false)
-                        <span class="text-red-500">*</span>
-                        @endif
-                    </label>
-                    <div class="mt-2 grid grid-cols-1">
-                        <x-form-select id="terminal_origen_id" name="terminal_origen_id" autocomplete="terminal_origen_id" wire:model.blur="terminal_origen_id" @blur="$wire.$refresh()">
-                            <option value="">-- Seleccionar --</option>
-                            @foreach ($origenes as $origen)
-                                <option value="{{ $origen->id }}">{{ $origen->nombre }}</option>
-                            @endforeach
-                        </x-form-select>
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="buque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Buque
-                        @if($validaciones['buque'] ?? false)
-                        <span class="text-red-500">*</span>
-                        @endif
-                    </label>
-                    <div class="mt-2">
-                        <x-form-text-input id="buque" type="text" name="buque" autocomplete="buque" wire:model.blur="buque" @blur="$wire.$refresh()" />
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
                     <label for="nro_embarque" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Numero de Embarque<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="nro_embarque" type="number" name="nro_embarque" autocomplete="family-name" wire:model.blur="nro_embarque" @blur="$wire.$refresh()" />

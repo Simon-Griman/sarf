@@ -21,7 +21,7 @@ class Cargamento extends Model
         'buque',
         'nro_embarque',
         'fecha_operacion',
-        'nro_ruta',
+        'ruta_id',
         'operacion_id',
         'inspector_id',
         'cantidad_determinada',
@@ -53,5 +53,10 @@ class Cargamento extends Model
     public function inspector(): BelongsTo
     {
         return $this->belongsTo(Inspector::class);
+    }
+
+    public function ruta(): BelongsTo
+    {
+        return $this->belongsTo(Ruta::class);
     }
 }

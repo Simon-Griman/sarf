@@ -6,7 +6,7 @@ use App\Models\Cargamento;
 use App\Models\FormField;
 use App\Models\Inspector;
 use App\Models\Operacion;
-use App\Models\TerminalDestino;
+use App\Models\Ruta;
 use App\Models\TerminalOrigen;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -19,18 +19,16 @@ class Edit extends Component
 
     public $cargamento_id;
 
-    public $terminal_origen_id, $buque, $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion, $validaciones = [];
+    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion, $validaciones = [];
 
     public function mount()
     {
         $cargamento = Cargamento::find($this->cargamento_id);
 
-        $this->terminal_origen_id = $cargamento->terminal_origen_id;
-        $this->buque = $cargamento->buque;
         $this->nro_embarque = $cargamento->nro_embarque;
         $this->fecha_operacion = $cargamento->fecha_operacion;
         $this->operacion_id = $cargamento->operacion_id;
-        $this->nro_ruta = $cargamento->nro_ruta;
+        $this->nro_ruta = $cargamento->ruta->nro_ruta;
         $this->inspector_id = $cargamento->inspector_id;
         $this->cantidad_determinada = $cargamento->cantidad_determinada;
         $this->documento = $cargamento->documento;
@@ -50,12 +48,10 @@ class Edit extends Component
     public function rules()
     {
         return [
-            'terminal_origen_id' => ($this->validaciones['terminal_origen'] ?? false) ? 'required' : 'nullable',
-            'buque' => ($this->validaciones['buque'] ?? false) ? 'required|max:45' : 'nullable|max:45',
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:999999999999', Rule::unique('cargamentos', 'nro_embarque')->ignore($this->cargamento_id)->whereNull('deleted_at')],
             'fecha_operacion' => ($this->validaciones['fecha_operacion'] ?? false) ? 'required|date' : 'nullable|date',
             'operacion_id' => 'required',
-            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::unique('cargamentos', 'nro_ruta')->ignore($this->cargamento_id)->whereNull('deleted_at')],
+            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', 'exists:rutas,nro_ruta'],
             'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
             'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
         ];
@@ -136,16 +132,12 @@ class Edit extends Component
         }
         else $ullage_final = $cargamento->ullage_final;
 
-        if (!$this->terminal_origen_id) {
-            $this->terminal_origen_id = null;
-        }
+        $ruta_id = Ruta::where('nro_ruta', $this->nro_ruta)->first()->id;
 
         $cargamento->update([
-            'terminal_origen_id' => $this->terminal_origen_id,
-            'buque' => $this->buque,
             'nro_embarque' => $this->nro_embarque,
             'fecha_operacion' => $this->fecha_operacion,
-            'nro_ruta' => $this->nro_ruta,
+            'ruta_id' => $ruta_id,
             'operacion_id' => $this->operacion_id,
             'inspector_id' => $this->inspector_id,
             'cantidad_determinada' => $this->cantidad_determinada,

@@ -131,12 +131,12 @@
             <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200 text-gray-700 dark:text-gray-200">
                 
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    {{ $cargamento->terminalOrigen->nombre ?? 'Sin terminal' }}
+                    {{ $cargamento->ruta->terminalOrigen->nombre ?? 'Sin terminal' }}
                 </td>
 
                 @if($columns['buque'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    {{ $cargamento->buque ?? 'Sin buque' }}
+                    {{ $cargamento->ruta->buque ?? 'Sin buque' }}
                 </td>
                 @endif
 
@@ -148,7 +148,7 @@
 
                 @if($columns['nro_ruta'])
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
-                    {{ $cargamento->nro_ruta ?? 'Sin nro ruta' }}
+                    {{ $cargamento->ruta->nro_ruta ?? 'Sin nro ruta' }}
                 </td>
                 @endif
 

@@ -13,14 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cargamentos', function (Blueprint $table) {
-            
-            $table->dropUnique(['nro_ruta']);
 
-            $sql = 'ALTER TABLE cargamentos ADD UNIQUE INDEX cargamentos_nro_ruta_active_unique ((IF(deleted_at IS NULL, nro_ruta, NULL)))';
+            //$sql = 'ALTER TABLE cargamentos ADD UNIQUE INDEX cargamentos_ruta_id_active_unique ((IF(deleted_at IS NULL, ruta_id, NULL)))';
 
             $sql2 = 'ALTER TABLE cargamentos ADD UNIQUE INDEX cargamentos_nro_embarque_active_unique ((IF(deleted_at IS NULL, nro_embarque, NULL)))';
 
-            DB::statement($sql);
+            //DB::statement($sql);
             DB::statement($sql2);
         });
     }
@@ -32,9 +30,8 @@ return new class extends Migration
     {
         Schema::table('cargamentos', function (Blueprint $table) {
             
-            $table->dropIndex('cargamentos_nro_ruta_active_unique');
+            //$table->dropIndex('cargamentos_ruta_id_active_unique');
             $table->dropIndex('cargamentos_nro_embarque_active_unique');
-            $table->unique('nro_ruta');
         });
     }
 };

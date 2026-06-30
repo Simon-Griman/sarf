@@ -145,31 +145,49 @@ class Index extends Component
 
     public function render()
     {
-        $cargamentos = Cargamento::with(['terminalOrigen', 'operacion']);
+        $cargamentos = Cargamento::with(['ruta.terminalOrigen', 'operacion']);
+
+        // 1. Definimos qué filtros pertenecen a la relación 'ruta'
+        $filtrosRuta = ['terminal_origen_id', 'buque', 'nro_ruta'];
 
         foreach ($this->filters as $column => $value)
         {
             if (!empty($value) && !in_array($column, ['fecha_inicio', 'fecha_fin']))
             {
-                if (str_ends_with($column, '_id')) {
-                    $cargamentos->where($column, $value);
+                // Determinar si el filtro es por coincidencia exacta o LIKE
+                $isId = str_ends_with($column, '_id');
+
+                // 2. Si el campo pertenece a la ruta, filtramos a través de la relación
+                if (in_array($column, $filtrosRuta)) {
+                    $cargamentos->whereHas('ruta', function ($query) use ($column, $value, $isId) {
+                        if ($isId) {
+                            $query->where($column, $value);
+                        } else {
+                            $query->where($column, 'like', '%' . $value . '%');
+                        }
+                    });
                 } 
+                // 3. Si pertenece a la tabla Cargamento, se queda como estaba
                 else {
-                    $cargamentos->where($column, 'like', '%' . $value . '%');
+                    if ($isId) {
+                        $cargamentos->where($column, $value);
+                    } else {
+                        $cargamentos->where($column, 'like', '%' . $value . '%');
+                    }
                 }
             }
         }
 
         // 1. Si el usuario llenó AMBOS campos de fecha
         if (!empty($this->filters['fecha_inicio']) && !empty($this->filters['fecha_fin'])) {
-            $cargamentos->whereBetween('Cargamentos.created_at', [
+            $cargamentos->whereBetween('cargamentos.created_at', [
                 $this->filters['fecha_inicio'] . ' 00:00:00', // Desde el primer segundo del inicio
                 $this->filters['fecha_fin'] . ' 23:59:59'    // Hasta el último segundo del fin
             ]);
         } 
         // 2. Si solo llenó la fecha de inicio, filtramos ese día exacto
         elseif (!empty($this->filters['fecha_inicio'])) {
-            $cargamentos->whereDate('Cargamentos.created_at', $this->filters['fecha_inicio']);
+            $cargamentos->whereDate('cargamentos.created_at', $this->filters['fecha_inicio']);
         }
 
         $cargamentos = $cargamentos->latest()->paginate($this->paginate);

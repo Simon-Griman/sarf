@@ -63,21 +63,6 @@
                     </div>
                 </div>
 
-                <div class="sm:col-span-2">
-                    <label for="cantidad_determinada" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Cantidad Determinada
-                        @if($validaciones['cantidad_determinada'] ?? false)
-                        <span class="text-red-500">*</span>
-                        @endif
-                    </label>
-                    <div class="mt-2 grid grid-cols-1">
-                        <x-form-select id="cantidad_determinada" name="cantidad_determinada" autocomplete="cantidad_determinada" wire:model.blur="cantidad_determinada" @blur="$wire.$refresh()">
-                            <option value="">-- Seleccionar --</option>
-                            <option value="Tanque de Tierra">Tanque de Tierra</option>
-                            <option value="Cifras Buque">Cifras Buque</option>
-                        </x-form-select>
-                    </div>
-                </div>
-
                 <div class="sm:col-span-6 text-center">
                     <hr class="mb-4">
                     <h2 class="">Documentos</h2>

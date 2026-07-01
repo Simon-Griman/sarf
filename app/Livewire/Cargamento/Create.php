@@ -16,7 +16,7 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final, $validaciones = [];
+    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $documento, $nominacion, $embarque, $cantidad, $calidad, $hoja_tiempo, $acta, $ullage_inicial, $ullage_final, $validaciones = [];
 
     public function mount()
     {
@@ -31,7 +31,6 @@ class Create extends Component
             'operacion_id' => 'required',
             'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', 'exists:rutas,nro_ruta'],
             'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
-            'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
 
             //archivos
             'nominacion' => ($this->validaciones['nominacion'] ?? false) ? 'required' : 'nullable',
@@ -48,14 +47,6 @@ class Create extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    // En tu componente de Livewire de Cargamento
-    public function updatedCantidadDeterminada($value)
-    {
-        if ($value === '') {
-            $this->cantidad_determinada = null;
-        }
     }
 
     public function save()
@@ -111,7 +102,6 @@ class Create extends Component
             'operacion_id' => $this->operacion_id,
             'ruta_id' => $ruta_id,
             'inspector_id' => $this->inspector_id,
-            'cantidad_determinada' => $this->cantidad_determinada,
 
             'nominacion' => $nominacion,
             'embarque' => $embarque,

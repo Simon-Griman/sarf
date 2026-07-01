@@ -9,7 +9,7 @@
                     <h2 class="">Resumen de la Parcela</h2>
                 </div>
 
-                <div class="sm:col-span-2">
+                <div class="sm:col-span-3">
                     <label for="producto_id" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Producto<span class="text-red-500">*</span></label>
                     <div class="mt-2 grid grid-cols-1">
                         <x-form-select id="producto_id" name="producto_id" autocomplete="producto_id" wire:model.blur="producto_id" @blur="$wire.$refresh()">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="sm:col-span-2" x-data="{ open: false }">
+                <div class="sm:col-span-3" x-data="{ open: false }">
                     <label class="block text-sm/6 font-medium text-gray-800 dark:text-white">Terminales de Destino<span class="text-red-500">*</span></label>
                     
                     <div class="relative mt-2" @click.away="open = false">
@@ -71,10 +71,25 @@
                     @error('terminales_destinos_ids') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                 </div>
 
-                <div class="sm:col-span-2">
+                <div class="sm:col-span-3">
                     <label for="volumen" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Volumen<span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <x-form-text-input id="volumen" type="number" name="volumen" autocomplete="family-name" wire:model.blur="volumen" @blur="$wire.$refresh()" />
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="cantidad_determinada" class="block text-sm/6 font-medium text-gray-800 dark:text-white">Cantidad Determinada
+                        @if($validaciones['cantidad_determinada'] ?? false)
+                        <span class="text-red-500">*</span>
+                        @endif
+                    </label>
+                    <div class="mt-2 grid grid-cols-1">
+                        <x-form-select id="cantidad_determinada" name="cantidad_determinada" autocomplete="cantidad_determinada" wire:model.blur="cantidad_determinada" @blur="$wire.$refresh()">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="Tanque de Tierra">Tanque de Tierra</option>
+                            <option value="Cifras Buque">Cifras Buque</option>
+                        </x-form-select>
                     </div>
                 </div>
 

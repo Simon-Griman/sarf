@@ -19,27 +19,27 @@
         </thead>
         <tbody>
             <tr>
-                <td><b>Terminal Origen:</b> {{ $parcela->cargamento->terminalOrigen->nombre ?? '' }}</td>
+                <td><b>Terminal Origen:</b> {{ $parcela->cargamento->ruta->terminalOrigen->nombre ?? '' }}</td>
                 <td><b>Terminal Destino:</b> 
-                    @foreach ($parcela->terminalDestinos as $destino)
+                    @foreach ($parcela->cargamento->ruta->terminalDestinos as $destino)
                         {{ $destino->nombre }}@if (!$loop->last), @endif
                     @endforeach
                 </td>
-                <td><b>Buque:</b> {{ $parcela->cargamento->buque }}</td>
+                <td><b>Buque:</b> {{ $parcela->cargamento->ruta->buque ?? '' }}</td>
             </tr>
             <tr>
                 <td><b>Nro Embarque:</b> {{ $parcela->cargamento->nro_embarque }}</td>
-                <td><b>Fecha de Operación:</b> {{ \Carbon\Carbon::parse($parcela->cargamento->fecha_operacion)->format('d/m/Y') }}</td>
-                <td><b>Nro Ruta:</b> {{ $parcela->cargamento->nro_ruta }}</td>
+                <td><b>Fecha de Operación:</b> {{ \Carbon\Carbon::parse($parcela->cargamento->fecha_operacion)->format('d/m/Y') ?? '' }}</td>
+                <td><b>Nro Ruta:</b> {{ $parcela->cargamento->ruta->nro_ruta }}</td>
             </tr>
             <tr>
                 <td><b>Tipo de Operación:</b> {{ $parcela->cargamento->operacion->nombre }}</td>
-                <td><b>Hidrocarburo:</b> {{ $parcela->producto->nombre }}</td>
+                <td><b>Hidrocarburo:</b> {{ $parcela->producto->nombre ?? '' }}</td>
                 <td><b>Volumen Nominal:</b> {{ number_format(($parcela->volumen), 0, ',', '.') }}</td>
             </tr>
             <tr>
                 <td><b>Compañía Inspectora:</b> SAMH</td>
-                <td><b>Cantidad Determinada:</b> {{ $parcela->cargamento->cantidad_determinada }}</td>
+                <td><b>Cantidad Determinada:</b> {{ $parcela->cantidad_determinada }}</td>
                 <td><b>Tipo de Documento:</b> Definitivo</td>
             </tr>
         </tbody>
@@ -190,7 +190,7 @@
         </thead>
         <tbody>
             <tr class="center">
-                <td>{{ $parcela->producto->nombre }}</td>
+                <td>{{ $parcela->producto->nombre ?? '' }}</td>
                 <td>{{ number_format(($parcela->temp), 1, ',', '.') }}</td>
                 <td>{{ number_format(($parcela->API), 1, ',', '.') }}</td>
                 <td>{{ number_format(($parcela->azufre), 2, ',', '.') }}</td>
@@ -303,9 +303,9 @@
         <thead>
             <tr>
                 <th>TCV (TIERRA)</th>
-                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Importación')
+                @if($parcela->cargamento->operacion->nombre == 'Carga' || $parcela->cargamento->operacion->nombre == 'Exportación')
                 <th>TRV AJUSTADO (BUQUE)</th>
-                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Exportación')
+                @elseif($parcela->cargamento->operacion->nombre == 'Descarga' || $parcela->cargamento->operacion->nombre == 'Importación')
                 <th>TDV AJUSTADO (BUQUE)</th>
                 @endif
                 <th>DIFERENCIA (BBL)</th>

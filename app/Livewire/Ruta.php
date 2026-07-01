@@ -22,12 +22,17 @@ class Ruta extends Component
                 'required',
                 'integer',
                 'max:9999999',
-                'min:100',
+                'min:10000',
                 $this->is_update 
                     ? 'unique:rutas,nro_ruta,' . $this->ruta_id 
                     : 'unique:rutas,nro_ruta'
             ],
         ];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 
     public function save()
@@ -103,6 +108,11 @@ class Ruta extends Component
 
         // Sincronizamos las terminales de destino
         $rutaActualizar->terminalDestinos()->sync($this->terminal_destinos_ids);
+
+        $this->buque = '';
+        $this->nro_ruta = '';
+        $this->terminal_origen_id = '';
+        $this->terminal_destinos_ids = [];
 
         $this->dispatch('notify', 
             message: 'Ruta actualizada correctamente', 

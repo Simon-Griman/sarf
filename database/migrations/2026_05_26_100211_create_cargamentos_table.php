@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('ruta_id')->constrained()->onDelete('cascade');
             $table->foreignId('operacion_id')->constrained()->onDelete('cascade');
             $table->foreignId('inspector_id')->nullable()->constrained()->onDelete('cascade');
-            $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque'])->nullable();
 
             //documentos
             $table->string('nominacion')->nullable();

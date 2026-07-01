@@ -22,6 +22,7 @@
                     </div>
                 </th>
 
+                @if($columns['id'])<th></th>@endif
                 @if($columns['buque'])<th></th>@endif
                 @if($columns['nro_embarque'])<th></th>@endif
                 @if($columns['nro_ruta'])<th></th>@endif
@@ -40,6 +41,10 @@
             </tr>
 
             <tr>
+                @if($columns['id'])
+                <th class="text-left pr-2"></th>
+                @endif
+
                 <th class="text-left px-2">
                     <x-index-select wire:model.live.debounce.300ms="filters.terminal_origen_id">
                         <option value="">Todo</option>
@@ -93,6 +98,10 @@
             </tr>
 
             <tr class="text-gray-900 dark:text-gray-100">
+                @if($columns['id'])
+                <th class="px-4 py-3.5 text-sm font-medium text-left">ID</th>
+                @endif
+
                 <th class="px-4 py-3.5 text-sm font-medium text-left">Origen</th>
 
                 @if($columns['buque'])
@@ -129,6 +138,12 @@
 
         @foreach ($cargamentos as $cargamento)
             <tr class="hover:bg-gray-100 dark:hover:bg-zinc-700/50 transition-colors duration-200 text-gray-700 dark:text-gray-200">
+
+                @if($columns['id'])
+                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                    {{ $cargamento->id }}
+                </td>
+                @endif
                 
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                     {{ $cargamento->ruta->terminalOrigen->nombre ?? 'Sin terminal' }}
@@ -314,7 +329,7 @@
                                     <tbody class="divide-y divide-zinc-700">
                                     @foreach ($parcelas as $parcela)
                                         <tr class="hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
-                                            <td class="py-2">{{ $parcela->producto->nombre }}</td>
+                                            <td class="py-2">{{ $parcela->producto->nombre ?? ''}}</td>
                                             <td class="whitespace-nowrap">
                                                 @foreach ($parcela->terminalDestinos as $terminal)
                                                     <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-1 rounded">

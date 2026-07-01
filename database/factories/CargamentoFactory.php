@@ -28,7 +28,6 @@ class CargamentoFactory extends Factory
             'ruta_id' => fake()->randomElement($ruta),
             'operacion_id' => $operacion_id->id,
             'inspector_id' => fake()->randomElement($inspector),
-            'cantidad_determinada' => fake()->randomElement(['Tanque de Tierra', 'Cifras Buque']),
         ];
     }
 }

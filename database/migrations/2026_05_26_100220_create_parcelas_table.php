@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('cargamento_id')->constrained()->onDelete('cascade');
-            $table->foreignId('producto_id')->constrained()->onDelete('cascade');
-            $table->integer('volumen');
+            $table->foreignId('producto_id')->nullable()->constrained()->onDelete('cascade');
+            $table->integer('volumen')->nullable();
+            $table->enum('cantidad_determinada', ['Tanque de Tierra', 'Cifras Buque'])->nullable();
 
             //datos tierra
             $table->decimal('TOV', 8, 2);

@@ -3,6 +3,7 @@
 namespace App\Livewire\Parcela;
 
 use App\Models\Cargamento;
+use App\Models\FormField;
 use App\Models\Producto;
 use App\Models\TerminalDestino;
 use Illuminate\Support\Str;
@@ -12,9 +13,10 @@ class Create extends Component
 {
     public $cargamentoId;
 
-    public $producto_id, $volumen, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $tipo_operacion;
+    public $producto_id, $volumen, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $tipo_operacion, $cantidad_determinada, $validaciones = [];
 
     public $terminales_destinos_ids = [];
+    public $rutas_destinos = [];
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -25,42 +27,49 @@ class Create extends Component
     public function mount()
     {
         $this->tipo_operacion = Str::slug(Cargamento::find($this->cargamentoId)->operacion->nombre);
+
+        $terminales_cargamento = Cargamento::find($this->cargamentoId)->ruta->terminalDestinos;
+
+        $this->rutas_destinos = $terminales_cargamento->pluck('id')->toArray();
+
+        $this->validaciones = FormField::pluck('is_required', 'field_name')->toArray();
     }
 
     public function rules()
     {
         return [
-            'producto_id' => 'required',
-            'terminales_destinos_ids' => 'required',
-            'volumen' => 'required|integer|max:999999999999|min:100',
-            'TOV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'GOV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'GSV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'NSV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'TCV' => 'required|decimal:2|max:999999.99|min:1.00',
-            'sediment_water' => 'required|decimal:2|max:9999.99|min:0.00',
-            'free_water' => 'required|decimal:2|max:9999.99|min:0.00',
-            'agua_sedimento' => 'required|decimal:3|max:999.999|min:0.000',
-            'temp' => 'required|decimal:1|max:9999|min:0.0',
-            'API' => 'required|decimal:1|max:9999|min:0.0',
-            'azufre' => 'required|decimal:2|max:999999.99|min:0.00',
+            'producto_id' => ($this->validaciones['producto'] ?? false) ? 'required' : 'nullable',
+            'terminales_destinos_ids' => ($this->validaciones['terminal_destino'] ?? false) ? 'required' : 'nullable',
+            'volumen' => [($this->validaciones['volumen'] ?? false) ? 'required' : 'nullable', 'integer', 'max:999999999', 'min:100'],
+            'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
 
-            'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'TCV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'GSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'NSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'TRV' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
-            'TRV_ajustado' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:999999'],
+            'TOV' => 'required|decimal:2|max:9999999.99|min:1.00',
+            'GOV' => 'required|decimal:2|max:9999999.99|min:1.00',
+            'GSV' => 'required|decimal:2|max:9999999.99|min:1.00',
+            'NSV' => 'required|decimal:2|max:9999999.99|min:1.00',
+            'TCV' => 'required|decimal:2|max:9999999.99|min:1.00',
+            'sediment_water' => 'required|decimal:2|max:999999.99|min:0.00',
+            'free_water' => 'required|decimal:2|max:999999.99|min:0.00',
+            'agua_sedimento' => 'required|decimal:3|max:9.999|min:0.000',
+            'temp' => 'required|decimal:1|max:999.9|min:-999.9',
+            'API' => 'required|decimal:1|max:999.9|min:0.0',
+            'azufre' => 'required|decimal:2|max:9.99|min:0.00',
 
-            'ROB' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'ROB_agua' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'TCV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'GSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'NSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'TDV' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'TDV_ajustado' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:999999'],
-            'VEF' => 'required|decimal:4|max:10.0000|min:0.0001',
+            'OBQ' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'OBQ_agua' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'TCV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'GSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'NSV_carga' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'TRV' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'TRV_ajustado' => ['nullable', 'required_if:tipo_operacion,carga,exportacion', 'decimal:2', 'max:9999999.99'],
+            'ROB' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'ROB_agua' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'TCV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'GSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'NSV_descarga' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'TDV' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'TDV_ajustado' => ['nullable', 'required_if:tipo_operacion,descarga,importacion', 'decimal:2', 'max:9999999.99'],
+            'VEF' => 'required|decimal:4|max:9.9999|min:0.0001',
         ];
     }
 
@@ -69,17 +78,21 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
-
-
     public function save()
     {
         $this->validate();
+
+        if ($this->producto_id == '') $this->producto_id = null;
+        if ($this->volumen == '') $this->volumen = null;
+        if ($this->cantidad_determinada == '') $this->cantidad_determinada = null;
 
         $cargamento = Cargamento::find($this->cargamentoId);
 
         $cargamento->parcelas()->create([
             'producto_id' => $this->producto_id,
             'volumen' => $this->volumen,
+            'cantidad_determinada' => $this->cantidad_determinada,
+
             'TOV' => $this->TOV,
             'GOV' => $this->GOV,
             'GSV' => $this->GSV,
@@ -117,7 +130,7 @@ class Create extends Component
     public function render()
     {
         $productos = Producto::orderBy('nombre')->get();
-        $destinos = TerminalDestino::orderBy('nombre')->get();
+        $destinos = TerminalDestino::orderBy('nombre')->whereIn('id', $this->rutas_destinos)->get();
 
         return view('livewire.parcela.create', compact('productos', 'destinos'));
     }

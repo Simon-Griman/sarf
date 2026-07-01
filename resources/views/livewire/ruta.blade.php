@@ -3,17 +3,17 @@
         <form wire:submit.prevent="@if($is_update) update @else save @endif">
             <div class="form-group mb-6">
                 <label for="nro_ruta" class="block font-medium text-gray-800 dark:text-white">Número de Ruta:<span class="text-red-500">*</span></label>
-                <x-form-text-input type="number" id="nro_ruta" name="nro_ruta" wire:model="nro_ruta" class="form-control w-full mt-2" />
+                <x-form-text-input type="number" id="nro_ruta" name="nro_ruta" wire:model.blur="nro_ruta" class="form-control w-full mt-2" @blur="$wire.$refresh()" />
             </div>
 
             <div class="form-group mb-6">
                 <label for="buque" class="block font-medium text-gray-800 dark:text-white">Buque:<span class="text-red-500">*</span></label>
-                <x-form-text-input type="text" id="buque" name="buque" wire:model="buque" class="form-control w-full mt-2" />
+                <x-form-text-input type="text" id="buque" name="buque" wire:model.blur="buque" class="form-control w-full mt-2" @blur="$wire.$refresh()" />
             </div>
 
             <div class="form-group mb-6">
                 <label for="terminal_origen_id" class="block font-medium text-gray-800 dark:text-white">Terminal de Origen:<span class="text-red-500">*</span></label>
-                <x-form-select id="terminal_origen_id" name="terminal_origen_id" wire:model="terminal_origen_id" class="form-control w-full mt-2">
+                <x-form-select id="terminal_origen_id" name="terminal_origen_id" wire:model.blur="terminal_origen_id" class="form-control w-full mt-2" @blur="$wire.$refresh()">
                     <option value="">-- Seleccionar --</option>
                     @foreach($origenes as $origen)
                         <option value="{{ $origen->id }}">{{ $origen->nombre }}</option>

@@ -36,6 +36,7 @@ class Index extends Component
     ];
 
     public $columns = [
+        'id' => false,
         //'origen' => true,
         'buque' => true,
         'nro_embarque' => true,

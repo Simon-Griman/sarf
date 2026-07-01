@@ -23,7 +23,7 @@ class Edit extends Component
 
     public function mount()
     {
-        $cargamento = Cargamento::find($this->cargamento_id);
+        $cargamento = Cargamento::findOrFail($this->cargamento_id);
 
         $this->nro_embarque = $cargamento->nro_embarque;
         $this->fecha_operacion = $cargamento->fecha_operacion;

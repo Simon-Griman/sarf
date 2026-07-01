@@ -19,6 +19,7 @@ class Parcela extends Model
         'cargamento_id',
         'producto_id',
         'volumen',
+        'cantidad_determinada',
         'TOV',
         'GOV',
         'GSV',

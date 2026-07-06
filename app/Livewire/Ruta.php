@@ -123,6 +123,24 @@ class Ruta extends Component
 
     public function confirmDelete($id)
     {
+        if (!ModelsRuta::find($id)) {
+            $this->dispatch('notify', 
+                message: 'La ruta que intentas eliminar no existe.', 
+                icon: 'error',
+                title: '¡Error!'
+            );
+            return;
+        }
+
+        if (ModelsRuta::find($id)->cargamentos()->count() > 0) {
+            $this->dispatch('notify',
+                message: 'No se puede eliminar la ruta porque tiene cargamentos asociados.',
+                icon: 'error',
+                title: '¡Error!'
+            );
+            return;
+        }
+
         $this->ruta_id_delete = $id;
         // Desparamos un evento del navegador para que Alpine abra el modal
         $this->dispatch('open-modal', name: 'delete-route-modal');

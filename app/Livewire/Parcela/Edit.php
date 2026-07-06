@@ -16,6 +16,7 @@ class Edit extends Component
     public $producto_id, $volumen, $TOV, $GOV, $GSV, $NSV, $TCV, $sediment_water, $free_water, $agua_sedimento, $azufre, $temp, $API, $VEF, $tipo_operacion, $cantidad_determinada;
 
     public $terminales_destinos_ids = [];
+    public $rutas_destinos = [];
 
     //carga
     public $OBQ, $OBQ_agua, $TCV_carga, $GSV_carga, $NSV_carga, $TRV, $TRV_ajustado;
@@ -26,6 +27,9 @@ class Edit extends Component
     public function mount()
     {
         $parcela = Parcela::findOrFail($this->parcelaId);
+
+        $terminales_cargamento = $parcela->cargamento->ruta->terminalDestinos;
+        $this->rutas_destinos = $terminales_cargamento->pluck('id')->toArray();
 
         $this->tipo_operacion = Str::slug($parcela->cargamento->operacion->nombre);
 
@@ -159,7 +163,7 @@ class Edit extends Component
     public function render()
     {
         $productos = Producto::orderBy('nombre')->get();
-        $destinos = TerminalDestino::orderBy('nombre')->get();
+        $destinos = TerminalDestino::orderBy('nombre')->whereIn('id', $this->rutas_destinos)->get();
 
         return view('livewire.parcela.edit', compact('productos', 'destinos'));
     }

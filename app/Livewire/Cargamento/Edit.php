@@ -19,7 +19,7 @@ class Edit extends Component
 
     public $cargamento_id;
 
-    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $cantidad_determinada, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion, $validaciones = [];
+    public $nro_embarque, $fecha_operacion, $operacion_id, $nro_ruta, $inspector_id, $documento, $nominacion, $nominacion_existente, $embarque, $embarque_existente, $cantidad, $cantidad_existente, $calidad, $calidad_existente, $hoja_tiempo, $hoja_tiempo_existente, $acta, $acta_existente, $ullage_inicial, $ullage_inicial_existente, $ullage_final, $ullage_final_existente, $tipo_operacion, $validaciones = [];
 
     public function mount()
     {
@@ -30,7 +30,6 @@ class Edit extends Component
         $this->operacion_id = $cargamento->operacion_id;
         $this->nro_ruta = $cargamento->ruta->nro_ruta;
         $this->inspector_id = $cargamento->inspector_id;
-        $this->cantidad_determinada = $cargamento->cantidad_determinada;
         $this->documento = $cargamento->documento;
 
         $this->nominacion_existente = $cargamento->nominacion;
@@ -53,21 +52,12 @@ class Edit extends Component
             'operacion_id' => 'required',
             'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', 'exists:rutas,nro_ruta'],
             'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
-            'cantidad_determinada' => ($this->validaciones['cantidad_determinada'] ?? false) ? 'required' : 'nullable',
         ];
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    // En tu componente de Livewire de Cargamento
-    public function updatedCantidadDeterminada($value)
-    {
-        if ($value === '') {
-            $this->cantidad_determinada = null;
-        }
     }
 
     public function update()
@@ -140,7 +130,6 @@ class Edit extends Component
             'ruta_id' => $ruta_id,
             'operacion_id' => $this->operacion_id,
             'inspector_id' => $this->inspector_id,
-            'cantidad_determinada' => $this->cantidad_determinada,
 
             'nominacion' => $nominacion,
             'embarque' => $embarque,

@@ -50,7 +50,7 @@ class Edit extends Component
             'nro_embarque' => ['required', 'integer', 'min:100000', 'max:999999999999', Rule::unique('cargamentos', 'nro_embarque')->ignore($this->cargamento_id)->whereNull('deleted_at')],
             'fecha_operacion' => ($this->validaciones['fecha_operacion'] ?? false) ? 'required|date' : 'nullable|date',
             'operacion_id' => 'required',
-            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', 'exists:rutas,nro_ruta'],
+            'nro_ruta' => ['required', 'integer', 'min:10000', 'max:1000000000', Rule::exists('rutas', 'nro_ruta')->whereNull('deleted_at')],
             'inspector_id' => ($this->validaciones['inspector'] ?? false) ? 'required' : 'nullable',
         ];
     }

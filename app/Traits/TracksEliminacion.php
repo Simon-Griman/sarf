@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\RegistrosEliminados;
 use App\Models\RespaldoBorrados;
 use App\Models\Role;
+use App\Models\Ruta;
 use Illuminate\Support\Facades\Auth;
 
 trait TracksEliminacion

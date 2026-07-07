@@ -4,12 +4,14 @@ namespace App\Livewire\Auditoria;
 
 use App\Models\RegistrosEditados;
 use App\Models\RespaldoEditados;
-use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Editados extends Component
 {
+    use WithPagination;
+    
     public $nombre, $tabla, $registro_id, $fecha_hora, $modelo, $modalOpen=false, $batch;
 
     public function mount()

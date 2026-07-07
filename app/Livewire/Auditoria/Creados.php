@@ -8,12 +8,16 @@ use App\Models\Parcela;
 use App\Models\RegistrosCreados;
 use App\Models\Resumen;
 use App\Models\Role;
+use App\Models\Ruta;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Creados extends Component
 {
+    use WithPagination;
+
     public $nombre, $tabla, $registro_id, $fecha_hora, $registro, $modalOpen=false, $modelo;
 
     public function mount()
@@ -26,6 +30,8 @@ class Creados extends Component
         $this->modelo = $tabla;
 
         if ($tabla == 'Resumen') $this->registro = Resumen::find($id);
+
+        elseif ($tabla == 'Ruta') $this->registro = Ruta::find($id);
 
         elseif ($tabla == 'Cargamento') $this->registro = Cargamento::find($id);
 

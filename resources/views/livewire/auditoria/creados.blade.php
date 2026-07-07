@@ -64,11 +64,19 @@
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                     @click.away="open = false" 
-                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full dark:bg-zinc-800 max-h-[90vh]" :class="$wire.modelo === 'Resumen' || $wire.modelo === 'Cargamento' || $wire.modelo === 'Cintillo' ? 'sm:max-w-4xl' : ($wire.modelo === 'User' || $wire.modelo === 'Parcela' ? 'sm:max-w-2xl' : 'sm:max-w-xs')">
+                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full dark:bg-zinc-800 max-h-[90vh]" :class="$wire.modelo === 'Resumen' || $wire.modelo === 'Cargamento' || $wire.modelo === 'Cintillo' ? 'sm:max-w-4xl' : ($wire.modelo === 'User' || $wire.modelo === 'Parcela' || $wire.modelo === 'Ruta' ? 'sm:max-w-2xl' : 'sm:max-w-xs')">
                     
                     <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
-                            {{ $this->modelo == 'Resumen' ? 'Detalles del Resumen' : ($this->modelo == 'User' ? 'Detalles del Usuario' : ($this->modelo === 'Role' ? 'Detalles del Rol' : ($this->modelo === 'Cargamento' ? 'Detalles del Cargamento' : ($this->modelo === 'Parcela' ? 'Detalles de la Parcela' : 'Detalles del Cintillo')))) }}
+                            {{ match($this->modelo) {
+                                'Resumen' => 'Detalles del Resumen',
+                                'User' => 'Detalles del Usuario',
+                                'Role' => 'Detalles del Rol',
+                                'Cargamento' => 'Detalles del Cargamento',
+                                'Parcela' => 'Detalles de la Parcela',
+                                'Ruta' => 'Detalles de la Ruta',
+                                default => 'Detalles del Cintillo',
+                            } }}
                         </h2>
                     </div>
 
@@ -87,6 +95,12 @@
                                         <th class="text-left">Nro. Viaje</th>
                                         <th class="text-left">Operación</th>
                                         <th class="text-left">Producto</th>
+
+                                        @elseif ($modelo == 'Ruta')
+                                        <th class="py-2 text-left">Origen</th>
+                                        <th class="text-left">Destino</th>
+                                        <th class="text-left">Buque</th>
+                                        <th class="text-left">Nro. Ruta</th>
 
                                         @elseif ($modelo == 'Cargamento')
                                         <th class="py-2 text-left">Origen</th>
@@ -126,13 +140,25 @@
                                         <td>{{ $registro->nro_viaje }}</td>
                                         <td>{{ $registro->operacion->nombre }}</td>
                                         <td>{{ $registro->producto->nombre }}</td>
+
+                                        @elseif ($modelo == 'Ruta')
+                                        <td>{{ $registro->terminalOrigen->nombre ?? '' }}</td>
+                                        <td>
+                                            @foreach ($registro->terminalDestinos as $destino)
+                                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-1 rounded">
+                                                    {{ $destino->nombre ?? '' }}
+                                                </span> 
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $registro->buque ?? '' }}</td>
+                                        <td>{{ $registro->nro_ruta ?? '' }}</td>
                                         
                                         @elseif ($modelo == 'Cargamento')
-                                        <td>{{ $registro->terminalOrigen->nombre ?? '' }}</td>
-                                        <td>{{ $registro->buque ?? '' }}</td>
+                                        <td>{{ $registro->ruta->terminalOrigen->nombre ?? '' }}</td>
+                                        <td>{{ $registro->ruta->buque ?? '' }}</td>
                                         <td>{{ $registro->nro_embarque ?? '' }}</td>
                                         <td>{{ $registro->fecha_operacion ?? '' }}</td>
-                                        <td>{{ $registro->nro_ruta ?? '' }}</td>
+                                        <td>{{ $registro->ruta->nro_ruta ?? '' }}</td>
                                         <td>{{ $registro->operacion->nombre ?? '' }}</td>
 
                                         @elseif ($modelo == 'Parcela')

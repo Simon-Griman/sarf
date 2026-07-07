@@ -153,7 +153,7 @@ class Ruta extends Component
             
             if ($ruta) {
                 // Eliminamos las relaciones en la tabla pivote primero
-                $ruta->terminalDestinos()->detach();
+                //$ruta->terminalDestinos()->detach();
                 // Eliminamos la ruta
                 $ruta->delete();
                 

@@ -12,6 +12,7 @@ use App\Models\RegistrosEditados;
 use App\Models\RespaldoEditados;
 use App\Models\Resumen;
 use App\Models\Role;
+use App\Models\Ruta;
 use App\Models\TerminalDestino;
 use App\Models\TerminalOrigen;
 use App\Models\User;
@@ -85,6 +86,31 @@ trait TracksEdicion
 
                     RespaldoEditados::create([
                         'resumen_id' => $model->id,
+                        'batch_id' => $batchId,
+                        'campo' => $campo,
+                        'valor_antes' => $valorAntes,
+                        'valor_despues' => $valorDespues,
+                    ]);
+                }
+
+                elseif ($model instanceof Ruta)
+                {
+                    if ($key == 'terminal_origen_id')
+                    {
+                        $valorAntes = TerminalOrigen::find($antes)->nombre ?? null;
+                        $valorDespues = TerminalOrigen::find($value)->nombre ?? null;
+                        $campo = 'Origen';
+                    }
+
+                    else
+                    {
+                        $valorAntes = $antes;
+                        $valorDespues = $value;
+                        $campo = $key;
+                    }
+
+                    RespaldoEditados::create([
+                        'ruta_id' => $model->id,
                         'batch_id' => $batchId,
                         'campo' => $campo,
                         'valor_antes' => $valorAntes,

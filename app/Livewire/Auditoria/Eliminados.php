@@ -7,12 +7,16 @@ use App\Models\Parcela;
 use App\Models\RegistrosEliminados;
 use App\Models\RespaldoBorrados;
 use App\Models\Resumen;
+use App\Models\Ruta;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Eliminados extends Component
 {
+    use WithPagination;
+    
     public $modelo, $nombre, $tabla, $registro_id, $registro, $fecha_hora, $modalOpen=false;
 
     public function mount()
@@ -27,6 +31,8 @@ class Eliminados extends Component
         if ($tabla == 'User') $this->registro = User::withTrashed()->find($id);
 
         elseif ($tabla == 'Resumen') $this->registro = Resumen::withTrashed()->find($id);
+
+        elseif ($tabla == 'Ruta') $this->registro = Ruta::withTrashed()->find($id);
 
         elseif ($tabla == 'Cargamento') $this->registro = Cargamento::withTrashed()->find($id);
 
@@ -43,9 +49,9 @@ class Eliminados extends Component
 
         if ($this->modelo == 'Resumen')
         {
-            $nro_viaje = $this->registro->nro_viaje;
+            $nro_embarque = $this->registro->nro_embarque;
 
-            $match = Resumen::where('nro_viaje', $nro_viaje)->first();
+            $match = Resumen::where('nro_embarque', $nro_embarque)->first();
 
             if (!$match)
             {
@@ -70,16 +76,16 @@ class Eliminados extends Component
 
         elseif ($this->modelo == 'Cargamento')
         {
-            $nro_viaje = $this->registro->nro_ruta;
+            $nro_embarque = $this->registro->nro_embarque;
 
-            $match = Cargamento::where('nro_ruta', $nro_viaje)->first();
+            $match = Cargamento::where('nro_embarque', $nro_embarque)->first();
 
             if (!$match)
             {
                 $this->registro->restore();
 
                 $this->dispatch('notify', 
-                    message: 'Resumen restaurado correctamente', 
+                    message: 'Cargamento restaurado correctamente', 
                     icon: 'success',
                     title: '¡Hecho!'
                 );
@@ -88,7 +94,7 @@ class Eliminados extends Component
             else
             {
                 $this->dispatch('notify', 
-                    message: 'El resumen ya existe', 
+                    message: 'El cargamento ya existe', 
                     icon: 'error',
                     title: '¡Error!'
                 );
@@ -117,6 +123,34 @@ class Eliminados extends Component
             {
                 $this->dispatch('notify', 
                     message: 'El usuario ya existe', 
+                    icon: 'error',
+                    title: '¡Error!'
+                );
+            }
+        }
+
+        elseif ($this->modelo == 'Ruta')
+        {
+            $nro_ruta = $this->registro->nro_ruta;
+            $buque = $this->registro->buque;
+
+            $match = Ruta::where('nro_ruta', $nro_ruta)->where('buque', $buque)->first();
+
+            if (!$match)
+            {
+                $this->registro->restore();
+
+                $this->dispatch('notify', 
+                    message: 'Ruta restaurada correctamente', 
+                    icon: 'success',
+                    title: '¡Hecho!'
+                );
+            }
+
+            else
+            {
+                $this->dispatch('notify', 
+                    message: 'La ruta ya existe', 
                     icon: 'error',
                     title: '¡Error!'
                 );

@@ -68,7 +68,7 @@
                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                     @click.away="open = false" 
-                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full dark:bg-zinc-800 max-h-[90vh]" :class="$wire.modelo === 'Resumen' || $wire.modelo === 'Cargamento' || $wire.modelo === 'Cintillo' ? 'sm:max-w-4xl' : ($wire.modelo === 'User' || $wire.modelo === 'Parcela' ? 'sm:max-w-2xl' : 'sm:max-w-xs')">
+                    class="relative transform flex flex-col overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full dark:bg-zinc-800 max-h-[90vh]" :class="$wire.modelo === 'Resumen' || $wire.modelo === 'Cargamento' || $wire.modelo === 'Cintillo' ? 'sm:max-w-4xl' : ($wire.modelo === 'User' || $wire.modelo === 'Parcela' || $wire.modelo === 'Ruta' ? 'sm:max-w-2xl' : 'sm:max-w-xs')">
                     
                     <div class="bg-white px-4 pt-5 pb-2 sm:px-6 dark:bg-zinc-800 border-b border-zinc-700">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal-title">
@@ -91,6 +91,12 @@
                                         <th class="text-left">Operación</th>
                                         <th class="text-left">Producto</th>
                                         <th class="text-left">Borrado</th>
+
+                                        @elseif ($modelo == 'Ruta')
+                                        <th class="py-2 text-left">Origen</th>
+                                        <th class="text-left">Destinos</th>
+                                        <th class="text-left">Buque</th>
+                                        <th class="text-left">Nro. Ruta</th>
 
                                         @elseif ($modelo == 'Cargamento')
                                         <th class="py-2 text-left">Origen</th>
@@ -133,14 +139,26 @@
                                         <td>{{ $registro->producto->nombre }}</td>
                                         <td>{{ $registro->deleted_at }}</td>
 
-                                        @elseif ($modelo == 'Cargamento')
+                                        @elseif ($modelo == 'Ruta')
                                         <td>{{ $registro->terminalOrigen->nombre ?? '' }}</td>
+                                        <td>
+                                            @foreach ($registro->terminalDestinos as $destino)
+                                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2 py-1 rounded">
+                                                    {{ $destino->nombre ?? '' }}
+                                                </span> 
+                                            @endforeach
+                                        </td>
                                         <td>{{ $registro->buque ?? '' }}</td>
+                                        <td>{{ $registro->nro_ruta ?? '' }}</td>
+
+                                        @elseif ($modelo == 'Cargamento')
+                                        <td>{{ $registro->ruta->terminalOrigen->nombre ?? '' }}</td>
+                                        <td>{{ $registro->ruta->buque ?? '' }}</td>
                                         <td>{{ $registro->nro_embarque ?? '' }}</td>
                                         <td>{{ $registro->fecha_operacion ?? '' }}</td>
-                                        <td>{{ $registro->nro_ruta ?? '' }}</td>
+                                        <td>{{ $registro->ruta->nro_ruta ?? '' }}</td>
                                         <td>{{ $registro->operacion->nombre ?? '' }}</td>
-                                        <td>{{ $registro->deleted_at }}</td>
+                                        <td>{{ $registro->deleted_at ?? '' }}</td>
 
                                         @elseif ($modelo == 'Parcela')
                                         <td>{{ $registro->producto->nombre ?? '' }}</td>
@@ -172,7 +190,7 @@
                     <div class="bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button @click="open = false" type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 mx-2 text-sm font-semibold text-gray-900 shadow-sm border-red-600 hover:bg-red-400 sm:mt-0 sm:w-auto">Cerrar</button>
                         
-                        @if($modelo == 'User' || $modelo == 'Resumen' || $modelo == 'Cargamento')
+                        @if($modelo == 'User' || $modelo == 'Resumen' || $modelo == 'Cargamento' || $modelo == 'Parcela' || $modelo == 'Ruta')
                         <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm border-green-6' hover:bg-green-400 sm:mt-0 sm:w-auto" wire:click="restaurar">Restaurar</button>
                         @endif
                     </div>

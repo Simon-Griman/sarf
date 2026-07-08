@@ -44,11 +44,13 @@
                 </div>
                 @error('terminal_destinos_ids') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
             </div>
-
+            @if(auth()->user()->can('ruta.create') || auth()->user()->can('ruta.edit'))
             <x-primary-button type="submit" class="btn btn-primary">Guardar</x-primary-button>
+            @endif
         </form>
     </x-card>
 
+    @can('ruta.view')
     <x-card class="w-full">
         <form wire:submit.prevent="buscar">
             <h1 class="mb-4">Buscar Ruta</h1>
@@ -133,8 +135,12 @@
                             </div>
                         </div>
                         <div class="text-center pt-4">
+                            @can('ruta.edit')
                             <x-warning-button type="button" wire:click="edit({{ $ruta->id }})">Editar</x-warning-button>
+                            @endcan
+                            @can('ruta.destroy')
                             <x-danger-button type="button" wire:click="confirmDelete({{ $ruta->id }})">Eliminar</x-danger-button>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -153,6 +159,7 @@
             <x-primary-button type="submit" class="btn btn-primary mt-3">Buscar</x-primary-button>
         </form>
     </x-card>
+    @endcan
 
     <div 
         x-data="{ open: false, name: 'delete-route-modal' }"

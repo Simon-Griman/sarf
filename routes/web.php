@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/ruta', function() {
         return view('ruta');
-    })->name('ruta')->middleware('permission:ruta', 'check.new.user');
+    })->name('ruta')->middleware('permission:ruta.index', 'check.new.user');
 
     Route::get('/el-rola-del-norte', function(){return view('rola');});
 });

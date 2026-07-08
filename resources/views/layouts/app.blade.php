@@ -42,7 +42,7 @@
                 </a>
                 @endcan
 
-                @can('ruta')
+                @can('ruta.index')
                 <a href="{{ route('ruta') }}" @keydown.window="if ($event.key.toLowerCase() === 'r' && !$event.target.closest('input, textarea, select')) { window.location.href = '{{ route('ruta') }}' }" class="flex items-center p-2 rounded-lg dark:text-gray-400 {{ request()->routeIs('ruta') ? 'bg-blue-500 text-white dark:text-white' : 'text-gray-600 hover:bg-blue-50 dark:hover:bg-zinc-700' }}">
                     <i class="fas fa-route mr-3"></i> Rutas
                 </a>

@@ -5,7 +5,8 @@ namespace App\Traits;
 use App\Models\RegistrosEliminados;
 use App\Models\RespaldoBorrados;
 use App\Models\Role;
-use App\Models\Ruta;
+use App\Models\TerminalDestino;
+use App\Models\TerminalOrigen;
 use Illuminate\Support\Facades\Auth;
 
 trait TracksEliminacion
@@ -28,6 +29,24 @@ trait TracksEliminacion
                         'role_id' => $model->id,
                         'role' => $model->name,
                         'peso' => $model->peso,
+                        'deleted_at' => now()
+                    ]);
+                }
+
+                elseif ($model instanceof TerminalDestino)
+                {
+                    RespaldoBorrados::create([
+                        'terminal_destino_id' => $model->id,
+                        'terminal_destino' => $model->nombre,
+                        'deleted_at' => now()
+                    ]);
+                }
+
+                elseif ($model instanceof TerminalOrigen)
+                {
+                    RespaldoBorrados::create([
+                        'terminal_origen_id' => $model->id,
+                        'terminal_origen' => $model->nombre,
                         'deleted_at' => now()
                     ]);
                 }

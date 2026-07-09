@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\TracksCreacion;
+use App\Traits\TracksEdicion;
+use App\Traits\TracksEliminacion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TerminalOrigen extends Model
 {
-    use HasFactory;
+    use HasFactory, TracksCreacion, TracksEdicion, TracksEliminacion;
 
     protected $fillable = [
         'nombre',

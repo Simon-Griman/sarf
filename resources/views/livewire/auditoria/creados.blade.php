@@ -75,6 +75,8 @@
                                 'Cargamento' => 'Detalles del Cargamento',
                                 'Parcela' => 'Detalles de la Parcela',
                                 'Ruta' => 'Detalles de la Ruta',
+                                'TerminalOrigen' => 'Detalles del Origen',
+                                'TerminalDestino' => 'Detalles del Destino',
                                 default => 'Detalles del Cintillo',
                             } }}
                         </h2>
@@ -126,6 +128,13 @@
 
                                         @elseif ($modelo == 'Cintillo')
                                         <th></th>
+
+                                        @elseif ($modelo == 'TerminalOrigen')
+                                        <th class="py-2 text-left">Nombre</th>
+
+                                        @elseif ($modelo == 'TerminalDestino')
+                                        <th class="py-2 text-left">Nombre</th>
+
                                         @endif
                                     </tr>
                                 </thead>
@@ -185,6 +194,12 @@
                                         <td class="text-center">
                                             <img src="{{ asset('storage/' . $registro->nombre) }}" alt="Cintillo" class="mx-auto h-16">
                                         </td>
+
+                                        @elseif ($modelo == 'TerminalOrigen')
+                                        <td>{{ $registro->nombre }}</td>
+
+                                        @elseif ($modelo == 'TerminalDestino')
+                                        <td>{{ $registro->nombre }}</td>
                                         @endif
                                     </tr>
                                 </tbody>

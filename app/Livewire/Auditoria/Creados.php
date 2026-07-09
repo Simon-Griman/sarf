@@ -9,6 +9,8 @@ use App\Models\RegistrosCreados;
 use App\Models\Resumen;
 use App\Models\Role;
 use App\Models\Ruta;
+use App\Models\TerminalOrigen;
+use App\Models\TerminalDestino;
 use App\Models\User;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -42,6 +44,10 @@ class Creados extends Component
         elseif ($tabla == 'Role') $this->registro = Role::find($id);
 
         elseif ($tabla == 'Cintillo') $this->registro = Cintillo::find($id);
+
+        elseif ($tabla == 'TerminalOrigen') $this->registro = TerminalOrigen::find($id);
+
+        elseif ($tabla == 'TerminalDestino') $this->registro = TerminalDestino::find($id);
 
         else return;
 

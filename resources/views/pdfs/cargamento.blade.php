@@ -21,7 +21,7 @@
             <tr>
                 <td><b>Terminal Origen:</b> {{ $parcela->cargamento->ruta->terminalOrigen->nombre ?? '' }}</td>
                 <td><b>Terminal Destino:</b> 
-                    @foreach ($parcela->cargamento->ruta->terminalDestinos as $destino)
+                    @foreach ($parcela->terminalDestinos as $destino)
                         {{ $destino->nombre }}@if (!$loop->last), @endif
                     @endforeach
                 </td>

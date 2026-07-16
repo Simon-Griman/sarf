@@ -24,6 +24,5 @@
         </div>
       </div>
     </div>
-    <h1>El Rola del Norte</h1>
   </div>
 </div>

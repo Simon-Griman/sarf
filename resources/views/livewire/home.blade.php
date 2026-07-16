@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center h-full min-h-[400px] w-full p-6">
   
-  <div class="max-w-lg w-full bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 rounded-r-2xl p-6 shadow-md border border-amber-100 dark:border-amber-900/30 transition-all hover:shadow-lg">
+  <div class="max-w-lg w-full bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 rounded-r-2xl p-6 shadow-md border dark:border-amber-900/30 transition-all hover:shadow-lg">
     
     <div class="flex items-start gap-4">
       <div class="flex-shrink-0 text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/40 p-2 rounded-lg">
@@ -24,6 +24,6 @@
         </div>
       </div>
     </div>
-
+    <h1>El Rola del Norte</h1>
   </div>
 </div>
